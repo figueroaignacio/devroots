@@ -3,7 +3,6 @@
 // Hooks
 import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 
@@ -35,7 +34,6 @@ export function LoginForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const { theme } = useTheme();
   const { toast } = useToast();
   const t = useTranslations("login");
 
