@@ -2,7 +2,6 @@
 
 // Hooks
 import { useToast } from "@/hooks/use-toast";
-import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
@@ -25,6 +24,7 @@ import { GitHubButton } from "./github-button";
 
 // Utils
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import { z } from "zod";
 
 // Schema
