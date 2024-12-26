@@ -1,11 +1,14 @@
 "use client";
 
 // Hooks
+import { useToast } from "@/hooks/use-toast";
+import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 
+// Components
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,14 +19,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { Link } from "@/config/i18n/routing";
-import { useToast } from "@/hooks/use-toast";
+import { GitHubButton } from "./github-button";
 
-// Hooks y Utils
+// Utils
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-// Schema y funciones
+// Schema
 import { registerAction } from "../lib/actions";
 import { registerSchema } from "../lib/schemas";
 
@@ -66,6 +70,10 @@ export function RegisterForm() {
       }
     });
   }
+
+  const handleGitHubSignUp = () => {
+    signIn("github", { callbackUrl: "/hub" });
+  };
 
   return (
     <div className="container mx-auto max-w-md p-6">
@@ -121,6 +129,10 @@ export function RegisterForm() {
           </Button>
         </form>
       </Form>
+      <Separator className="my-7" />
+      <div className="mt-4">
+        <GitHubButton handleGitHubAuth={handleGitHubSignUp} />
+      </div>
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-600">
           {t("haveAccount")}{" "}

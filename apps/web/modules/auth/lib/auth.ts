@@ -1,26 +1,31 @@
-// db
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool as NeonPool } from "@neondatabase/serverless";
-
-// Utils
 import bcrypt from "bcryptjs";
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-
-// Schema
+import GitHubProvider from "next-auth/providers/github";
 import { loginSchema } from "./schemas";
 
 const pool = new NeonPool({
   connectionString: process.env.DATABASE_URL,
 }) as unknown as import("pg").Pool;
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const authConfig: NextAuthConfig = {
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error",
+  },
   adapter: PostgresAdapter(pool),
   session: {
     strategy: "jwt",
   },
   secret: process.env.AUTH_SECRET,
   providers: [
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+      allowDangerousEmailAccountLinking: true,
+    }),
     Credentials({
       name: "credentials",
       credentials: {
@@ -63,4 +68,56 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-});
+  callbacks: {
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "github" && user.email) {
+        const { email, name, image } = user;
+        try {
+          const userResult = await pool.query(
+            `SELECT id FROM "users" WHERE email = $1`,
+            [email]
+          );
+          if (userResult.rows.length === 0) {
+            // El usuario no existe, créalo
+            await pool.query(
+              `INSERT INTO "users" (email, name, image, github_id, role) 
+               VALUES ($1, $2, $3, $4, $5)`,
+              [email, name || null, image || null, profile?.id || null, "user"]
+            );
+          } else {
+            // El usuario existe, actualiza su información
+            await pool.query(
+              `UPDATE "users" SET name = $1, image = $2, github_id = $3 
+               WHERE email = $4`,
+              [name || null, image || null, profile?.id || null, email]
+            );
+          }
+          return true;
+        } catch (error) {
+          console.error("Error durante el inicio de sesión con GitHub:", error);
+          return false;
+        }
+      }
+      return true;
+    },
+    async session({ session, token }) {
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) {
+        if (url.includes("error=OAuthAccountNotLinked")) {
+          return `${baseUrl}/auth/login?error=OAuthAccountNotLinked`;
+        }
+        return `${baseUrl}/hub`;
+      } else if (url.startsWith("/")) {
+        return `${baseUrl}${url}`;
+      }
+      return baseUrl;
+    },
+  },
+};
+
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
