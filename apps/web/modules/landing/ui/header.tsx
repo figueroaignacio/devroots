@@ -1,8 +1,9 @@
 // Hooks
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 // Componetns
 import { Logo } from "@/components/shared/logo";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -13,16 +14,22 @@ import {
 import { Link } from "@/config/i18n/routing";
 import { LoginButton } from "@/modules/auth/ui/login-button";
 import { RegisterButton } from "@/modules/auth/ui/register-button";
-import { Menu } from "lucide-react";
+
+// Icons
+import { ArrowRight, Menu } from "lucide-react";
+
+// Utils
+import { auth } from "@/modules/auth/lib/auth";
 
 type Navigation = {
   title: string;
   href: string;
 };
 
-export function Header() {
-  const t = useTranslations();
+export async function Header() {
+  const t = await getTranslations();
   const navigation = t.raw("navigation");
+  const session = await auth();
 
   return (
     <header className="bg-background border-b">
@@ -43,8 +50,19 @@ export function Header() {
             ))}
           </nav>
           <div className="hidden md:flex items-center space-x-2">
-            <RegisterButton />
-            <LoginButton />
+            {session ? (
+              <Button asChild>
+                <Link href="/hub">
+                  Go to hub
+                  <ArrowRight className="size-4" />
+                </Link>
+              </Button>
+            ) : (
+              <>
+                <RegisterButton />
+                <LoginButton />
+              </>
+            )}
           </div>
           <div className="md:hidden">
             <Sheet>
@@ -70,8 +88,19 @@ export function Header() {
                   ))}
                 </nav>
                 <div className="flex flex-col space-y-2 mt-8">
-                  <RegisterButton />
-                  <LoginButton />
+                  {session ? (
+                    <Button asChild>
+                      <Link href="/hub">
+                        Go to hub
+                        <ArrowRight className="size-4" />
+                      </Link>
+                    </Button>
+                  ) : (
+                    <>
+                      <RegisterButton />
+                      <LoginButton />
+                    </>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
