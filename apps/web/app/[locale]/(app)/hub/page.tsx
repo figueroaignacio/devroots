@@ -15,39 +15,6 @@ export default async function HubPage() {
       <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
         {JSON.stringify(session, null, 2)}
       </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
-      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
-        {JSON.stringify(session, null, 2)}
-      </pre>
     </div>
   );
 }
