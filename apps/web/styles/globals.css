@@ -95,7 +95,7 @@
 
 @layer components {
   .page-container {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 py-5;
   }
 
   .gradient-text {
@@ -103,7 +103,7 @@
   }
 
   .gradient-background {
-    @apply bg-gradient-to-br from-purple-600 via-violet-500 to-fuchsia-500  text-white;
+    @apply bg-gradient-to-br from-purple-600 via-violet-500 to-fuchsia-500 text-white;
     background-size: 200% 200%;
     animation: gradientShift 15s ease infinite;
   }
