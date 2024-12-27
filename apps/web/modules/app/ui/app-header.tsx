@@ -6,6 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { auth } from "@/modules/auth/lib/auth";
 import { SignOutButton } from "@/modules/auth/ui/signout-button";
 import { Settings, User } from "lucide-react";
@@ -21,8 +22,8 @@ export async function AppHeader() {
 
   return (
     <header className="border-b">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="font-semibold text-lg">Your App Name</div>
+      <div className="container mx-auto py-2 flex items-center justify-between lg:justify-end">
+        <SidebarTrigger className="block lg:hidden" />
         {session?.user && (
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:outline-none">

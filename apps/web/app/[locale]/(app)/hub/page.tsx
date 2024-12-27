@@ -4,15 +4,17 @@ import { redirect } from "next/navigation";
 export default async function HubPage() {
   const session = await auth();
 
-  console.log("Session data:", session);
-
   if (!session || !session.user) {
     redirect("/auth/login");
   }
 
   return (
-    <div className="page-container flex justify-center items-center min-h-dvh flex-col">
-      <h2>Welcome {session.user.name}</h2>
+    <div className="p-6 font-sans">
+      <h2 className="text-2xl font-bold mb-4">Welcome, {session.user.name}!</h2>
+      <p className="text-lg mb-2">Here is your session data:</p>
+      <pre className="p-4 rounded-lg overflow-x-auto text-sm bg-card">
+        {JSON.stringify(session, null, 2)}
+      </pre>
     </div>
   );
 }
