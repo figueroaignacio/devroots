@@ -81,7 +81,8 @@
     "submit": "Registrarse",
     "submitting": "Registrando...",
     "haveAccount": "¿Y tienes una cuenta?",
-    "login": "Iniciar Sesión"
+    "login": "Iniciar Sesión",
+    "registerWithGithub": "Registrarse con GitHub"
   },
   "login": {
     "title": "Iniciar sesión en devs",
@@ -106,6 +107,7 @@
     "forgotPassword": "¿Olvidaste tu contraseña?",
     "noAccount": "¿No tienes una cuenta?",
     "signUp": "Regístrate",
+    "loginWithGithub": "Inicia Sesión con GitHub",
     "success": {
       "title": "Inicio de sesión exitoso",
       "description": "¡Bienvenido de vuelta a devs!"

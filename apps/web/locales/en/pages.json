@@ -81,7 +81,8 @@
     "submit": "Submit",
     "submitting": "Submitting...",
     "haveAccount": "Already have an account?",
-    "login": "Login"
+    "login": "Login",
+    "registerWithGithub": "Register with Github"
   },
   "login": {
     "title": "Log in to devs",
@@ -105,6 +106,7 @@
     "forgotPassword": "Forgot password?",
     "noAccount": "Don't have an account?",
     "signUp": "Sign up",
+    "loginWithGithub": "Login with Github",
     "success": {
       "title": "Login Successful",
       "description": "Welcome back to devs!"
