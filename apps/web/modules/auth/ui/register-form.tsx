@@ -28,6 +28,7 @@ import { signIn } from "next-auth/react";
 import { z } from "zod";
 
 // Schema
+import { Loader2 } from "lucide-react";
 import { registerAction } from "../lib/actions";
 import { registerSchema } from "../lib/schemas";
 
@@ -124,8 +125,19 @@ export function RegisterForm() {
             )}
           />
           {error && <FormMessage>{error}</FormMessage>}
-          <Button type="submit" className="w-full" disabled={isPending}>
-            {isPending ? t("submitting") : t("submit")}
+          <Button
+            type={!isPending ? "submit" : undefined}
+            disabled={isPending}
+            className="w-full"
+          >
+            {isPending ? (
+              <>
+                {t("submitting")}
+                <Loader2 className="animate-spin" />
+              </>
+            ) : (
+              t("submit")
+            )}
           </Button>
         </form>
       </Form>

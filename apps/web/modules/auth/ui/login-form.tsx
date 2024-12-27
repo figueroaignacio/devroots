@@ -27,6 +27,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 // Schema
+import { Loader2 } from "lucide-react";
 import { loginAction } from "../lib/actions";
 import { loginSchema } from "../lib/schemas";
 
@@ -121,8 +122,19 @@ export function LoginForm() {
               {t("forgotPassword")}
             </Link>
           </div>
-          <Button type="submit" className="w-full" disabled={isPending}>
-            {isPending ? t("submitting") : t("submit")}
+          <Button
+            type={!isPending ? "submit" : undefined}
+            disabled={isPending}
+            className="w-full"
+          >
+            {isPending ? (
+              <>
+                {t("submitting")}
+                <Loader2 className="animate-spin" />
+              </>
+            ) : (
+              t("submit")
+            )}
           </Button>
         </form>
       </Form>

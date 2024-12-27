@@ -8,6 +8,7 @@ import {
   DialogFooter,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState, useTransition } from "react";
@@ -15,13 +16,31 @@ import { useState, useTransition } from "react";
 export function SignOutButton() {
   const [isPending, startTransition] = useTransition();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { toast } = useToast();
 
   const handleSignOut = async () => {
     startTransition(async () => {
-      await signOut({
-        redirect: true,
-        callbackUrl: "/auth/login",
-      });
+      try {
+        await signOut({
+          redirect: true,
+          callbackUrl: "/auth/login",
+        });
+        toast({
+          title: "Sesión cerrada",
+          description: "Has cerrado sesión correctamente.",
+          duration: 3000,
+        });
+      } catch (error) {
+        console.error("Error during sign out:", error);
+        toast({
+          title: "Error",
+          description: "Hubo un problema al cerrar la sesión.",
+          variant: "destructive",
+          duration: 3000,
+        });
+      } finally {
+        setIsDialogOpen(false);
+      }
     });
   };
 
@@ -48,7 +67,11 @@ export function SignOutButton() {
             desconectará.
           </DialogDescription>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setIsDialogOpen(false)}
+              disabled={isPending}
+            >
               Cancelar
             </Button>
             <Button
