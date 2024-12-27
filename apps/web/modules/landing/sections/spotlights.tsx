@@ -4,8 +4,6 @@ import { useTranslations } from "next-intl";
 // Components
 import { SpotlightCard } from "../ui/spotlight-card";
 
-// Icons
-
 interface Spotlight {
   title: string;
   description: string;
