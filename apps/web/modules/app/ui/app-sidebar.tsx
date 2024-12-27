@@ -18,8 +18,8 @@ import { usePathname } from "next/navigation";
 const appMenuItems = [
   { icon: Home, label: "Hub", href: "/hub" },
   { icon: Lightbulb, label: "Challenges", href: "/challenges" },
-  { icon: User, label: "Profile", href: "/profile" },
-  { icon: Settings, label: "Settings", href: "/settings" },
+  { icon: User, label: "Profile", href: "/user/profile" },
+  { icon: Settings, label: "Settings", href: "/user/settings" },
 ];
 
 const supportMenuItems = [
