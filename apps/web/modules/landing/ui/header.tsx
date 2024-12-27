@@ -53,7 +53,7 @@ export async function Header() {
             {session ? (
               <Button asChild>
                 <Link href="/hub">
-                  Go to hub
+                  {t("actionButtons.goToHub")}
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>

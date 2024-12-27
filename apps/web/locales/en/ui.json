@@ -19,7 +19,8 @@
   ],
   "actionButtons": {
     "register": "Register",
-    "login": "Login"
+    "login": "Login",
+    "goToHub": "Go to Hub"
   },
   "buttons": {
     "backButton": "Back"
