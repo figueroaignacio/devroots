@@ -1,5 +1,9 @@
 "use client";
 
+// Hooks
+import { usePathname } from "next/navigation";
+
+// Components
 import {
   Sidebar,
   SidebarContent,
@@ -11,9 +15,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { Link } from "@/config/i18n/routing";
+
+// Icons
 import { BugPlay, Home, Lightbulb, Mail, Settings, User } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const appMenuItems = [
   { icon: Home, label: "Hub", href: "/hub" },

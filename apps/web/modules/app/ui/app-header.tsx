@@ -1,3 +1,4 @@
+// Components
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -7,9 +8,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { auth } from "@/modules/auth/lib/auth";
 import { SignOutButton } from "@/modules/auth/ui/signout-button";
+
+// Icons
 import { Settings, User } from "lucide-react";
+
+// Utils
+import { auth } from "@/modules/auth/lib/auth";
 
 export async function AppHeader() {
   const session = await auth();
