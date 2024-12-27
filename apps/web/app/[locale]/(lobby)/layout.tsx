@@ -8,6 +8,7 @@ import "@/styles/globals.css";
 // Config
 import { routing } from "@/config/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
+import { BgBlur } from "@/components/shared/bg-blur";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -24,6 +25,7 @@ export default async function LandingLayout({ children, params }: LayoutProps) {
 
   return (
     <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto]">
+      <BgBlur />
       <Header />
       <main>{children}</main>
       <Footer />
