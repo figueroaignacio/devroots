@@ -7,27 +7,22 @@
   },
   "spotlights": [
     {
-      "icon": "Globe",
       "title": "Connect with developers from around the world",
       "description": "Join a global network of developers to share ideas, learn, and collaborate on exciting projects."
     },
     {
-      "icon": "Edit",
       "title": "Build your profile and showcase your skills",
       "description": "Customize your profile, display your projects and achievements, and grow your professional presence within the Dev community."
     },
     {
-      "icon": "Folder",
       "title": "Share your projects and get feedback",
       "description": "Post your projects to receive constructive feedback and improve your skills while helping others with their ideas."
     },
     {
-      "icon": "Target",
       "title": "Challenges to test your skills",
       "description": "Take part in interactive challenges that allow you to learn and grow by tackling real-world programming problems."
     },
     {
-      "icon": "BookOpen",
       "title": "Access articles, tutorials, and resources",
       "description": "Read articles, tutorials, and resources created by the community to keep up with the latest trends in development."
     }

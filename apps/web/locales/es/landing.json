@@ -7,27 +7,22 @@
   },
   "spotlights": [
     {
-      "icon": "Globe",
       "title": "Conecta con desarrolladores de todo el mundo",
       "description": "Únete a una red global de desarrolladores para compartir ideas, aprender y colaborar en proyectos apasionantes."
     },
     {
-      "icon": "Edit",
       "title": "Construye tu perfil y resalta tus habilidades",
       "description": "Personaliza tu perfil, muestra tus proyectos y logros, y haz crecer tu presencia profesional dentro de la comunidad de Devs."
     },
     {
-      "icon": "Folder",
       "title": "Comparte tus proyectos y recibe retroalimentación",
       "description": "Publica tus proyectos para recibir comentarios constructivos y mejorar tus habilidades, mientras ayudas a otros con sus ideas."
     },
     {
-      "icon": "Target",
       "title": "Desafíos para poner a prueba tus habilidades",
       "description": "Participa en desafíos interactivos que te permitirán aprender y crecer, enfrentando problemas reales de programación."
     },
     {
-      "icon": "BookOpen",
       "title": "Accede a artículos, tutoriales y recursos",
       "description": "Lee artículos, tutoriales y recursos creados por la comunidad para mantenerte al día con las últimas tendencias en desarrollo."
     }

@@ -5,25 +5,8 @@ import { useTranslations } from "next-intl";
 import { SpotlightCard } from "../ui/spotlight-card";
 
 // Icons
-import {
-  BookOpen,
-  Edit,
-  Folder,
-  Globe,
-  LucideIcon,
-  Target,
-} from "lucide-react";
-
-const iconMap: { [key: string]: LucideIcon } = {
-  Globe: Globe,
-  Edit: Edit,
-  Folder: Folder,
-  Target: Target,
-  BookOpen: BookOpen,
-};
 
 interface Spotlight {
-  icon: string;
   title: string;
   description: string;
 }
@@ -35,26 +18,21 @@ export const Spotlights = () => {
   return (
     <div>
       <ul className="grid grid-cols-2 lg:grid-cols-12 gap-3">
-        {spotlights.map((spotlight: Spotlight, index: number) => {
-          const IconComponent = iconMap[spotlight.icon];
-
-          return (
-            <li
-              className={
-                index === 0 || index === 1
-                  ? "col-span-6"
-                  : "col-span-6 lg:col-span-4 "
-              }
-              key={index}
-            >
-              <SpotlightCard
-                title={spotlight.title}
-                description={spotlight.description}
-                icon={<IconComponent size={24} />}
-              />
-            </li>
-          );
-        })}
+        {spotlights.map((spotlight: Spotlight, index: number) => (
+          <li
+            className={
+              index === 0 || index === 1
+                ? "col-span-6"
+                : "col-span-6 lg:col-span-4 "
+            }
+            key={index}
+          >
+            <SpotlightCard
+              title={spotlight.title}
+              description={spotlight.description}
+            />
+          </li>
+        ))}
       </ul>
     </div>
   );
