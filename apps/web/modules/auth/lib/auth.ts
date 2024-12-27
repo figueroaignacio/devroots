@@ -85,14 +85,12 @@ export const authConfig: NextAuthConfig = {
             [email]
           );
           if (userResult.rows.length === 0) {
-            // El usuario no existe, créalo
             await pool.query(
               `INSERT INTO "users" (email, name, image, github_id, role) 
                VALUES ($1, $2, $3, $4, $5)`,
               [email, name || null, image || null, profile?.id || null, "user"]
             );
           } else {
-            // El usuario existe, actualiza su información
             await pool.query(
               `UPDATE "users" SET name = $1, image = $2, github_id = $3 
                WHERE email = $4`,
