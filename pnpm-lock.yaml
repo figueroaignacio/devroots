@@ -111,9 +111,6 @@ importers:
       '@auth/pg-adapter':
         specifier: ^1.7.4
         version: 1.7.4(nodemailer@6.9.10)(pg@8.13.1)
-      '@fontsource-variable/onest':
-        specifier: ^5.1.0
-        version: 5.1.0
       '@hookform/resolvers':
         specifier: ^3.9.1
         version: 3.9.1(react-hook-form@7.54.2(react@19.0.0))
@@ -688,9 +685,6 @@ packages:
 
   '@floating-ui/utils@0.2.8':
     resolution: {integrity: sha512-kym7SodPp8/wloecOpcmSnWJsK7M0E5Wg8UcFA+uO4B9s5d0ywXOEro/8HM9x0rW+TljRzul/14UYz3TleT3ig==}
-
-  '@fontsource-variable/onest@5.1.0':
-    resolution: {integrity: sha512-8jspwmuPWtC2p4gxmjUIQ2JugqCcClFwlD1DEJt+gARgZMm3PI62rYivoKVUDB3Q6hdQxeL5wdzjxCOnzTU5BA==}
 
   '@formatjs/ecma402-abstract@2.2.1':
     resolution: {integrity: sha512-O4ywpkdJybrjFc9zyL8qK5aklleIAi5O4nYhBVJaOFtCkNrnU+lKFeJOFC48zpsZQmR8Aok2V79hGpHnzbmFpg==}
@@ -5885,8 +5879,6 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
 
   '@floating-ui/utils@0.2.8': {}
-
-  '@fontsource-variable/onest@5.1.0': {}
 
   '@formatjs/ecma402-abstract@2.2.1':
     dependencies:
