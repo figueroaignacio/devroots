@@ -32,7 +32,7 @@ export async function Header() {
   const session = await auth();
 
   return (
-    <header className="sticky top-0 left-0 z-50 border-b backdrop-blur-md  ">
+    <header className="sticky top-0 left-0 z-50 border-b backdrop-blur-md">
       <div className="page-container">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
