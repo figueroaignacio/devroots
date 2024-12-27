@@ -15,8 +15,8 @@ interface SpotlightCardProps {
 export function SpotlightCard({ description, title }: SpotlightCardProps) {
   return (
     <Card className="w-full h-full overflow-hidden">
-      <CardHeader>
-        <CardTitle className="text-xl font-semibold">{title}</CardTitle>
+      <CardHeader className="">
+        <CardTitle className="text-3xl w-72 font-bold">{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <CardDescription>{description}</CardDescription>
