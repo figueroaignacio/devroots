@@ -26,7 +26,7 @@ export async function AppHeader() {
     .toUpperCase();
 
   return (
-    <header className="border-b">
+    <header className="sticky top-0 left-0 z-50 border-b backdrop-blur-md">
       <div className="container mx-auto py-2 flex items-center justify-between lg:justify-end">
         <SidebarTrigger className="block lg:hidden" />
         {session?.user && (
