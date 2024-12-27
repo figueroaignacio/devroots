@@ -21,7 +21,7 @@ export function RegisterButton({
     <Button variant="default" asChild>
       <Link href={href}>
         {t("register")}
-        <UserPlus className="h-5 w-5 ml-2" />
+        <UserPlus className="size-4 ml-2" />
       </Link>
     </Button>
   );

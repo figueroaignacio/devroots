@@ -19,7 +19,7 @@ export function LoginButton({ href = "/auth/login" }: LoginButtonProps) {
     <Button variant="outline" asChild>
       <Link href={href}>
         {t("login")}
-        <LogIn className="h-5 w-5 ml-2" />
+        <LogIn className="size-4 ml-2" />
       </Link>
     </Button>
   );
