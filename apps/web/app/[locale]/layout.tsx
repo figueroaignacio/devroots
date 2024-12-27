@@ -15,7 +15,7 @@ import {
 } from "next-intl/server";
 
 // Font
-import "@fontsource-variable/onest";
+import { onest } from "@/lib/fonts";
 
 // Styles
 import "@/styles/globals.css";
@@ -66,7 +66,7 @@ export default async function RootLayout({ children, params }: LayoutProps) {
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body>
+      <body className={onest.className}>
         <NextTopLoader color="#7e22ce" showSpinner={false} />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider

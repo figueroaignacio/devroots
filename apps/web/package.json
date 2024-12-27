@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@auth/pg-adapter": "^1.7.4",
-    "@fontsource-variable/onest": "^5.1.0",
     "@hookform/resolvers": "^3.9.1",
     "@neondatabase/serverless": "^0.10.4",
     "@radix-ui/react-accordion": "^1.2.1",

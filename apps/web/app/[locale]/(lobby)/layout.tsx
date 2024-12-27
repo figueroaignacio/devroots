@@ -2,9 +2,6 @@
 import { Footer } from "@/modules/landing/ui/footer";
 import { Header } from "@/modules/landing/ui/header";
 
-// Font
-import "@fontsource-variable/onest";
-
 // Styles
 import "@/styles/globals.css";
 
