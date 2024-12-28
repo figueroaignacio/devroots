@@ -15,7 +15,7 @@ interface SpotlightCardProps {
 
 export function SpotlightCard({ description, title, img }: SpotlightCardProps) {
   return (
-    <Card className="w-full h-full overflow-hidden relative z-50">
+    <Card className="w-full h-full overflow-hidden relative">
       <img
         src={img}
         alt={title}
