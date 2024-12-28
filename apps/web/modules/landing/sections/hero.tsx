@@ -12,7 +12,7 @@ export function Hero() {
     <section className="py-20 sm:py-32 max-w-2xl">
       <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
         {t.rich("hero.title", {
-          span: (chunks) => <span className="gradient-text">{chunks}</span>,
+          span: (chunks) => <span>{chunks}</span>,
         })}
       </h1>
       <h2 className="mt-6 text-muted-foreground sm:text-2xl">
