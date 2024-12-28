@@ -1,4 +1,3 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserPost } from "@/modules/app/user/ui/user-post";
 import { auth } from "@/modules/auth/lib/auth";
 import { redirect } from "next/navigation";
@@ -23,7 +22,7 @@ export default async function HubPage() {
             ))}
           </ul>
         </main>
-        <aside className="lg:col-span-4 space-y-6">
+        {/* <aside className="lg:col-span-4 space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Trending Topics</CardTitle>
@@ -47,7 +46,7 @@ export default async function HubPage() {
               </ul>
             </CardContent>
           </Card>
-        </aside>
+        </aside> */}
       </div>
     </div>
   );

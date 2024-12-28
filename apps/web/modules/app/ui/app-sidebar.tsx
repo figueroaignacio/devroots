@@ -1,40 +1,10 @@
-"use client";
-
-// Hooks
-import { usePathname } from "next/navigation";
-
 // Components
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
+import { Sidebar, SidebarHeader } from "@/components/ui/sidebar";
 import { Link } from "@/config/i18n/routing";
-
-// Icons
-import { BugPlay, Home, Lightbulb, Mail, Settings, User } from "lucide-react";
-
-const appMenuItems = [
-  { icon: Home, label: "Hub", href: "/hub" },
-  { icon: Lightbulb, label: "Challenges", href: "/challenges" },
-  { icon: User, label: "Profile", href: "/user/profile" },
-  { icon: Settings, label: "Settings", href: "/user/settings" },
-];
-
-const supportMenuItems = [
-  { icon: BugPlay, label: "Report a Bug", href: "/report-bug" },
-  { icon: Mail, label: "Developer Contact", href: "/contact" },
-];
+import { AppSidebarFooter } from "./app-sidebar-footer";
+import { AppSidebarLinks } from "./app-sidebar-links";
 
 export function AppSidebar() {
-  const pathname = usePathname();
-
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b px-2 py-3">
@@ -44,42 +14,8 @@ export function AppSidebar() {
           </Link>
         </div>
       </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>App</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {appMenuItems.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild isActive={pathname === item.href}>
-                    <Link href={item.href} className="flex items-center py-2">
-                      <item.icon className="mr-3 h-5 w-5" />
-                      {item.label}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel>Support</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {supportMenuItems.map((item) => (
-                <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild isActive={pathname === item.href}>
-                    <Link href={item.href} className="flex items-center py-2">
-                      <item.icon className="mr-3 h-5 w-5" />
-                      {item.label}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
+      <AppSidebarLinks />
+      <AppSidebarFooter />
     </Sidebar>
   );
 }
