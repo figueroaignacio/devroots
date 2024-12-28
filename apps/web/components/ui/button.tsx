@@ -9,8 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "w-full flex items-center gap-2 group bg-purple-700 text-white",
+        default: "w-full flex items-center gap-2 group bg-[#62096a] text-white",
         secondary: "bg-card border",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
