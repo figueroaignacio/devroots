@@ -17,16 +17,14 @@ interface SpotlightCardProps {
 export function SpotlightCard({ description, title, img }: SpotlightCardProps) {
   return (
     <Card className="w-full h-full overflow-hidden relative z-10 rounded-lg shadow-lg group">
-      {/* Background Image */}
       <Image
-        width={400}
-        height={400}
+        width={600}
+        height={600}
         src={img}
         alt={title}
-        className="w-full h-full absolute inset-0 object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 opacity-20 pointer-events-none"
+        className="w-full h-full absolute inset-0 object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 opacity-30 pointer-events-none"
       />
 
-      {/* Card Content */}
       <div className="relative z-20 p-6">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-white drop-shadow-md">
