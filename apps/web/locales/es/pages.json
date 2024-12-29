@@ -126,5 +126,34 @@
       "title": "Error de inicio de sesión",
       "description": "Por favor, verifica tus credenciales e intenta de nuevo."
     }
+  },
+  "settings": {
+    "title": "Configuración",
+    "tabs": {
+      "profile": "Perfil",
+      "preferences": "Preferencias"
+    },
+    "profile": {
+      "title": "Configuración del Perfil",
+      "description": "Gestiona la información de tu perfil público.",
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "bio": "Biografía",
+      "bioPlaceholder": "Cuéntanos sobre ti",
+      "saveChanges": "Guardar Cambios"
+    },
+    "preferences": {
+      "title": "Preferencias",
+      "description": "Personaliza tu configuración de idioma y tema.",
+      "language": "Idioma",
+      "selectLanguage": "Selecciona un idioma",
+      "theme": "Tema",
+      "selectTheme": "Selecciona un tema",
+      "themes": {
+        "light": "Claro",
+        "dark": "Oscuro",
+        "system": "Sistema"
+      }
+    }
   }
 }

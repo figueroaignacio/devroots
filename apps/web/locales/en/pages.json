@@ -125,5 +125,34 @@
       "title": "Login Failed",
       "description": "Please check your credentials and try again."
     }
+  },
+  "settings": {
+    "title": "Settings",
+    "tabs": {
+      "profile": "Profile",
+      "preferences": "Preferences"
+    },
+    "profile": {
+      "title": "Profile Settings",
+      "description": "Manage your public profile information.",
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "bio": "Bio",
+      "bioPlaceholder": "Tell us about yourself",
+      "saveChanges": "Save Changes"
+    },
+    "preferences": {
+      "title": "Preferences",
+      "description": "Customize your language and theme settings.",
+      "language": "Language",
+      "selectLanguage": "Select a language",
+      "theme": "Theme",
+      "selectTheme": "Select a theme",
+      "themes": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      }
+    }
   }
 }
