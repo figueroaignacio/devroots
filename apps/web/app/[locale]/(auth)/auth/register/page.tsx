@@ -1,5 +1,8 @@
 // Components
 import { RegisterForm } from "@/modules/auth/ui/register-form";
+import { RegisterHero } from "@/modules/auth/ui/register-hero";
+
+// Utils
 import { setRequestLocale } from "next-intl/server";
 
 interface RegisterPageProps {
@@ -13,7 +16,8 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
   setRequestLocale(locale);
 
   return (
-    <section className="min-h-dvh flex justify-center items-center">
+    <section className="min-h-[80dvh] flex justify-around">
+      <RegisterHero />
       <RegisterForm />
     </section>
   );

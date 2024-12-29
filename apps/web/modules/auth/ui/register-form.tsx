@@ -22,13 +22,13 @@ import { Separator } from "@/components/ui/separator";
 import { Link } from "@/config/i18n/routing";
 import { GitHubButton } from "./github-button";
 
+// Icons
+import { Loader2 } from "lucide-react";
+
 // Utils
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { z } from "zod";
-
-// Schema
-import { Loader2 } from "lucide-react";
 import { registerAction } from "../lib/actions";
 import { registerSchema } from "../lib/schemas";
 
@@ -66,7 +66,6 @@ export function RegisterForm() {
           variant: "success",
           duration: 4000,
         });
-
         router.push("/hub");
       }
     });
@@ -77,10 +76,15 @@ export function RegisterForm() {
   };
 
   return (
-    <div className="container mx-auto max-w-md p-6">
-      <h1 className="text-2xl font-bold mb-6">{t("title")}</h1>
+    <div className="w-full max-w-md p-8 rounded-lg shadow-md">
+      <h1 className="text-3xl font-bold mb-6">{t("title")}</h1>
+      <GitHubButton handleGitHubAuth={handleGitHubSignUp} />
+      <Separator className="my-6" />
+      <p className="text-center text-sm text-gray-600 mb-6">
+        {t("orUseEmail")}
+      </p>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
             name="name"
@@ -133,7 +137,7 @@ export function RegisterForm() {
             {isPending ? (
               <>
                 {t("submitting")}
-                <Loader2 className="animate-spin" />
+                <Loader2 className="ml-2 h-4 w-4 animate-spin" />
               </>
             ) : (
               t("submit")
@@ -141,14 +145,11 @@ export function RegisterForm() {
           </Button>
         </form>
       </Form>
-      <Separator className="my-7" />
-      <div className="mt-4">
-        <GitHubButton handleGitHubAuth={handleGitHubSignUp} />
-      </div>
+
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-600">
           {t("haveAccount")}{" "}
-          <Link href="/auth/login" className="text-blue-600 underline">
+          <Link href="/auth/login" className="text-blue-600 hover:underline">
             {t("login")}
           </Link>
         </p>

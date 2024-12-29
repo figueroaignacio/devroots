@@ -49,7 +49,7 @@
     "description": "Descubre artículos, tendencias y estrategias diseñadas para potenciar tus habilidades, optimizar tu flujo de trabajo y mantenerte a la vanguardia de la innovación tecnológica. Únete a nuestra comunidad de expertos y eleva tu impacto en el mundo del desarrollo."
   },
   "register": {
-    "title": "Registrate en devs",
+    "title": "Regístrate en devs",
     "fields": {
       "name": {
         "label": "Nombre",
@@ -80,9 +80,19 @@
     },
     "submit": "Registrarse",
     "submitting": "Registrando...",
-    "haveAccount": "¿Y tienes una cuenta?",
+    "haveAccount": "¿Ya tienes una cuenta?",
     "login": "Iniciar Sesión",
-    "registerWithGithub": "Registrarse con GitHub"
+    "registerWithGithub": "Registrarse con GitHub",
+    "orUseEmail": "O regístrate con tu correo electrónico",
+    "hero": {
+      "title": "Comienza a conectar con otros desarrolladores.",
+      "items": [
+        { "title": "Regístrate gratis y obtén acceso instantáneo." },
+        { "title": "Conéctate con desarrolladores de todo el mundo." },
+        { "title": "Participa en eventos y desafíos exclusivos." },
+        { "title": "Únete a una comunidad que comparte tus intereses." }
+      ]
+    }
   },
   "login": {
     "title": "Iniciar sesión en devs",

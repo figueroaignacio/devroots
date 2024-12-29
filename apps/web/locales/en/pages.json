@@ -49,20 +49,20 @@
     "description": "Explore articles, trends, and strategies crafted to enhance your skills, streamline your workflow, and keep you at the forefront of technological innovation. Join our community of experts and elevate your impact in the development world."
   },
   "register": {
-    "title": "Register for devs",
+    "title": "Register on devs",
     "fields": {
       "name": {
         "label": "Name",
         "description": "This is the name that will be displayed on your profile.",
         "errors": {
-          "minCharacters": "Name must be at least 2 characters long.",
-          "maxCharacters": "Name must be at most 30 characters long.",
-          "allowedCharacters": "Name can only contain letters and spaces."
+          "minCharacters": "The name must have at least 2 characters.",
+          "maxCharacters": "The name must not exceed 30 characters.",
+          "allowedCharacters": "The name can only contain letters and spaces."
         }
       },
       "email": {
         "label": "Email",
-        "description": "Your email will never share to no one",
+        "description": "Your email will never be shared with anyone.",
         "errors": {
           "validEmail": "Please enter a valid email address."
         }
@@ -71,18 +71,28 @@
         "label": "Password",
         "description": "Your password must be at least 8 characters long.",
         "errors": {
-          "minCharacters": "Password must be at least 2 characters long.",
-          "maxCharacters": "Password must be at most 50 characters long.",
-          "shouldIncludeOneLetter": "Password must include at least one letter.",
-          "shouldIncludeOneNumber": "Password must include at least one Number."
+          "minCharacters": "The password must have at least 8 characters.",
+          "maxCharacters": "The password must not exceed 50 characters.",
+          "shouldIncludeOneLetter": "The password must include at least one letter.",
+          "shouldIncludeOneNumber": "The password must include at least one number."
         }
       }
     },
-    "submit": "Submit",
-    "submitting": "Submitting...",
+    "submit": "Sign up",
+    "submitting": "Signing up...",
     "haveAccount": "Already have an account?",
-    "login": "Login",
-    "registerWithGithub": "Register with Github"
+    "login": "Log in",
+    "registerWithGithub": "Sign up with GitHub",
+    "orUseEmail": "Or sign up with your email",
+    "hero": {
+      "title": "Start connecting with other developers.",
+      "items": [
+        { "title": "Sign up for free and gain instant access." },
+        { "title": "Connect with developers worldwide." },
+        { "title": "Participate in exclusive events and challenges." },
+        { "title": "Join a community that shares your interests." }
+      ]
+    }
   },
   "login": {
     "title": "Log in to devs",
