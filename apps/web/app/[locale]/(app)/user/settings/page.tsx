@@ -1,5 +1,5 @@
 // Compoennts
-import { UserSettings } from "@/modules/app/user/ui/user-settings";
+import { UserSettings } from "@/modules/app/settings/ui/user-settings";
 
 export default function SettingsPage() {
   return <UserSettings />;
