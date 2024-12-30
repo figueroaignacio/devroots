@@ -1,5 +1,12 @@
 "use client";
 
+// Hooks
+import { locales, usePathname, useRouter } from "@/config/i18n/routing";
+import { useLocale, useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
+import { useEffect, useState, useTransition } from "react";
+
+// Components
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,12 +16,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { locales, usePathname, useRouter } from "@/config/i18n/routing";
-import { Locale } from "@/lib/types";
+
+// Icons
 import { Languages } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
-import { useEffect, useState, useTransition } from "react";
+
+// Types
+import { Locale } from "@/lib/types";
 
 export function UserPreferences() {
   const router = useRouter();
