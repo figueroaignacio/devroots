@@ -6,9 +6,9 @@ import { Header } from "@/modules/landing/ui/header";
 import "@/styles/globals.css";
 
 // Config
+import { BgBlur } from "@/components/shared/bg-blur";
 import { routing } from "@/config/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
-import { BgBlur } from "@/components/shared/bg-blur";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -24,7 +24,7 @@ export default async function LandingLayout({ children, params }: LayoutProps) {
   setRequestLocale(locale);
 
   return (
-    <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto]">
+    <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto] overflow-x-hidden">
       <BgBlur />
       <Header />
       <main>{children}</main>

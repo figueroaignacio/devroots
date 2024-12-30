@@ -28,7 +28,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       <AppSidebar />
       <div className="w-full">
         <AppHeader />
-        <main className="page-container">{children}</main>
+        <main className="page-container relative">{children}</main>
       </div>
     </SidebarProvider>
   );

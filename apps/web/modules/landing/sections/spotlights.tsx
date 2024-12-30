@@ -13,11 +13,7 @@ export const Spotlights = () => {
   const t = useTranslations();
   const spotlights = t.raw("spotlights");
 
-  const images = [
-    "/magicpattern-grid-pattern-1735417074146.png",
-    "/magicpattern-grid-pattern-1735417406009.png",
-    "/magicpattern-grid-pattern-1735417346535.png",
-  ];
+  const images = ["images/bg-card-1.png", "images/bg-card-2.png"];
 
   return (
     <div>
