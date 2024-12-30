@@ -1,5 +1,5 @@
-import { UserPost } from "@/modules/app/user/ui/user-post";
 import { auth } from "@/modules/auth/lib/auth";
+import { UserPost } from "@/modules/user/ui/user-post";
 import { redirect } from "next/navigation";
 
 export default async function HubPage() {

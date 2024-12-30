@@ -155,5 +155,27 @@
         "system": "Sistema"
       }
     }
+  },
+  "profile": {
+    "title": "Perfil",
+    "header": {
+      "avatarAlt": "Foto de perfil",
+      "editProfile": "Editar Perfil"
+    },
+    "details": {
+      "title": "Detalles",
+      "bio": "Biografía",
+      "location": "Ubicación",
+      "skills": "Habilidades"
+    },
+    "activity": {
+      "title": "Actividad Reciente",
+      "viewDetails": "Ver",
+      "activityTypes": {
+        "project": "Proyecto",
+        "contribution": "Contribución",
+        "article": "Artículo"
+      }
+    }
   }
 }
