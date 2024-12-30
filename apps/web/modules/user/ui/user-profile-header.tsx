@@ -37,7 +37,7 @@ export function UserProfileHeader({ user }: ProfileHeaderProps) {
         </div>
       </div>
       <Button variant="outline" asChild>
-        <Link href="/user/settings" className="flex gap-3">
+        <Link href="/settings" className="flex gap-3">
           {t("editProfile")}
           <Edit className="mr-2 h-4 w-4" />
         </Link>
