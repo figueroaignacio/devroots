@@ -42,11 +42,11 @@ export async function AppSidebarFooter() {
               <p className="text-sm font-medium">{session?.user?.name}</p>
             </div>
           </div>
-          <DropdownMenuTrigger className="focus:outline-none">
-            <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" asChild>
+            <DropdownMenuTrigger className="focus:outline-none">
               <MoreVertical className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
-            </Button>
-          </DropdownMenuTrigger>
+            </DropdownMenuTrigger>
+          </Button>
         </div>
         <DropdownMenuContent align="end" className="w-56">
           <DropdownMenuItem className="cursor-pointer">
