@@ -56,14 +56,14 @@ export function RegisterForm() {
         setError(response.error);
         toast({
           variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: "There was a problem with your request.",
+          title: t("toasts.error.title"),
+          description: t("toasts.error.description"),
         });
       } else {
         toast({
-          title: "Registration Successful!",
-          description: "You have successfully registered. Welcome aboard!",
           variant: "success",
+          title: t("toasts.success.title"),
+          description: t("toasts.success.description"),
           duration: 4000,
         });
         router.push("/hub");
@@ -145,7 +145,6 @@ export function RegisterForm() {
           </Button>
         </form>
       </Form>
-
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-600">
           {t("haveAccount")}{" "}

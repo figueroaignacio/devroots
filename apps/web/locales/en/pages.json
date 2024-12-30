@@ -92,6 +92,16 @@
         { "title": "Participate in exclusive events and challenges." },
         { "title": "Join a community that shares your interests." }
       ]
+    },
+    "toast": {
+      "error": {
+        "title": "Uh oh! Something went wrong.",
+        "description": "There was a problem with your request."
+      },
+      "success": {
+        "title": "Registration Successful!",
+        "description": "You have successfully registered. Welcome aboard!"
+      }
     }
   },
   "login": {
@@ -118,13 +128,15 @@
     "signUp": "Sign up",
     "loginWithGithub": "Login with Github",
     "orUseEmail": "Or log in with your email",
-    "success": {
-      "title": "Login Successful",
-      "description": "Welcome back to devs!"
-    },
-    "error": {
-      "title": "Login Failed",
-      "description": "Please check your credentials and try again."
+    "toast": {
+      "success": {
+        "title": "Login Successful",
+        "description": "Welcome back to devs!"
+      },
+      "error": {
+        "title": "Login Failed",
+        "description": "Please check your credentials and try again."
+      }
     }
   },
   "settings": {

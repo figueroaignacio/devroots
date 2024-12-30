@@ -92,6 +92,16 @@
         { "title": "Participa en eventos y desafíos exclusivos." },
         { "title": "Únete a una comunidad que comparte tus intereses." }
       ]
+    },
+    "toast": {
+      "error": {
+        "title": "Uh! Algo salió mal.",
+        "description": "Hubo un problema con tu solicitud."
+      },
+      "success": {
+        "title": "¡Registro exitoso!",
+        "description": "Te has registrado con éxito. ¡Bienvenido!"
+      }
     }
   },
   "login": {
@@ -119,13 +129,15 @@
     "signUp": "Regístrate",
     "loginWithGithub": "Inicia Sesión con GitHub",
     "orUseEmail": "O inicia sesión con tu correo electrónico",
-    "success": {
-      "title": "Inicio de sesión exitoso",
-      "description": "¡Bienvenido de vuelta a devs!"
-    },
-    "error": {
-      "title": "Error de inicio de sesión",
-      "description": "Por favor, verifica tus credenciales e intenta de nuevo."
+    "toast": {
+      "success": {
+        "title": "Inicio de sesión exitoso",
+        "description": "¡Bienvenido de vuelta a devs!"
+      },
+      "error": {
+        "title": "Error de inicio de sesión",
+        "description": "Por favor, verifica tus credenciales e intenta de nuevo."
+      }
     }
   },
   "settings": {
