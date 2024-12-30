@@ -11,7 +11,15 @@ import {
 import { Link } from "@/config/i18n/routing";
 
 // Icons
-import { BugPlay, Home, Lightbulb, Mail, Settings, User } from "lucide-react";
+import {
+  BugPlay,
+  Home,
+  Lightbulb,
+  Mail,
+  Rss,
+  Settings,
+  User,
+} from "lucide-react";
 
 export function AppSidebarLinks() {
   const appMenuItems = [
@@ -19,6 +27,7 @@ export function AppSidebarLinks() {
     { icon: Lightbulb, label: "Challenges", href: "/challenges" },
     { icon: User, label: "Profile", href: "/user/profile" },
     { icon: Settings, label: "Settings", href: "/user/settings" },
+    { icon: Rss, label: "Blog", href: "/blog" },
   ];
 
   const supportMenuItems = [
