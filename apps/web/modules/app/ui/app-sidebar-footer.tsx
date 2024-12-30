@@ -27,7 +27,7 @@ export async function AppSidebarFooter() {
     .toUpperCase();
 
   return (
-    <SidebarFooter className="border-t p-4">
+    <SidebarFooter className="p-4">
       <DropdownMenu>
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center space-x-3">
