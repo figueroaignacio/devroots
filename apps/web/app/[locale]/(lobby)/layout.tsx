@@ -6,7 +6,6 @@ import { Header } from "@/modules/landing/ui/header";
 import "@/styles/globals.css";
 
 // Config
-import { BgBlur } from "@/components/shared/bg-blur";
 import { routing } from "@/config/i18n/routing";
 import { setRequestLocale } from "next-intl/server";
 
@@ -25,7 +24,6 @@ export default async function LandingLayout({ children, params }: LayoutProps) {
 
   return (
     <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto] overflow-x-hidden">
-      <BgBlur />
       <Header />
       <main>{children}</main>
       <Footer />
