@@ -47,7 +47,7 @@
   "actionButtons": {
     "register": "Registrarse",
     "login": "Iniciar Sesión",
-    "goToHub": "Ir al Hub"
+    "goToHub": "Hub"
   },
   "buttons": {
     "backButton": "Volver"
