@@ -17,6 +17,33 @@
       "href": "/resources"
     }
   ],
+  "sidebarNavigation": [
+    {
+      "groupLabel": "App",
+      "items": [
+        { "title": "Hub", "href": "/hub", "icon": "Home" },
+        { "title": "Desafíos", "href": "/challenges", "icon": "Lightbulb" },
+        { "title": "Blog", "href": "/blog", "icon": "Rss" },
+        { "title": "Perfíl", "href": "/user/profile", "icon": "User" },
+        { "title": "Ajustes", "href": "/user/settings", "icon": "Settings" }
+      ]
+    },
+    {
+      "groupLabel": "Support",
+      "items": [
+        {
+          "title": "Reportar un Error",
+          "href": "/report-bug",
+          "icon": "BugPlay"
+        },
+        {
+          "title": "Contacto del Desarrollador",
+          "href": "/contact",
+          "icon": "Mail"
+        }
+      ]
+    }
+  ],
   "actionButtons": {
     "register": "Registrarse",
     "login": "Iniciar Sesión",
