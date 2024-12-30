@@ -150,11 +150,7 @@
       "selectLanguage": "Selecciona un idioma",
       "theme": "Tema",
       "selectTheme": "Selecciona un tema",
-      "themes": {
-        "light": "Claro",
-        "dark": "Oscuro",
-        "system": "Sistema"
-      }
+      "darkMode": "Modo Oscuro"
     }
   },
   "profile": {

@@ -1,12 +1,5 @@
 "use client";
 
-// Hooks
-import { locales, usePathname, useRouter } from "@/config/i18n/routing";
-import { useLocale, useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
-import { useEffect, useState, useTransition } from "react";
-
-// Componetns
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,17 +8,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Languages } from "lucide-react";
-
-// Utils
+import { Switch } from "@/components/ui/switch";
+import { locales, usePathname, useRouter } from "@/config/i18n/routing";
 import { Locale } from "@/lib/types";
+import { Languages } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
+import { useEffect, useState, useTransition } from "react";
 
 export function UserPreferences() {
   const router = useRouter();
@@ -82,18 +71,13 @@ export function UserPreferences() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="theme">{t("theme")}</Label>
-        <Select onValueChange={setTheme} defaultValue={theme}>
-          <SelectTrigger id="theme">
-            <SelectValue placeholder={t("selectTheme")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="light">{t("themes.light")}</SelectItem>
-            <SelectItem value="dark">{t("themes.dark")}</SelectItem>
-            <SelectItem value="system">{t("themes.system")}</SelectItem>
-          </SelectContent>
-        </Select>
+      <div className="flex items-center justify-between">
+        <Label htmlFor="dark-mode">{t("darkMode")}</Label>
+        <Switch
+          id="dark-mode"
+          checked={theme === "dark"}
+          onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+        />
       </div>
     </form>
   );

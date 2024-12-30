@@ -149,11 +149,7 @@
       "selectLanguage": "Select a language",
       "theme": "Theme",
       "selectTheme": "Select a theme",
-      "themes": {
-        "light": "Light",
-        "dark": "Dark",
-        "system": "System"
-      }
+      "darkMode": "Dark Mode"
     }
   },
   "profile": {
