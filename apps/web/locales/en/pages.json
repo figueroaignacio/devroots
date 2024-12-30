@@ -117,6 +117,7 @@
     "noAccount": "Don't have an account?",
     "signUp": "Sign up",
     "loginWithGithub": "Login with Github",
+    "orUseEmail": "Or log in with your email",
     "success": {
       "title": "Login Successful",
       "description": "Welcome back to devs!"

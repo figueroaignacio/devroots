@@ -118,6 +118,7 @@
     "noAccount": "¿No tienes una cuenta?",
     "signUp": "Regístrate",
     "loginWithGithub": "Inicia Sesión con GitHub",
+    "orUseEmail": "O inicia sesión con tu correo electrónico",
     "success": {
       "title": "Inicio de sesión exitoso",
       "description": "¡Bienvenido de vuelta a devs!"

@@ -22,12 +22,14 @@ import { Link, useRouter } from "@/config/i18n/routing";
 import { signIn } from "next-auth/react";
 import { GitHubButton } from "./github-button";
 
+// Icons
+import { Loader2 } from "lucide-react";
+
 // Utils
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 // Schema
-import { Loader2 } from "lucide-react";
 import { loginAction } from "../lib/actions";
 import { loginSchema } from "../lib/schemas";
 
@@ -54,17 +56,16 @@ export function LoginForm() {
         setError(response.error);
         toast({
           variant: "destructive",
-          title: "Login failed",
-          description: "There was an issue logging in. Please try again.",
+          title: t("toast.error.title"),
+          description: t("toast.error.description"),
         });
       } else {
         toast({
-          title: "Login Successful!",
-          description: "Welcome back! You have successfully logged in.",
+          title: t("toast.success.title"),
+          description: t("toast.success.description"),
           variant: "success",
           duration: 4000,
         });
-
         router.push("/hub");
       }
     });
@@ -75,10 +76,15 @@ export function LoginForm() {
   };
 
   return (
-    <div className="container mx-auto max-w-md">
-      <h1 className="text-2xl font-bold mb-6">{t("title")}</h1>
+    <div className="w-full max-w-md p-8 rounded-lg shadow-md">
+      <h1 className="text-3xl font-bold mb-6">{t("title")}</h1>
+      <GitHubButton handleGitHubAuth={handleGitHubSignIn} />
+      <Separator className="my-6" />
+      <p className="text-center text-sm text-gray-600 mb-6">
+        {t("orUseEmail")}
+      </p>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
             control={form.control}
             name="email"
@@ -116,21 +122,17 @@ export function LoginForm() {
           {error && <FormMessage>{error}</FormMessage>}
           <div className="flex justify-between items-center">
             <Link
-              href="/forgot-password"
+              href="/auth/forgot-password"
               className="text-sm text-blue-600 hover:underline"
             >
               {t("forgotPassword")}
             </Link>
           </div>
-          <Button
-            type={!isPending ? "submit" : undefined}
-            disabled={isPending}
-            className="w-full"
-          >
+          <Button type="submit" disabled={isPending} className="w-full">
             {isPending ? (
               <>
                 {t("submitting")}
-                <Loader2 className="animate-spin" />
+                <Loader2 className="ml-2 h-4 w-4 animate-spin" />
               </>
             ) : (
               t("submit")
@@ -138,10 +140,7 @@ export function LoginForm() {
           </Button>
         </form>
       </Form>
-      <Separator className="my-7" />
-      <div className="mt-4">
-        <GitHubButton handleGitHubAuth={handleGitHubSignIn} />
-      </div>
+
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-600">
           {t("noAccount")}{" "}
