@@ -49,7 +49,7 @@ export default function About() {
           {values.map(
             (item: { description: string; title: string }, index: number) => (
               <li key={index}>
-                <Card>
+                <Card className="h-full">
                   <CardHeader>
                     <CardTitle>{item.title}</CardTitle>
                   </CardHeader>
