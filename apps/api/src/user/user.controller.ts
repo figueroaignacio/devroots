@@ -1,4 +1,3 @@
-// users.controller.ts
 import { Controller, Get, Param, UseInterceptors } from '@nestjs/common';
 import { UserService } from './user.service';
 
