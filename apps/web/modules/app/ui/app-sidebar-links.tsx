@@ -54,11 +54,11 @@ export function AppSidebarLinks() {
                 {group.items.map((item) => {
                   const Icon = iconMap[item.icon];
                   return (
-                    <SidebarMenuButton asChild key={item.href}>
+                    <SidebarMenuButton asChild key={item.href} variant="ghost">
                       <SidebarMenuItem>
                         <Link
                           href={item.href}
-                          className="flex items-center py-2"
+                          className="flex items-center py-2 w-full"
                         >
                           <Icon className="mr-3 h-5 w-5" />
                           {item.title}
