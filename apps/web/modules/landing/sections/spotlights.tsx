@@ -13,7 +13,11 @@ export const Spotlights = () => {
   const t = useTranslations();
   const spotlights = t.raw("spotlights");
 
-  const images = ["images/bg-card-1.png", "images/bg-card-2.png"];
+  const images = [
+    "images/bg-card-1.png",
+    "images/bg-card-2.png",
+    "images/bg-card-3.png",
+  ];
 
   return (
     <div>

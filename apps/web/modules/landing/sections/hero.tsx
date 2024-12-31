@@ -10,11 +10,6 @@ export function Hero() {
 
   return (
     <section className="py-20 sm:py-32 max-w-2xl relative">
-      <img
-        src="images/bg-card-3.png"
-        alt=""
-        className="absolute left-[1000px] bottom-[100px]"
-      />
       <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
         {t.rich("hero.title", {
           span: (chunks) => <span>{chunks}</span>,
