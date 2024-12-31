@@ -62,29 +62,17 @@ export function UserPost({
       <Separator className="my-2" />
       <CardFooter className="flex justify-between items-center p-6">
         <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hover:bg-purple-100 transition-colors duration-200"
-          >
+          <Button variant="ghost" size="sm">
             <Heart className="h-5 w-5  mr-1" />
             <span className="font-medium">42</span>
           </Button>
         </div>
         <div className="flex gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hover:bg-blue-100 transition-colors duration-200"
-          >
+          <Button variant="ghost" size="sm">
             <MessageCircle className="h-5 w-5  mr-1" />
             <span className="font-medium">12</span>
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hover:bg-green-100 transition-colors duration-200"
-          >
+          <Button variant="ghost" size="sm">
             <Share2 className="h-5 w-5" />
           </Button>
         </div>
