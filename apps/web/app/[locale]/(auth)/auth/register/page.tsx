@@ -24,7 +24,7 @@ export default async function RegisterPage({ params }: RegisterPageProps) {
   }
 
   return (
-    <section className="min-h-[80dvh] flex justify-around">
+    <section className="min-h-[90dvh] flex justify-around">
       <RegisterHero />
       <RegisterForm />
     </section>

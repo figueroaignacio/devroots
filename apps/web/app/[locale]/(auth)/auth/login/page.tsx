@@ -23,7 +23,7 @@ export default async function LoginPage({ params }: LoginPageProps) {
   }
 
   return (
-    <section className="min-h-dvh flex justify-center items-center">
+    <section className="min-h-[90dvh] flex justify-center items-center">
       <LoginForm />
     </section>
   );
