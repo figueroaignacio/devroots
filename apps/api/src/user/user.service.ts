@@ -6,11 +6,31 @@ export class UserService {
   constructor(private readonly db: DatabaseService) {}
 
   async findAll() {
-    return this.db.query('SELECT * FROM users');
+    const users = await this.db.query('SELECT * FROM users');
+    for (const user of users) {
+      const posts = await this.db.query(
+        'SELECT * FROM posts WHERE user_id = $1',
+        [user.id],
+      );
+      user.posts = posts;
+    }
+
+    return users;
   }
 
   async findOneById(id: number) {
-    return this.db.query('SELECT * FROM users WHERE id = $1', [id]);
+    const user = await this.db.query('SELECT * FROM users WHERE id = $1', [id]);
+    if (user.length === 0) {
+      return null;
+    }
+
+    const posts = await this.db.query(
+      'SELECT * FROM posts WHERE user_id = $1',
+      [id],
+    );
+    user[0].posts = posts;
+
+    return user[0];
   }
 
   async createUser(email: string, name: string) {

@@ -1,7 +1,6 @@
 import { Controller, Get, Param, UseInterceptors } from '@nestjs/common';
-import { UserService } from './user.service';
-
 import { PasswordRemovalInterceptor } from './interceptors/password-removal.interceptor';
+import { UserService } from './user.service';
 
 @Controller('users')
 @UseInterceptors(PasswordRemovalInterceptor)
