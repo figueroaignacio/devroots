@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Feed } from "@/modules/app/ui/feed";
 import { auth } from "@/modules/auth/lib/auth";
-import { UserPost } from "@/modules/user/ui/user-post";
 import { redirect } from "next/navigation";
 
 export default async function HubPage() {
@@ -14,14 +14,8 @@ export default async function HubPage() {
     <div className="container mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <main className="lg:col-span-8 space-y-6">
-          <h1 className="text-3xl font-bold mb-6">Your Feed</h1>
-          <ul className="space-y-6">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <li key={i}>
-                <UserPost />
-              </li>
-            ))}
-          </ul>
+          <h1 className="text-3xl font-bold mb-6">Posts</h1>
+          <Feed />
         </main>
         <aside className="lg:col-span-4 space-y-6 mt-14">
           <Card>
