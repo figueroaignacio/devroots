@@ -29,7 +29,18 @@ export class PostsService {
   }
 
   async findAll() {
-    const query = `SELECT * FROM posts ORDER BY created_at DESC;`;
+    const query = `
+      SELECT 
+        p.id, 
+        p.title, 
+        p.content, 
+        p.created_at AS "createdAt", 
+        u.name AS author, 
+        u.image AS "authorImage"
+      FROM posts p
+      LEFT JOIN users u ON p.user_id = u.id
+      ORDER BY p.created_at DESC;
+    `;
     const result = await this.databaseService.query(query);
 
     return result;
