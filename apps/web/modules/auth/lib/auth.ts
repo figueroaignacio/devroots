@@ -1,10 +1,10 @@
-// db
+// Database
 import PostgresAdapter from "@auth/pg-adapter";
 import { Pool as NeonPool } from "@neondatabase/serverless";
 
-// next-auth
+// Next-Auth
 import NextAuth, { type NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 
 // Schemas
@@ -13,9 +13,43 @@ import { loginSchema } from "./schemas";
 // Utils
 import bcrypt from "bcryptjs";
 
+// Database Pool Initialization
 const pool = new NeonPool({
   connectionString: process.env.DATABASE_URL,
 }) as unknown as import("pg").Pool;
+
+async function getUserByEmail(email: string) {
+  const query = `SELECT id, email, password, name FROM "users" WHERE email = $1`;
+  const { rows } = await pool.query(query, [email]);
+  return rows[0];
+}
+
+async function syncGitHubUser(user: any, profile: any) {
+  const { email, name, image } = user;
+  const githubId = profile?.id || null;
+
+  try {
+    const existingUser = await pool.query(
+      `SELECT id FROM "users" WHERE email = $1`,
+      [email]
+    );
+    if (existingUser.rows.length === 0) {
+      await pool.query(
+        `INSERT INTO "users" (email, name, image, github_id, role) VALUES ($1, $2, $3, $4, $5)`,
+        [email, name || null, image || null, githubId, "user"]
+      );
+    } else {
+      await pool.query(
+        `UPDATE "users" SET name = $1, image = $2, github_id = $3 WHERE email = $4`,
+        [name || null, image || null, githubId, email]
+      );
+    }
+    return true;
+  } catch (error) {
+    console.error("Error syncing GitHub user:", error);
+    return false;
+  }
+}
 
 export const authConfig: NextAuthConfig = {
   pages: {
@@ -28,12 +62,15 @@ export const authConfig: NextAuthConfig = {
   },
   secret: process.env.AUTH_SECRET,
   providers: [
+    // GitHub Provider
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       allowDangerousEmailAccountLinking: true,
     }),
-    Credentials({
+
+    // Credentials Provider
+    CredentialsProvider({
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "text" },
@@ -42,32 +79,16 @@ export const authConfig: NextAuthConfig = {
       async authorize(credentials) {
         try {
           const { success, data } = loginSchema.safeParse(credentials);
-          if (!success) {
-            return null;
-          }
+          if (!success) return null;
 
           const { email, password } = data;
-
-          const userResult = await pool.query(
-            `SELECT id, email, password, name FROM "users" WHERE email = $1`,
-            [email]
-          );
-
-          const user = userResult.rows[0];
-          if (!user) {
-            return null;
-          }
+          const user = await getUserByEmail(email);
+          if (!user) return null;
 
           const isPasswordValid = await bcrypt.compare(password, user.password);
-          if (!isPasswordValid) {
-            return null;
-          }
+          if (!isPasswordValid) return null;
 
-          return {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-          };
+          return { id: user.id, email: user.email, name: user.name };
         } catch (error) {
           console.error("Authorization error:", error);
           return null;
@@ -78,39 +99,18 @@ export const authConfig: NextAuthConfig = {
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account?.provider === "github" && user.email) {
-        const { email, name, image } = user;
-        try {
-          const userResult = await pool.query(
-            `SELECT id FROM "users" WHERE email = $1`,
-            [email]
-          );
-          if (userResult.rows.length === 0) {
-            await pool.query(
-              `INSERT INTO "users" (email, name, image, github_id, role) 
-               VALUES ($1, $2, $3, $4, $5)`,
-              [email, name || null, image || null, profile?.id || null, "user"]
-            );
-          } else {
-            await pool.query(
-              `UPDATE "users" SET name = $1, image = $2, github_id = $3 
-               WHERE email = $4`,
-              [name || null, image || null, profile?.id || null, email]
-            );
-          }
-          return true;
-        } catch (error) {
-          console.error("Error durante el inicio de sesión con GitHub:", error);
-          return false;
-        }
+        return await syncGitHubUser(user, profile);
       }
       return true;
     },
+
     async session({ session, token }) {
       if (session.user && token.sub) {
         session.user.id = token.sub;
       }
       return session;
     },
+
     async redirect({ url, baseUrl }) {
       if (url.startsWith(baseUrl)) {
         if (url.includes("error=OAuthAccountNotLinked")) {
