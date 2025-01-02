@@ -1,3 +1,7 @@
+// Hooks
+import { useTranslations } from "next-intl";
+
+// Components
 import {
   SidebarContent,
   SidebarGroup,
@@ -8,7 +12,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Link } from "@/config/i18n/routing";
-import { useTranslations } from "next-intl";
 
 // Icons
 import {
@@ -50,12 +53,12 @@ export function AppSidebarLinks() {
           <SidebarGroup key={group.groupLabel}>
             <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>
             <SidebarGroupContent>
-              <SidebarMenu>
+              <SidebarMenu className="space-y-1">
                 {group.items.map((item) => {
                   const Icon = iconMap[item.icon];
                   return (
                     <SidebarMenuButton asChild key={item.href} variant="ghost">
-                      <SidebarMenuItem>
+                      <SidebarMenuItem className="text-xl">
                         <Link
                           href={item.href}
                           className="flex items-center py-2 w-full"
