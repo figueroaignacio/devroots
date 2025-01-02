@@ -13,11 +13,11 @@ export default async function HubPage() {
   return (
     <div className="container mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <main className="lg:col-span-8 space-y-6">
+        <main className="lg:col-span-7 space-y-6">
           <h1 className="text-3xl font-bold mb-6">Posts</h1>
           <Feed />
         </main>
-        <aside className="lg:col-span-4 space-y-6 mt-14">
+        <aside className="lg:col-span-5 space-y-6 mt-14">
           <Card>
             <CardHeader>
               <CardTitle>Trending Topics</CardTitle>
