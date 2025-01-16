@@ -1,46 +1,36 @@
-// Next
-import { NextResponse } from "next/server";
-
-// utils
-import { auth } from "@/modules/auth/lib/auth";
-import createMiddleware from "next-intl/middleware";
+import { getToken } from "next-auth/jwt";
+import createIntlMiddleware from "next-intl/middleware";
+import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./config/i18n/routing";
 
-const publicPages = ["/auth/login", "/auth/register", "/"];
+const intlMiddleware = createIntlMiddleware(routing);
 
-const intlMiddleware = createMiddleware(routing);
+async function handleAuth(request: NextRequest) {
+  const token = await getToken({ req: request });
 
-export default async function middleware(request: any) {
-  if (request.nextUrl.pathname.startsWith("/api/auth")) {
-    return NextResponse.next();
+  const isAuthPage = request.nextUrl.pathname.startsWith("/login");
+  if (!token && !isAuthPage) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  const isPublicPage = publicPages.some((page) =>
-    request.nextUrl.pathname.endsWith(page)
-  );
+  return null;
+}
 
-  if (isPublicPage) {
-    return intlMiddleware(request);
+export async function middleware(request: NextRequest) {
+  const intlResponse = await intlMiddleware(request);
+
+  if (intlResponse instanceof NextResponse) {
+    return intlResponse;
   }
 
-  const session = await auth();
-  if (!session && !isPublicPage) {
-    const loginUrl = new URL("/auth/login", request.url);
-    const locale = request.nextUrl.pathname.split("/")[1];
-
-    if (locale === "en" || locale === "es") {
-      loginUrl.pathname = `/${locale}${loginUrl.pathname}`;
-    }
+  const authResponse = await handleAuth(request);
+  if (authResponse) {
+    return authResponse;
   }
 
-  return intlMiddleware(request);
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next|_vercel|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
-    "/",
-    "/(en|es)/:path*",
-  ],
+  matcher: ["/((?!api|_next|.*\\..*).*)", "/", "/(en|es)/:path*"],
 };

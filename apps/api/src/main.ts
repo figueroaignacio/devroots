@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { PasswordRemovalInterceptor } from './user/interceptors/password-removal.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -8,7 +7,6 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.useGlobalPipes();
   app.useGlobalFilters();
-  app.useGlobalInterceptors(new PasswordRemovalInterceptor());
   app.enableCors({
     origin: ['http://localhost:3000', 'http://localhost:3001'],
     methods: 'GET, POST, PUT, DELETE, PATCH',

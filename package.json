@@ -13,7 +13,15 @@
     "node": ">=18"
   },
   "keywords": [],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "bcryptjs": "^2.4.3"
+  },
   "devDependencies": {
-    "turbo": "^2.3.3"
+    "turbo": "^2.3.3",
+    "@types/bcryptjs": "^2.4.6"
   }
 }

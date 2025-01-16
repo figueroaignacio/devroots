@@ -17,8 +17,16 @@ import { Separator } from "@/components/ui/separator";
 import { Heart, MessageCircle, Share2 } from "lucide-react";
 
 // Utils
-import { UserPostProps } from "@/modules/app/lib/definitions";
-import { getInitials, timeAgo } from "../lib/utils";
+import { getInitials } from "../lib/utils";
+
+interface UserPostProps {
+  content: string;
+  createdAt: string;
+  id: string;
+  title: string;
+  author?: string;
+  authorImage?: string;
+}
 
 export function UserPost({
   content,
@@ -48,7 +56,7 @@ export function UserPost({
           <p className="text-lg font-semibold tracking-tight">
             {author || "Anonymous"}
           </p>
-          <p className="text-sm text-muted-foreground">{timeAgo(createdAt)}</p>
+          {/* <p className="text-sm text-muted-foreground">{timeAgo(createdAt)}</p> */}
         </div>
       </CardHeader>
       <CardContent className="space-y-4 px-6">
