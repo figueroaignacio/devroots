@@ -1,9 +1,10 @@
-import { prisma } from "@repo/db";
-import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { db } from "@repo/db";
+import NextAuth from "next-auth";
+import authConfig from "./auth.config";
 
-export const auth = betterAuth({
-  database: prismaAdapter(prisma, {
-    provider: "postgresql",
-  }),
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  adapter: PrismaAdapter(db),
+  ...authConfig,
+  session: { strategy: "jwt" },
 });

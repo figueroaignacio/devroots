@@ -1,12 +1,5 @@
 "use client";
 
-// Hooks
-import { useRouter } from "@/config/i18n/routing";
-import { useToast } from "@/hooks/use-toast";
-import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-
-// Components
 import { Github } from "@/components/shared/tech-icons";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,13 +18,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "@/config/i18n/routing";
-
-// Utils
+import { Link, useRouter } from "@/config/i18n/routing";
+import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// Schema
 import { Loader2 } from "lucide-react";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { registerAction } from "../lib/actions";
 import { registerSchema } from "../lib/schemas";
@@ -59,13 +51,13 @@ export function RegisterForm() {
         setError(response.error);
         toast({
           variant: "destructive",
-          title: "toast.error.title",
-          description: "toast.error.description",
+          title: "Registration failed",
+          description: response.error,
         });
       } else {
         toast({
-          title: "toast.success.title",
-          description: "toast.success.description",
+          title: "Registration successful",
+          description: "You have been successfully registered and logged in.",
           variant: "success",
           duration: 4000,
         });
@@ -75,7 +67,7 @@ export function RegisterForm() {
   }
 
   return (
-    <Card className="w-full max-w-md ">
+    <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-center">
           Register on devs
@@ -105,9 +97,9 @@ export function RegisterForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" type="name" {...field} />
+                    <Input placeholder="John Doe" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -143,23 +135,15 @@ export function RegisterForm() {
                 </FormItem>
               )}
             />
-            <div className="flex items-center justify-end">
-              <Link
-                href="/forgot-password"
-                className="text-sm text-primary hover:underline"
-              >
-                Forgot password?
-              </Link>
-            </div>
             {error && <FormMessage>{error}</FormMessage>}
             <Button type="submit" className="w-full" disabled={isPending}>
               {isPending ? (
                 <>
-                  Wait a moment...
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Registering...
+                  <Loader2 className="ml-2 h-4 w-4 animate-spin" />
                 </>
               ) : (
-                "Login"
+                "Register"
               )}
             </Button>
           </form>
