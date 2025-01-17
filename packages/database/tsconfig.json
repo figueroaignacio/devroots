@@ -1,8 +1,0 @@
-{
-  "extends": "@repo/typescript-config/base.json",
-  "compilerOptions": {
-    "lib": ["ESNext"],
-    "types": ["node"],
-    "strict": true
-  }
-}

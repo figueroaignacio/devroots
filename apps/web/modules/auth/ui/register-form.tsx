@@ -1,14 +1,14 @@
 "use client";
 
-import { Github } from "@/components/shared/tech-icons";
+// Hooks
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+
+// Schema
+import { RegisterSchema } from "../lib/schemas";
+
+// Components
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -18,24 +18,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link, useRouter } from "@/config/i18n/routing";
-import { useToast } from "@/hooks/use-toast";
+import { FormError } from "@/modules/auth/ui/form-error";
+import { FormSuccess } from "@/modules/auth/ui/form-success";
+import { Loader } from "lucide-react";
+import { FormWrapper } from "./form-wrapper";
+
+// Utils
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { registerAction } from "../lib/actions";
-import { registerSchema } from "../lib/schemas";
+import { register } from "../lib/actions";
 
 export function RegisterForm() {
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | null>(null);
-  const { toast } = useToast();
-  const router = useRouter();
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>("");
 
-  const form = useForm<z.infer<typeof registerSchema>>({
-    resolver: zodResolver(registerSchema),
+  const form = useForm<z.infer<typeof RegisterSchema>>({
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -43,55 +42,28 @@ export function RegisterForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof registerSchema>) {
-    setError(null);
-    startTransition(async () => {
-      const response = await registerAction(values);
-      if (response.error) {
-        setError(response.error);
-        toast({
-          variant: "destructive",
-          title: "Registration failed",
-          description: response.error,
-        });
-      } else {
-        toast({
-          title: "Registration successful",
-          description: "You have been successfully registered and logged in.",
-          variant: "success",
-          duration: 4000,
-        });
-        router.push("/hub");
-      }
+  function onSubmit(values: z.infer<typeof RegisterSchema>) {
+    setError("");
+    setSuccess("");
+
+    startTransition(() => {
+      register(values).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
     });
   }
 
   return (
-    <Card className="w-full max-w-md">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">
-          Register on devs
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="mb-6">
-          <Button
-            variant="outline"
-            className="w-full flex items-center justify-center gap-3"
-          >
-            <Github />
-            Continue with GitHub
-          </Button>
-        </div>
-        <div className="relative mb-6">
-          <div className="relative flex justify-center items-center text-xs">
-            <div className="w-20 h-[1px] bg-muted-foreground" />
-            <span className="px-2 text-muted-foreground">Or continue with</span>
-            <div className="w-20 h-[1px] bg-muted-foreground" />
-          </div>
-        </div>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+    <FormWrapper
+      label="Create an account and start connecting."
+      backButtonLabel="Already have an account?"
+      backButtonHref="/auth/login"
+      showSocial
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <div className="space-y-4">
             <FormField
               control={form.control}
               name="name"
@@ -99,7 +71,7 @@ export function RegisterForm() {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field} />
+                    <Input {...field} placeholder="Your name" type="text" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,9 +85,9 @@ export function RegisterForm() {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="johndoe@email.com"
-                      type="email"
                       {...field}
+                      placeholder="email@example.com"
+                      type="email"
                     />
                   </FormControl>
                   <FormMessage />
@@ -129,34 +101,29 @@ export function RegisterForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="••••••••" type="password" {...field} />
+                    <Input
+                      {...field}
+                      placeholder="Your password"
+                      type="password"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {error && <FormMessage>{error}</FormMessage>}
-            <Button type="submit" className="w-full" disabled={isPending}>
-              {isPending ? (
-                <>
-                  Registering...
-                  <Loader2 className="ml-2 h-4 w-4 animate-spin" />
-                </>
-              ) : (
-                "Register"
-              )}
+          </div>
+          <FormError message={error} />
+          <FormSuccess message={success} />
+          {isPending ? (
+            <Button type="submit" disabled>
+              Registering...
+              <Loader className="size-4 animate-spin" />
             </Button>
-          </form>
-        </Form>
-      </CardContent>
-      <CardFooter className="flex justify-center">
-        <p className="text-sm text-muted-foreground">
-          Already have an account?{" "}
-          <Link href="/auth/login" className="text-primary underline">
-            Login
-          </Link>
-        </p>
-      </CardFooter>
-    </Card>
+          ) : (
+            <Button type="submit">Register</Button>
+          )}
+        </form>
+      </Form>
+    </FormWrapper>
   );
 }
