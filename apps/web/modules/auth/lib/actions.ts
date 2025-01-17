@@ -2,7 +2,9 @@
 
 import { db } from "@repo/db";
 import bcrypt from "bcryptjs";
+import { AuthError } from "next-auth";
 import { z } from "zod";
+import { signIn } from "./auth";
 import { getUserByEmail } from "./data";
 import { LoginSchema, RegisterSchema } from "./schemas";
 
@@ -13,7 +15,25 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     return { error: "Invalid fields." };
   }
 
-  return { success: "Email sent!" };
+  const { email, password } = validatedFields.data;
+
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: "/hub",
+    });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return { error: "Invalid Credentials" };
+        default:
+          return { error: "Something went wrong" };
+      }
+    }
+    throw error;
+  }
 };
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
