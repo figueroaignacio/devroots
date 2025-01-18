@@ -5,8 +5,8 @@ import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 import { z } from "zod";
 import { signIn } from "./auth";
-import { getUserByEmail } from "./data";
 import { LoginSchema, RegisterSchema } from "./schemas";
+import { getUserByEmail } from "./utils";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
