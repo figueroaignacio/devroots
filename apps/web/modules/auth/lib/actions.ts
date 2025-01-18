@@ -6,7 +6,7 @@ import { AuthError } from "next-auth";
 import { z } from "zod";
 import { signIn } from "./auth";
 import { LoginSchema, RegisterSchema } from "./schemas";
-import { getUserByEmail } from "./utils";
+import { generateVerificationToken, getUserByEmail } from "./utils";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
@@ -16,6 +16,20 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
   }
 
   const { email, password } = validatedFields.data;
+
+  const existingUser = await getUserByEmail(email);
+
+  if (!existingUser || !existingUser.email || !existingUser.password) {
+    return { error: "Invalid Credentials" };
+  }
+
+  if (!existingUser.emailVerified) {
+    const verificationToken = await generateVerificationToken(
+      existingUser.email
+    );
+
+    return { success: "Confirmation email sent." };
+  }
 
   try {
     await signIn("credentials", {
@@ -61,8 +75,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     },
   });
 
-  // TODO: Send verification token email
+  const verificationToken = await generateVerificationToken(email);
 
-  return { success: "User Created!" };
-  // return { success: "Email sent!" };
+  return { success: "Confirmation email sent." };
 };
