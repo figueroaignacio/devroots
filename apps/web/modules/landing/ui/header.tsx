@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 
 // Componetns
 import { Logo } from "@/components/shared/logo";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -15,10 +16,10 @@ import { LoginButton } from "@/modules/auth/ui/login-button";
 import { RegisterButton } from "@/modules/auth/ui/register-button";
 
 // Icons
-import { Menu } from "lucide-react";
+import { ArrowRight, Menu } from "lucide-react";
 
 // Utils
-// import { auth } from "@/modules/auth/lib/auth";
+import { auth } from "@/modules/auth/lib/auth";
 
 type Navigation = {
   title: string;
@@ -28,7 +29,7 @@ type Navigation = {
 export async function Header() {
   const t = await getTranslations();
   const navigation = t.raw("navigation");
-  // const session = await auth();
+  const session = await auth();
 
   return (
     <header className="sticky top-0 left-0 z-50 border-b backdrop-blur-md">
@@ -49,12 +50,7 @@ export async function Header() {
             ))}
           </nav>
           <div className="hidden md:flex items-center space-x-2">
-            <>
-              <RegisterButton />
-              <LoginButton />
-            </>
-          </div>
-          {/* {session ? (
+            {session ? (
               <Button asChild>
                 <Link href="/hub">
                   {t("actionButtons.goToHub")}
@@ -66,7 +62,8 @@ export async function Header() {
                 <RegisterButton />
                 <LoginButton />
               </>
-            )} */}
+            )}
+          </div>
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
@@ -91,9 +88,7 @@ export async function Header() {
                   ))}
                 </nav>
                 <div className="flex flex-col space-y-2 mt-8">
-                  <RegisterButton />
-                  <LoginButton />
-                  {/* {session ? (
+                  {session ? (
                     <Button asChild>
                       <Link href="/hub">
                         Go to hub
@@ -105,7 +100,7 @@ export async function Header() {
                       <RegisterButton />
                       <LoginButton />
                     </>
-                  )} */}
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
