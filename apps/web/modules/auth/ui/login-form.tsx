@@ -57,7 +57,7 @@ export function LoginForm() {
   return (
     <FormWrapper
       label="Welcome Back!"
-      backButtonLabel="Don't have and account?"
+      backButtonLabel="Don't have an account?"
       backButtonHref="/auth/register"
       showSocial
     >
@@ -75,6 +75,7 @@ export function LoginForm() {
                       {...field}
                       placeholder="email@example.com"
                       type="email"
+                      autoComplete="email"
                     />
                   </FormControl>
                   <FormMessage />
@@ -92,6 +93,7 @@ export function LoginForm() {
                       {...field}
                       placeholder="Your password"
                       type="password"
+                      autoComplete="current-password"
                     />
                   </FormControl>
                   <FormMessage />
@@ -101,14 +103,16 @@ export function LoginForm() {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          {isPending ? (
-            <Button type="submit" disabled>
-              Logging in...
-              <Loader className="size-4 animate-spin" />
-            </Button>
-          ) : (
-            <Button type="submit">Login</Button>
-          )}
+          <Button type="submit" className="w-full" disabled={isPending}>
+            {isPending ? (
+              <>
+                Logging in...
+                <Loader className="ml-2 h-4 w-4 animate-spin" />
+              </>
+            ) : (
+              "Login"
+            )}
+          </Button>
         </form>
       </Form>
     </FormWrapper>

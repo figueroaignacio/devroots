@@ -56,7 +56,7 @@ export function RegisterForm() {
 
   return (
     <FormWrapper
-      label="Create an account and start connecting."
+      label="Create an account"
       backButtonLabel="Already have an account?"
       backButtonHref="/auth/login"
       showSocial
@@ -71,7 +71,12 @@ export function RegisterForm() {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Your name" type="text" />
+                    <Input
+                      {...field}
+                      placeholder="Your name"
+                      type="text"
+                      autoComplete="name"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -88,6 +93,7 @@ export function RegisterForm() {
                       {...field}
                       placeholder="email@example.com"
                       type="email"
+                      autoComplete="email"
                     />
                   </FormControl>
                   <FormMessage />
@@ -105,6 +111,7 @@ export function RegisterForm() {
                       {...field}
                       placeholder="Your password"
                       type="password"
+                      autoComplete="new-password"
                     />
                   </FormControl>
                   <FormMessage />
@@ -114,14 +121,16 @@ export function RegisterForm() {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          {isPending ? (
-            <Button type="submit" disabled>
-              Registering...
-              <Loader className="size-4 animate-spin" />
-            </Button>
-          ) : (
-            <Button type="submit">Register</Button>
-          )}
+          <Button type="submit" className="w-full" disabled={isPending}>
+            {isPending ? (
+              <>
+                Registering...
+                <Loader className="ml-2 h-4 w-4 animate-spin" />
+              </>
+            ) : (
+              "Register"
+            )}
+          </Button>
         </form>
       </Form>
     </FormWrapper>
