@@ -10,7 +10,7 @@
     "db:deploy": "prisma migrate deploy"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*",
+    "@repo/ts-config": "workspace:*",
     "@types/node": "^22.10.7",
     "prisma": "^6.2.1",
     "typescript": "^5.7.3"
