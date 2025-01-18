@@ -58,7 +58,7 @@ export function AppSidebarLinks() {
                   const Icon = iconMap[item.icon];
                   return (
                     <SidebarMenuButton asChild key={item.href} variant="ghost">
-                      <SidebarMenuItem className="text-xl">
+                      <SidebarMenuItem className="text-sm">
                         <Link
                           href={item.href}
                           className="flex items-center py-2 w-full"
