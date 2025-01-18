@@ -19,7 +19,7 @@ export function SpotlightCard({ description, title, img }: SpotlightCardProps) {
       <img
         src={img}
         alt={title}
-        className="w-full h-full absolute left-60 object-cover"
+        className="w-full h-full absolute left-60 object-cover opacity-35"
       />
       <CardHeader className="">
         <CardTitle className="text-3xl w-72 font-bold">{title}</CardTitle>
