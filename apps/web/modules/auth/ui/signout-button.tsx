@@ -1,5 +1,10 @@
 "use client";
 
+// Hooks
+import { useToast } from "@/hooks/use-toast";
+import { useState, useTransition } from "react";
+
+// Components
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,10 +13,10 @@ import {
   DialogFooter,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useToast } from "@/hooks/use-toast";
 import { LogOut } from "lucide-react";
+
+// Utils
 import { signOut } from "next-auth/react";
-import { useState, useTransition } from "react";
 
 export function SignOutButton() {
   const [isPending, startTransition] = useTransition();
