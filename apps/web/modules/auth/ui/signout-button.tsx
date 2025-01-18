@@ -21,22 +21,19 @@ export function SignOutButton() {
   const handleSignOut = async () => {
     startTransition(async () => {
       try {
+        toast({
+          title: "Cerrando sesión...",
+          description: "Por favor, espera un momento.",
+        });
         await signOut({
           redirect: true,
           callbackUrl: "/auth/login",
         });
-        toast({
-          title: "Sesión cerrada",
-          description: "Has cerrado sesión correctamente.",
-          duration: 3000,
-        });
       } catch (error) {
-        console.error("Error during sign out:", error);
         toast({
           title: "Error",
           description: "Hubo un problema al cerrar la sesión.",
           variant: "destructive",
-          duration: 3000,
         });
       } finally {
         setIsDialogOpen(false);
@@ -79,7 +76,7 @@ export function SignOutButton() {
               disabled={isPending}
               variant="destructive"
             >
-              {isPending ? "Cerrando sesión..." : "Confirmar"}
+              Confirmar
             </Button>
           </DialogFooter>
         </DialogContent>
