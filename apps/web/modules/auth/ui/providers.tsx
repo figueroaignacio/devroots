@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useCallback, useTransition } from "react";
 
-export function Social() {
+export function Providers() {
   const [isPending, startTransition] = useTransition();
 
   const onClick = useCallback((provider: "github") => {

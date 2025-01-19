@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { FormLink } from "./form-link";
-import { Social } from "./social";
+import { Providers } from "./providers";
 
 interface FormWrapperProps {
   children: React.ReactNode;
@@ -32,7 +32,7 @@ export function FormWrapper({
       </CardHeader>
       {showSocial && (
         <CardContent>
-          <Social />
+          <Providers />
           <div className="relative my-4">
             <Separator />
             <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-2 text-xs text-muted-foreground">
