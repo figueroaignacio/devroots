@@ -3,11 +3,15 @@
 import { db } from "@repo/db";
 import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
+
+// Utils
 import { z } from "zod";
 import { signIn } from "./auth";
 import { sendVerificationEmail } from "./mail";
-import { LoginSchema, RegisterSchema } from "./schemas";
 import { generateVerificationToken, getUserByEmail } from "./utils";
+
+// Schemas
+import { LoginSchema, RegisterSchema } from "./schemas";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);

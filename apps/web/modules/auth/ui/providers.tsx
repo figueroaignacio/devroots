@@ -1,10 +1,15 @@
 "use client";
 
+// Hooks
+import { useCallback, useTransition } from "react";
+
+// Components
 import { Github } from "@/components/shared/tech-icons";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+
+// Utils
 import { signIn } from "next-auth/react";
-import { useCallback, useTransition } from "react";
 
 export function Providers() {
   const [isPending, startTransition] = useTransition();
