@@ -5,6 +5,7 @@ import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 import { z } from "zod";
 import { signIn } from "./auth";
+import { sendVerificationEmail } from "./mail";
 import { LoginSchema, RegisterSchema } from "./schemas";
 import { generateVerificationToken, getUserByEmail } from "./utils";
 
@@ -76,6 +77,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   });
 
   const verificationToken = await generateVerificationToken(email);
+  await sendVerificationEmail(verificationToken.email, verificationToken.token);
 
   return { success: "Confirmation email sent." };
 };
