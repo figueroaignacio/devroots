@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@repo/database": ["../../packages/database/dist"]
+    },
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
