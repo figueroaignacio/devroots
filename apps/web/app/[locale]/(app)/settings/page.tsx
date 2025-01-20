@@ -1,6 +1,3 @@
-// Compoennts
-import { UserSettings } from "@/modules/settings/ui/user-settings";
-
 // Utils
 import { auth } from "@/modules/auth/lib/auth";
 import { redirect } from "next/navigation";
@@ -12,5 +9,5 @@ export default async function SettingsPage() {
     redirect("/auth/login");
   }
 
-  return <UserSettings />;
+  return <div>Settings page</div>;
 }
