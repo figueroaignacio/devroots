@@ -13,15 +13,15 @@ import { Providers } from "./providers";
 
 interface FormWrapperProps {
   children: React.ReactNode;
-  label: string;
-  backButtonLabel: string;
-  backButtonHref: string;
+  label?: string;
+  backButtonLabel?: string;
+  backButtonHref?: string;
   showSocial?: boolean;
 }
 
 export function FormWrapper({
-  backButtonHref,
-  backButtonLabel,
+  backButtonHref = "",
+  backButtonLabel = "",
   children,
   label,
   showSocial,

@@ -8,7 +8,11 @@ import { AuthError } from "next-auth";
 import { z } from "zod";
 import { signIn } from "./auth";
 import { sendVerificationEmail } from "./mail";
-import { generateVerificationToken, getUserByEmail } from "./utils";
+import {
+  generateVerificationToken,
+  getUserByEmail,
+  getVerificationTokenByToken,
+} from "./utils";
 
 // Schemas
 import { LoginSchema, RegisterSchema } from "./schemas";
@@ -31,6 +35,11 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
   if (!existingUser.emailVerified) {
     const verificationToken = await generateVerificationToken(
       existingUser.email
+    );
+
+    await sendVerificationEmail(
+      verificationToken.email,
+      verificationToken.token
     );
 
     return { success: "Confirmation email sent." };
@@ -85,3 +94,37 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
   return { success: "Confirmation email sent." };
 };
+
+export async function newVerification(token: string) {
+  const existingToken = await getVerificationTokenByToken(token);
+
+  if (!existingToken) {
+    return { error: "Token does not exists!" };
+  }
+
+  const hasExpired = new Date(existingToken.expires) < new Date();
+
+  if (hasExpired) {
+    return { error: "Token has expired!" };
+  }
+
+  const existingUser = await getUserByEmail(existingToken.email);
+
+  if (!existingToken) {
+    return { error: "Something went wrong" };
+  }
+
+  await db.user.update({
+    where: { id: existingUser?.id },
+    data: {
+      emailVerified: new Date(),
+      email: existingToken.email,
+    },
+  });
+
+  await db.verificationToken.delete({
+    where: { id: existingToken.id },
+  });
+
+  return { success: "Email verified!" };
+}
