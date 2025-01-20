@@ -1,23 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2020", // Mantén el target a ES2020 o superior
-    "module": "CommonJS", // Usa CommonJS para la salida (para NestJS)
-    "moduleResolution": "Node", // Resolución de módulos similar a Node.js
-    "esModuleInterop": true, // Asegura la interoperabilidad entre CommonJS y ES Modules
-    "skipLibCheck": true, // Evita la verificación de tipos en las dependencias
-    "forceConsistentCasingInFileNames": true, // Asegura que la diferencia de mayúsculas/minúsculas no cause errores
-    "declaration": true, // Genera archivos .d.ts para tipos
-    "declarationMap": true, // Crea mapas de declaración
-    "sourceMap": true, // Genera mapas de código fuente
-    "outDir": "./dist", // Directorio de salida para los archivos transpilados
-    "rootDir": "./src", // Directorio raíz de entrada
-    "resolveJsonModule": true, // Permite importar archivos JSON
-    "allowJs": true, // Permite incluir archivos .js
-    "baseUrl": ".", // Directorio base para la resolución de módulos
+    "target": "ES2020",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "baseUrl": ".",
     "paths": {
-      "@repo/*": ["../*"] // Asegura que los módulos del monorepo sean resueltos correctamente
+      "@repo/*": ["../*"]
     }
   },
-  "include": ["src/**/*"], // Incluye todo el código fuente de TypeScript
-  "exclude": ["node_modules", "dist"] // Excluye node_modules y la carpeta dist
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
