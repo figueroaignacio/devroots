@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { API_URL } from "@/lib/constants";
 import { auth } from "@/modules/auth/lib/auth";
 import { format } from "date-fns";
 
@@ -17,7 +18,7 @@ interface User {
 export async function Feed() {
   const session = await auth();
 
-  const data = await fetch("http://localhost:3001/api/users");
+  const data = await fetch(`${API_URL}/users`);
   const users: User[] = await data.json();
 
   return (
