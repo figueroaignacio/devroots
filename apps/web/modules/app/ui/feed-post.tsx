@@ -1,5 +1,10 @@
 "use client";
 
+// Hooks
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+
+// Components
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,8 +22,8 @@ import {
 } from "@/components/ui/tooltip";
 import { Link } from "@/config/i18n/routing";
 import { Heart, MessageCircle, Pencil, Trash2 } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
+
+// Utils & Definitions
 import type { Post } from "../lib/definitions";
 import { formatDateDistance } from "../lib/utils";
 
