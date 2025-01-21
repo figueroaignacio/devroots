@@ -9,14 +9,14 @@ export default async function ProfilePage({
 }) {
   const session = await auth();
 
+  if (!session || !session.user) {
+    redirect("/auth/login");
+  }
+
   const user = await getUser(params.id);
 
   if (!user) {
     return <div>No user found</div>;
-  }
-
-  if (!session || !session.user) {
-    redirect("/auth/login");
   }
 
   return <pre>{JSON.stringify(user, null, 2)}</pre>;
