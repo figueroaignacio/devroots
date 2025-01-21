@@ -47,7 +47,7 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
   };
 
   return (
-    <div className="bg-card shadow-lg rounded-lg p-6 flex flex-col gap-4 hover:shadow-xl transition-shadow duration-200 ease-in-out">
+    <div className="bg-card rounded-lg p-6 flex flex-col gap-4 border">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-3">
           <Avatar>
