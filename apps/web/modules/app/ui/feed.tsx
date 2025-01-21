@@ -1,66 +1,118 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { API_URL } from "@/lib/constants";
-import { auth } from "@/modules/auth/lib/auth";
-import { format } from "date-fns";
-import { Post, User } from "../lib/definitions";
-import { getInitials } from "../lib/utils";
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
+import { Post, UpdatePost } from "../lib/definitions";
+import { deletePost, getPosts, updatePost } from "../lib/services";
 import { FeedPost } from "./feed-post";
 
-export async function Feed() {
-  const session = await auth();
+export function Feed() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [editingPost, setEditingPost] = useState<Post | null>(null);
+  const [updatedTitle, setUpdatedTitle] = useState<string>("");
+  const [updatedContent, setUpdatedContent] = useState<string>("");
 
-  const usersData = await fetch(`${API_URL}/users`);
-  const users: User[] = await usersData.json();
-  const postsData = await fetch(`${API_URL}/posts`);
-  const posts: Post[] = await postsData.json();
+  const handleDelete = async (id: string) => {
+    try {
+      await deletePost(id);
+      const updatedPosts = await getPosts();
+      setPosts(updatedPosts);
+    } catch (error) {
+      setError("Failed to delete post");
+    }
+  };
+
+  const handleUpdate = async () => {
+    if (editingPost) {
+      const updatedPostData: UpdatePost = {
+        title: updatedTitle,
+        content: updatedContent,
+        published: true,
+      };
+      try {
+        await updatePost(editingPost.id, updatedPostData);
+        const updatedPosts = await getPosts();
+        setPosts(updatedPosts);
+        setEditingPost(null);
+      } catch (error) {
+        setError("Failed to update post");
+      }
+    }
+  };
+
+  const startEditing = (post: Post) => {
+    setEditingPost(post);
+    setUpdatedTitle(post.title);
+    setUpdatedContent(post.content);
+  };
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const fetchedPosts = await getPosts();
+        setPosts(fetchedPosts);
+      } catch (error) {
+        setError("Failed to fetch posts");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
-    <div className="flex flex-col gap-y-4">
-      <div>
-        <h2>Account</h2>
-        <pre>
-          <code className="p-2">{JSON.stringify(session, null, 2)}</code>
-        </pre>
-      </div>
-      <div>
-        <h2 className="mb-5">Users registered</h2>
-        <ul className="space-y-5">
-          {users.map((user) => (
-            <li key={user.id} className="bg-card p-4 rounded-md">
-              <Avatar>
-                <AvatarImage src={user.image || undefined} alt={user.name} />
-                <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
-              </Avatar>
-              <h3 className="font-semibold">{user.name}</h3>
-              <p className="text-gray-600">{user.email}</p>
-              <p>
-                <span className="font-medium">Verified:</span>{" "}
-                {user.emailVerified
-                  ? format(new Date(user.emailVerified), "PPP p")
-                  : "Not verified"}
-              </p>
-              <p>
-                <span className="font-medium">Created At:</span>{" "}
-                {format(new Date(user.createdAt), "PPP p")}
-              </p>
-              <p>
-                <span className="font-medium">Updated At:</span>{" "}
-                {format(new Date(user.updatedAt), "PPP p")}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h2 className="mb-5">Posts</h2>
-        <ul className="space-y-5">
-          {posts.map((post) => (
+    <div>
+      <ul className="space-y-6">
+        {posts.length === 0 ? (
+          <li>No posts available.</li>
+        ) : (
+          posts.map((post) => (
             <li key={post.id}>
-              <FeedPost post={post} />
+              <FeedPost
+                post={post}
+                onDelete={() => handleDelete(post.id)}
+                onUpdate={() => startEditing(post)}
+              />
             </li>
-          ))}
-        </ul>
-      </div>
+          ))
+        )}
+      </ul>
+
+      {editingPost && (
+        <div className="mt-6 p-4 border rounded">
+          <h3 className="font-semibold mb-2">Edit Post</h3>
+          <Input
+            type="text"
+            value={updatedTitle}
+            onChange={(e) => setUpdatedTitle(e.target.value)}
+            className="mb-4"
+            placeholder="Title"
+          />
+          <Input
+            type="text"
+            value={updatedContent}
+            onChange={(e) => setUpdatedContent(e.target.value)}
+            className="mb-4"
+            placeholder="Content"
+          />
+          <div className="flex gap-x-2">
+            <Button onClick={handleUpdate}>Update</Button>
+            <Button onClick={() => setEditingPost(null)}>Cancel</Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -9,25 +9,27 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarFooter } from "@/components/ui/sidebar";
+import { Link } from "@/config/i18n/routing";
 import { SignOutButton } from "@/modules/auth/ui/signout-button";
 
 // Icons
-import { MoreVertical, Settings, User } from "lucide-react";
+import { MoreVertical, Pen, Settings, User } from "lucide-react";
 
 // Utils
 import { auth } from "@/modules/auth/lib/auth";
+import { getInitials } from "../lib/utils";
 
 export async function AppSidebarFooter() {
   const session = await auth();
 
-  const userInitials = session?.user?.name
-    ?.split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase();
-
   return (
     <SidebarFooter className="p-4">
+      <Button className="mb-5" asChild>
+        <Link href="/create-post" className="flex items-center gap-x-3">
+          <span>Create</span>
+          <Pen className="size-4" />
+        </Link>
+      </Button>
       <DropdownMenu>
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center space-x-3">
@@ -36,7 +38,9 @@ export async function AppSidebarFooter() {
                 src={session?.user?.image ?? undefined}
                 alt={session?.user?.name ?? "User avatar"}
               />
-              <AvatarFallback>{userInitials}</AvatarFallback>
+              <AvatarFallback>
+                {getInitials(session?.user?.name ?? "User")}
+              </AvatarFallback>
             </Avatar>
             <div className="text-left">
               <p className="text-sm font-medium">{session?.user?.name}</p>

@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 // Components
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/modules/app/ui/app-sidebar";
+import { SessionProvider } from "next-auth/react";
 
 // Config
 import { routing } from "@/config/i18n/routing";
@@ -24,12 +25,14 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   setRequestLocale(locale);
 
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <div className="w-full">
-        <AppHeader />
-        <main className="page-container relative">{children}</main>
-      </div>
-    </SidebarProvider>
+    <SessionProvider>
+      <SidebarProvider>
+        <AppSidebar />
+        <div className="w-full">
+          <AppHeader />
+          <main className="page-container relative">{children}</main>
+        </div>
+      </SidebarProvider>
+    </SessionProvider>
   );
 }

@@ -13,6 +13,12 @@ export interface Post {
   };
 }
 
+export interface CreatePost
+  extends Pick<Post, "title" | "content" | "published" | "authorId"> {}
+
+export interface UpdatePost
+  extends Pick<CreatePost, "title" | "content" | "published"> {}
+
 export interface User {
   id: string;
   name: string;
