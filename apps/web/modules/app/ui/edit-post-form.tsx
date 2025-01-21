@@ -8,7 +8,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
 // Definitions & Services
@@ -34,7 +33,7 @@ export function EditPostForm({
     const updatedPostData: UpdatePost = {
       title,
       content,
-      published,
+      published: true,
     };
 
     try {
@@ -48,7 +47,7 @@ export function EditPostForm({
   };
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 w-[700px]">
       <h1 className="text-2xl font-bold mb-6">Edit Post</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -70,14 +69,6 @@ export function EditPostForm({
             required
             className="min-h-[200px]"
           />
-        </div>
-        <div className="flex items-center space-x-2">
-          <Switch
-            id="published"
-            checked={published}
-            onCheckedChange={setPublished}
-          />
-          <Label htmlFor="published">Publish immediately</Label>
         </div>
         <div className="flex gap-x-2">
           <Button type="submit" disabled={isSubmitting}>

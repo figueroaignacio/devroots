@@ -9,7 +9,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
 // Services & Definitions
@@ -34,7 +33,7 @@ export function CreatePostForm() {
     const newPost: CreatePost = {
       title,
       content,
-      published,
+      published: true,
       authorId: session.user.id,
     };
     try {
@@ -48,7 +47,7 @@ export function CreatePostForm() {
   };
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-8 w-[700px]">
       <h1 className="text-2xl font-bold mb-6">Create New Post</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
@@ -69,14 +68,6 @@ export function CreatePostForm() {
             required
             className="min-h-[200px]"
           />
-        </div>
-        <div className="flex items-center space-x-2">
-          <Switch
-            id="published"
-            checked={published}
-            onCheckedChange={setPublished}
-          />
-          <Label htmlFor="published">Publish immediately</Label>
         </div>
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Creating..." : "Create Post"}
