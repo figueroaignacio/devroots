@@ -1,9 +1,9 @@
 // Hooks
-import { Button } from "@/components/ui/button";
-import { Link } from "@/config/i18n/routing";
 import { useTranslations } from "next-intl";
 
 // Components
+import { Button } from "@/components/ui/button";
+import { Link } from "@/config/i18n/routing";
 
 export function Hero() {
   const t = useTranslations();
