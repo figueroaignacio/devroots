@@ -25,7 +25,7 @@ export async function AppSidebarFooter() {
   return (
     <SidebarFooter className="p-4">
       <Button className="mb-5" asChild>
-        <Link href="/create-post" className="flex items-center gap-x-3">
+        <Link href="/post/create-post" className="flex items-center gap-x-3">
           <span>Create</span>
           <Pen className="size-4" />
         </Link>

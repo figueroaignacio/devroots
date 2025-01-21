@@ -16,7 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { CreatePost } from "../lib/definitions";
 import { createPost } from "../lib/services";
 
-export default function CreatePostForm() {
+export function CreatePostForm() {
   const router = useRouter();
   const { data: session } = useSession();
   const [title, setTitle] = useState("");

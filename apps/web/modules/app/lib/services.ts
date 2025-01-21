@@ -3,7 +3,7 @@ import { CreatePost, Post, UpdatePost } from "./definitions";
 import { API_URL } from "@/lib/constants";
 
 export async function getPosts(): Promise<Post[]> {
-  const response = await fetch(`API_URL/posts`);
+  const response = await fetch(`${API_URL}/posts`);
   if (!response.ok) {
     throw new Error("Failed to fetch posts");
   }
@@ -19,7 +19,7 @@ export async function getPost(id: string): Promise<Post> {
 }
 
 export async function createPost(post: CreatePost): Promise<Post> {
-  const response = await fetch("API_URL/posts", {
+  const response = await fetch(`${API_URL}/posts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
