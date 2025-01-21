@@ -24,7 +24,7 @@
         { "title": "Hub", "href": "/hub", "icon": "Home" },
         { "title": "Challenges", "href": "/challenges", "icon": "Lightbulb" },
         { "title": "Blog", "href": "/blog", "icon": "Rss" },
-        { "title": "Profile", "href": "/profile", "icon": "User" },
+        { "title": "Profile", "href": "/profile/me", "icon": "User" },
         { "title": "Settings", "href": "/settings", "icon": "Settings" }
       ]
     },

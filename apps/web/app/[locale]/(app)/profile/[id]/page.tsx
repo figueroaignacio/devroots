@@ -1,6 +1,13 @@
-import { getUser } from "@/modules/app/services/users-service";
+// Components
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+// Utils
+import { getInitials } from "@/modules/app/lib/utils";
 import { auth } from "@/modules/auth/lib/auth";
 import { redirect } from "next/navigation";
+
+// Services
+import { getUser } from "@/modules/app/services/users-service";
 
 export default async function ProfilePage({
   params,
@@ -19,5 +26,14 @@ export default async function ProfilePage({
     return <div>No user found</div>;
   }
 
-  return <pre>{JSON.stringify(user, null, 2)}</pre>;
+  return (
+    <div>
+      <Avatar>
+        <AvatarImage src={user.image ?? ""} />
+        <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
+      </Avatar>
+      <h1>{user?.name}</h1>
+      <span className="text-xs text-muted-foreground">{user.email}</span>
+    </div>
+  );
 }
