@@ -21,7 +21,7 @@ import { Languages } from "lucide-react";
 import { locales } from "@/config/i18n/routing";
 
 // Types
-import { Locale } from "@/lib/types";
+import { Locale } from "@/lib/definitions";
 
 export function LocaleSwitcher() {
   const router = useRouter();

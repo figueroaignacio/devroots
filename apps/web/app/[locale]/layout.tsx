@@ -21,7 +21,7 @@ import { onest } from "@/lib/fonts";
 import "@/styles/globals.css";
 
 // Metadata
-import { MetadataParams } from "@/lib/types";
+import { MetadataParams } from "@/lib/definitions";
 
 export async function generateMetadata({ params }: MetadataParams) {
   const { locale } = await params;
