@@ -1,9 +1,9 @@
 import { CreatePost, Post, UpdatePost } from "./definitions";
 
-const API_URL = "http://localhost:3001/api/posts";
+import { API_URL } from "@/lib/constants";
 
 export async function getPosts(): Promise<Post[]> {
-  const response = await fetch(API_URL);
+  const response = await fetch(`API_URL/posts`);
   if (!response.ok) {
     throw new Error("Failed to fetch posts");
   }
@@ -11,7 +11,7 @@ export async function getPosts(): Promise<Post[]> {
 }
 
 export async function getPost(id: string): Promise<Post> {
-  const response = await fetch(`${API_URL}/${id}`);
+  const response = await fetch(`${API_URL}/posts/${id}`);
   if (!response.ok) {
     throw new Error("Failed to fetch post");
   }
@@ -19,7 +19,7 @@ export async function getPost(id: string): Promise<Post> {
 }
 
 export async function createPost(post: CreatePost): Promise<Post> {
-  const response = await fetch(API_URL, {
+  const response = await fetch("API_URL/posts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export async function createPost(post: CreatePost): Promise<Post> {
 }
 
 export async function updatePost(id: string, post: UpdatePost): Promise<Post> {
-  const response = await fetch(`${API_URL}/${id}`, {
+  const response = await fetch(`${API_URL}/posts/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export async function updatePost(id: string, post: UpdatePost): Promise<Post> {
 }
 
 export async function deletePost(id: string): Promise<void> {
-  const response = await fetch(`${API_URL}/${id}`, {
+  const response = await fetch(`${API_URL}/posts/${id}`, {
     method: "DELETE",
   });
   if (!response.ok) {
