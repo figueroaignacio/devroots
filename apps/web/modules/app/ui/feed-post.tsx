@@ -104,14 +104,14 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
             <>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href={`/post/edit-post/${post.id}`}>
+                  <Link href={`/post/edit/${post.id}`}>
                     <Button variant="ghost" size="icon">
                       <Pencil size={20} />
                     </Button>
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Update</p>
+                  <p>Edit</p>
                 </TooltipContent>
               </Tooltip>
               <Tooltip>
