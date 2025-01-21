@@ -89,9 +89,11 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <MessageCircle size={20} />
-              </Button>
+              <Link href={`/post/details/${post.id}`}>
+                <Button variant="ghost" size="icon">
+                  <MessageCircle size={20} />
+                </Button>
+              </Link>
             </TooltipTrigger>
             <TooltipContent>
               <p>Comments</p>

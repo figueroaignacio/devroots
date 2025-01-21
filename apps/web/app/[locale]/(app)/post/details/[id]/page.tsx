@@ -1,0 +1,39 @@
+// Components
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Link } from "@/config/i18n/routing";
+
+// Utils
+import { getInitials } from "@/modules/app/lib/utils";
+import { getPost } from "@/modules/app/services/posts-service";
+import { auth } from "@/modules/auth/lib/auth";
+import { redirect } from "next/navigation";
+
+export default async function PostPage({ params }: { params: { id: string } }) {
+  const session = await auth();
+
+  if (!session || !session.user) {
+    redirect("/auth/login");
+  }
+
+  const post = await getPost(params.id);
+
+  if (!post) {
+    return <div>No post found</div>;
+  }
+
+  return (
+    <>
+      <Avatar>
+        <AvatarImage src={post.author.image ?? ""} />
+        <AvatarFallback>{getInitials(post.author.name)}</AvatarFallback>
+      </Avatar>
+      <div className="flex flex-col">
+        <Link href={`/profile/${post.authorId}`} className="hover:underline">
+          {post.author.name}
+        </Link>
+      </div>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
+    </>
+  );
+}
