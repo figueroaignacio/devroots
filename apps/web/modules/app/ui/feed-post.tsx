@@ -1,3 +1,4 @@
+// Components
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,7 +8,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Heart, MessageCircle } from "lucide-react";
+
+// Definitions
 import { Post } from "../lib/definitions";
+
+// Utils
 import { formatDateDistance } from "../lib/utils";
 
 interface FeedPostProps {
