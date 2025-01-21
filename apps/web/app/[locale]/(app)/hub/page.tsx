@@ -1,4 +1,5 @@
 import { Feed } from "@/modules/app/ui/feed";
+import { UsersList } from "@/modules/app/ui/users-list";
 import { auth } from "@/modules/auth/lib/auth";
 import { redirect } from "next/navigation";
 
@@ -16,7 +17,9 @@ export default async function HubPage() {
           <h1 className="text-3xl font-bold mb-6">Feed</h1>
           <Feed />
         </main>
-        <aside className="lg:col-span-5 space-y-6 mt-14"></aside>
+        <aside className="lg:col-span-5 space-y-6 mt-14">
+          <UsersList />
+        </aside>
       </div>
     </div>
   );
