@@ -1,4 +1,4 @@
-import { CreatePost, Post, UpdatePost } from "./definitions";
+import { CreatePost, Post, UpdatePost } from "../lib/definitions";
 
 import { API_URL } from "@/lib/constants";
 

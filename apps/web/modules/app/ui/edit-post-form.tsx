@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 // Definitions & Services
 import { UpdatePost } from "../lib/definitions";
-import { updatePost } from "../lib/services";
+import { updatePost } from "../services/posts-service";
 
 export function EditPostForm({
   post,

@@ -1,4 +1,4 @@
-import { getPost } from "@/modules/app/lib/services";
+import { getPost } from "@/modules/app/services/posts-service";
 import { EditPostForm } from "@/modules/app/ui/edit-post-form";
 
 export default async function EditPostPage({

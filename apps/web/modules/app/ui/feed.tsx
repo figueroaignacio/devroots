@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Post } from "../lib/definitions";
-import { deletePost, getPosts } from "../lib/services";
+import { deletePost, getPosts } from "../services/posts-service";
 import { FeedPost } from "./feed-post";
 
 export function Feed() {
