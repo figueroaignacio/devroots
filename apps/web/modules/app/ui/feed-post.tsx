@@ -6,7 +6,6 @@ import { useState } from "react";
 
 // Components
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -21,6 +20,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Link } from "@/config/i18n/routing";
+import { Button } from "@repo/ui/components/button";
 import { Heart, MessageCircle, Pencil, Trash2 } from "lucide-react";
 
 // Utils & Definitions

@@ -1,6 +1,5 @@
 // Components
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,6 +10,7 @@ import {
 import { SidebarFooter } from "@/components/ui/sidebar";
 import { Link } from "@/config/i18n/routing";
 import { SignOutButton } from "@/modules/auth/ui/signout-button";
+import { Button } from "@repo/ui/components/button";
 
 // Icons
 import { MoreVertical, Pen, Settings, User } from "lucide-react";
@@ -24,7 +24,7 @@ export async function AppSidebarFooter() {
 
   return (
     <SidebarFooter className="p-4">
-      <Button className="mb-5" asChild>
+      <Button className="mb-5">
         <Link href="/post/create" className="flex items-center gap-x-3">
           <span>Create</span>
           <Pen className="size-4" />

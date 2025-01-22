@@ -5,7 +5,7 @@ import { useRouter } from "@/config/i18n/routing";
 import { useTranslations } from "next-intl";
 
 // Components
-import { Button } from "../ui/button";
+import { Button } from "@repo/ui/components/button";
 
 // Icons
 import { ArrowLeft } from "lucide-react";

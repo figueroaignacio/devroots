@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 
 // Componetns
 import { Logo } from "@/components/shared/logo";
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetClose,
@@ -14,6 +13,7 @@ import {
 import { Link } from "@/config/i18n/routing";
 import { LoginButton } from "@/modules/auth/ui/login-button";
 import { RegisterButton } from "@/modules/auth/ui/register-button";
+import { Button } from "@repo/ui/components/button";
 
 // Icons
 import { ArrowRight, Menu } from "lucide-react";

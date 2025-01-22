@@ -6,7 +6,7 @@ import { useLocale } from "next-intl";
 import { useTransition } from "react";
 
 // Components
-import { Button } from "../ui/button";
+import { Button } from "@repo/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
