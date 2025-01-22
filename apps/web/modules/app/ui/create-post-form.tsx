@@ -13,14 +13,13 @@ import { Textarea } from "@/components/ui/textarea";
 
 // Services & Definitions
 import { CreatePost } from "../lib/definitions";
-import { createPost } from "../lib/services";
+import { createPost } from "../services/posts-service";
 
 export function CreatePostForm() {
   const router = useRouter();
   const { data: session } = useSession();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [published, setPublished] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {

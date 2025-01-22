@@ -95,7 +95,7 @@
 
 @layer components {
   .page-container {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8 py-5;
+    @apply mx-auto sm:px-1 lg:px-8 py-5;
   }
 
   .gradient-text {
