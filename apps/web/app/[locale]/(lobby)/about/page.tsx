@@ -2,16 +2,16 @@
 import { useTranslations } from "next-intl";
 
 // Components
-import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Link } from "@/config/i18n/routing";
+import { Button } from "@repo/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Link } from "@/config/i18n/routing";
+} from "@repo/ui/components/card";
 
 export default function About() {
   const t = useTranslations();

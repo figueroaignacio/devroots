@@ -8,7 +8,7 @@
     "css": "src/styles/globals.css",
     "baseColor": "slate",
     "cssVariables": false,
-    "prefix": "ui-"
+    "prefix": ""
   },
   "aliases": {
     "components": "src/components",

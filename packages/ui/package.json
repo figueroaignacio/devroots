@@ -22,10 +22,10 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss": "^3.4.14",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "tailwindcss": "^3.4.14",
     "@repo/typescript-config": "workspace:*",
     "@tailwindcss/typography": "^0.5.15",
     "@turbo/gen": "^1.12.4",
@@ -34,7 +34,9 @@
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "eslint": "^8.57.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.6.3",
+    "postcss": "^8.4.47",
+    "autoprefixer": "^10.4.20"
   },
   "exports": {
     "./globals.css": "./src/styles/globals.css",

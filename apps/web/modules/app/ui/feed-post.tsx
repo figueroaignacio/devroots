@@ -106,7 +106,7 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
             </TooltipContent>
           </Tooltip>
 
-          {currentUserId === post.author.id && (
+          {currentUserId === post.authorId && (
             <>
               <Tooltip>
                 <TooltipTrigger asChild>
