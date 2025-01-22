@@ -1,5 +1,4 @@
 // Components
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +9,11 @@ import {
 import { SidebarFooter } from "@/components/ui/sidebar";
 import { Link } from "@/config/i18n/routing";
 import { SignOutButton } from "@/modules/auth/ui/signout-button";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@repo/ui/components/avatar";
 import { Button } from "@repo/ui/components/button";
 
 // Icons

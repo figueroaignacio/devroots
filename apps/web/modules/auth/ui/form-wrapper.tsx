@@ -1,13 +1,13 @@
 "use client";
 
 // Components
+import { Separator } from "@/components/ui/separator";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+} from "@repo/ui/components/card";
 import { FormLink } from "./form-link";
 import { Providers } from "./providers";
 

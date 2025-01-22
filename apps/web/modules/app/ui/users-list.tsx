@@ -1,6 +1,10 @@
 // Components
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "@/config/i18n/routing";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@repo/ui/components/avatar";
 
 // Utils
 import { getInitials } from "../lib/utils";

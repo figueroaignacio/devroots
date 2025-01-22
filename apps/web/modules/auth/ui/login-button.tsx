@@ -2,8 +2,8 @@
 import { useTranslations } from "next-intl";
 
 // Components
-import { Button } from "@/components/ui/button";
 import { Link } from "@/config/i18n/routing";
+import { Button } from "@repo/ui/components/button";
 
 // Icons
 import { LogIn } from "lucide-react";

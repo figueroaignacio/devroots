@@ -8,7 +8,9 @@ import { useForm } from "react-hook-form";
 import { LoginSchema } from "../lib/schemas";
 
 // Components
-import { Button } from "@/components/ui/button";
+import { FormError } from "@/modules/auth/ui/form-error";
+import { FormSuccess } from "@/modules/auth/ui/form-success";
+import { Button } from "@repo/ui/components/button";
 import {
   Form,
   FormControl,
@@ -16,10 +18,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { FormError } from "@/modules/auth/ui/form-error";
-import { FormSuccess } from "@/modules/auth/ui/form-success";
+} from "@repo/ui/components/form";
+import { Input } from "@repo/ui/components/input";
 import { Loader } from "lucide-react";
 import { FormWrapper } from "./form-wrapper";
 

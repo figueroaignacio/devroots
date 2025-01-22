@@ -1,8 +1,8 @@
 "use client";
 
 // Components
-import { Button } from "@/components/ui/button";
 import { Link } from "@/config/i18n/routing";
+import { Button } from "@repo/ui/components/button";
 
 interface FormLinkProps {
   href: string;
