@@ -30,3 +30,5 @@ export interface User {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface UpdateUser extends Pick<User, "name" | "image"> {}

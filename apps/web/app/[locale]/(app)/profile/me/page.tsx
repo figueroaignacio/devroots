@@ -42,7 +42,9 @@ export default async function ProfilePage({
               {getInitials(session?.user?.name ?? "User")}
             </AvatarFallback>
           </Avatar>
-          <Button variant="outline">Edit profile</Button>
+          <Button variant="outline" asChild>
+            <Link href="/profile/edit">Edit profile</Link>
+          </Button>
         </div>
         <div>
           <h1 className="text-2xl font-semibold">{session.user.name}</h1>
