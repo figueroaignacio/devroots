@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@repo/ui/components/button";
 
 // Definitions & Services
+import { Loader } from "@/components/shared/loader";
 import { UpdatePost } from "../lib/definitions";
 import { updatePost } from "../services/posts-service";
 
@@ -72,7 +73,7 @@ export function EditPostForm({
         </div>
         <div className="flex gap-x-2">
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Updating..." : "Update Post"}
+            {isSubmitting ? <Loader /> : "Update"}
           </Button>
           <Button
             type="button"

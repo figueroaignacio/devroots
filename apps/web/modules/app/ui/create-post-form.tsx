@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 // Components
+import { Loader } from "@/components/shared/loader";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -69,7 +70,7 @@ export function CreatePostForm() {
           />
         </div>
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Creating..." : "Create Post"}
+          {isSubmitting ? <Loader /> : "Post"}
         </Button>
       </form>
     </div>
