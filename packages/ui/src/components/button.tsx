@@ -5,18 +5,17 @@ import * as React from "react";
 import { cn } from "../lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center w-full justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-all transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-full cursor-pointer rounded-md",
+  "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-all transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-full cursor-pointer rounded-md",
 
   {
     variants: {
       variant: {
-        default:
-          "w-full flex items-center gap-2 group bg-purple-700 text-white active:scale-95",
+        default: "w-full flex items-center gap-2 group",
         secondary: "bg-card border",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-border border-[1px] bg-transparent dark:hover:bg-gray-600 dark:hover:bg-opacity-30 hover:bg-gray-200 hover:bg-opacity-50 duration-100",
+          "border border-border border-[1px] bg-transparent dark:hover:bg-gray-600 dark:hover:bg-opacity-30 hover:bg-[#dde3ea] duration-100",
         link: "text-primary underline-offset-4 hover:underline",
         ghost:
           "dark:hover:bg-gray-600 dark:hover:bg-opacity-30 hover:bg-[#dde3ea]",

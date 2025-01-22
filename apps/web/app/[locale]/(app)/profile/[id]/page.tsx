@@ -1,17 +1,21 @@
-// Components
+import { Link } from "@/config/i18n/routing";
+import { getInitials } from "@/modules/app/lib/utils";
+import { getUser } from "@/modules/app/services/users-service";
+import { auth } from "@/modules/auth/lib/auth";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
 } from "@repo/ui/components/avatar";
+import { Button } from "@repo/ui/components/button";
+import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
 
-// Utils
-import { getInitials } from "@/modules/app/lib/utils";
-import { auth } from "@/modules/auth/lib/auth";
-import { redirect } from "next/navigation";
-
-// Services
-import { getUser } from "@/modules/app/services/users-service";
+export const metadata: Metadata = {
+  title: "User Profile",
+  description: "View user profile",
+};
 
 export default async function ProfilePage({
   params,
@@ -27,17 +31,42 @@ export default async function ProfilePage({
   const user = await getUser(params.id);
 
   if (!user) {
-    return <div>No user found</div>;
+    notFound();
   }
 
   return (
-    <div>
-      <Avatar>
-        <AvatarImage src={user.image ?? ""} />
-        <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
-      </Avatar>
-      <h1>{user?.name}</h1>
-      <span className="text-xs text-muted-foreground">{user.email}</span>
+    <div className="min-h-screen px-4 sm:px-6 lg:px-8 space-y-3 max-w-3xl">
+      <header className="w-full border-b flex items-center gap-x-4 pb-3">
+        <Button className="" variant="ghost" size="icon">
+          <Link href="/hub" className="flex items-center">
+            <ArrowLeft className="size-6" />
+          </Link>
+        </Button>
+        {user.name}
+      </header>
+      <div className="space-y-3">
+        <Avatar className="size-24">
+          <AvatarImage
+            src={session?.user?.image ?? undefined}
+            alt={session?.user?.name ?? "User avatar"}
+          />
+          <AvatarFallback>
+            {getInitials(session?.user?.name ?? "User")}
+          </AvatarFallback>
+        </Avatar>
+        <div>
+          <h1 className="text-2xl font-semibold">{user.name}</h1>
+          <h2 className="text-sm text-muted-foreground">{user.email}</h2>
+        </div>
+        <div className="space-y-3">
+          <span>Fullstack Developer</span>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+            obcaecati sequi reiciendis ad excepturi sunt repellat facilis omnis
+            soluta saepe.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
