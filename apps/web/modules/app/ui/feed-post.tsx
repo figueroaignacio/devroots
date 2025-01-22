@@ -66,7 +66,9 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
 
           <div>
             <div className="flex items-center gap-x-2">
-              <span className="font-semibold">{post.author.name}</span>
+              <Link href={`/profile/${post.author.id}`}>
+                <span className="font-semibold">{post.author.name}</span>
+              </Link>
               <span className="text-xs">·</span>
               <span className="text-xs">
                 {formatDateDistance(post.createdAt)}
