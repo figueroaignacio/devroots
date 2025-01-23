@@ -35,4 +35,14 @@ export class UsersService {
       where: { id },
     });
   }
+
+  async getUserPosts(userId: string) {
+    return this.prisma.post.findMany({
+      where: { authorId: userId },
+      orderBy: { createdAt: 'desc' },
+      include: {
+        author: true,
+      },
+    });
+  }
 }

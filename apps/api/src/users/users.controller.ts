@@ -39,4 +39,9 @@ export class UsersController {
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
+
+  @Get(':id/posts')
+  async getUserPosts(@Param('id') userId: string) {
+    return this.usersService.getUserPosts(userId);
+  }
 }
