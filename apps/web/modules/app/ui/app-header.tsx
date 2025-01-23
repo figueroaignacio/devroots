@@ -1,5 +1,5 @@
 // Components
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger } from "@repo/ui/components/sidebar";
 
 export async function AppHeader() {
   return (

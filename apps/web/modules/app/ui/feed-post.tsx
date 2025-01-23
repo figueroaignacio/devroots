@@ -5,19 +5,6 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 // Components
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { Link } from "@/config/i18n/routing";
 import {
   Avatar,
@@ -25,6 +12,19 @@ import {
   AvatarImage,
 } from "@repo/ui/components/avatar";
 import { Button } from "@repo/ui/components/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@repo/ui/components/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@repo/ui/components/tooltip";
 import { Heart, MessageCircle, Pencil, Trash2 } from "lucide-react";
 
 // Utils & Definitions

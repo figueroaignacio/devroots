@@ -1,12 +1,4 @@
 // Components
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { SidebarFooter } from "@/components/ui/sidebar";
 import { Link } from "@/config/i18n/routing";
 import { SignOutButton } from "@/modules/auth/ui/signout-button";
 import {
@@ -15,6 +7,14 @@ import {
   AvatarImage,
 } from "@repo/ui/components/avatar";
 import { Button } from "@repo/ui/components/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@repo/ui/components/dropdown-menu";
+import { SidebarFooter } from "@repo/ui/components/sidebar";
 
 // Icons
 import { MoreVertical, Pen, Settings, User } from "lucide-react";

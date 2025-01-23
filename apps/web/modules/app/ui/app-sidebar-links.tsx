@@ -2,6 +2,7 @@
 import { useTranslations } from "next-intl";
 
 // Components
+import { Link } from "@/config/i18n/routing";
 import {
   SidebarContent,
   SidebarGroup,
@@ -10,8 +11,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { Link } from "@/config/i18n/routing";
+} from "@repo/ui/components/sidebar";
 
 // Icons
 import {

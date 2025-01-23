@@ -1,6 +1,6 @@
 // Components
-import { Sidebar, SidebarHeader } from "@/components/ui/sidebar";
 import { Link } from "@/config/i18n/routing";
+import { Sidebar, SidebarHeader } from "@repo/ui/components/sidebar";
 import { AppSidebarFooter } from "./app-sidebar-footer";
 import { AppSidebarLinks } from "./app-sidebar-links";
 

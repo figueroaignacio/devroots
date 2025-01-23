@@ -2,7 +2,6 @@
 import { useTranslations } from "next-intl";
 
 // Components
-import { Separator } from "@/components/ui/separator";
 import { Link } from "@/config/i18n/routing";
 import { Button } from "@repo/ui/components/button";
 import {
@@ -12,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/card";
+import { Separator } from "@repo/ui/components/separator";
 
 export default function About() {
   const t = useTranslations();

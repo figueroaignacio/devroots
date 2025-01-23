@@ -4,8 +4,8 @@ import { auth } from "@/modules/auth/lib/auth";
 import "@/styles/globals.css";
 
 // Components
-import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/modules/app/ui/app-sidebar";
+import { SidebarProvider } from "@repo/ui/components/sidebar";
 import { SessionProvider } from "next-auth/react";
 
 // Config

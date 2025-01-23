@@ -5,14 +5,14 @@ import { useToast } from "@/hooks/use-toast";
 import { useState, useTransition } from "react";
 
 // Components
+import { Button } from "@repo/ui/components/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@repo/ui/components/button";
+} from "@repo/ui/components/dialog";
 import { LogOut } from "lucide-react";
 
 // Utils

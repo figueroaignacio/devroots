@@ -1,5 +1,4 @@
 // Components
-import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Card,
@@ -8,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@repo/ui/components/card";
+import { Separator } from "@repo/ui/components/separator";
 
 export default function LoadingPosts() {
   return (
