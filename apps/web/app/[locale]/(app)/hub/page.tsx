@@ -17,7 +17,7 @@ export default async function HubPage() {
           <h1 className="text-3xl font-bold mb-6">Feed</h1>
           <Feed />
         </main>
-        <aside className="lg:col-span-5 lg:sticky lg:top-16 lg:h-full space-y-6 lg:border-l lg:pl-8">
+        <aside className="lg:col-span-5 lg:h-full space-y-6 pt-14">
           <UsersList />
         </aside>
       </div>
