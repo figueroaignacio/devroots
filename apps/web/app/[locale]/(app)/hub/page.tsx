@@ -1,15 +1,7 @@
 import { Feed } from "@/modules/app/ui/feed";
 import { UsersList } from "@/modules/app/ui/users-list";
-import { auth } from "@/modules/auth/lib/auth";
-import { redirect } from "next/navigation";
 
 export default async function HubPage() {
-  const session = await auth();
-
-  if (!session || !session.user) {
-    redirect("/auth/login");
-  }
-
   return (
     <div className="px-3 mx-auto min-h-screen overflow-visible">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
