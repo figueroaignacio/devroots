@@ -4,6 +4,7 @@ import { Post } from "@/modules/app/lib/definitions";
 import { deletePost } from "@/modules/app/services/posts-service";
 import { getUserPosts } from "@/modules/app/services/users-service";
 import { FeedPost } from "@/modules/app/ui/feed-post";
+import { FeedPostSkeleton } from "@/modules/app/ui/feed-post-skeleton";
 import { useEffect, useState } from "react";
 
 interface PostsTabProps {
@@ -39,14 +40,24 @@ export function PostsTab({ userId }: PostsTabProps) {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <ul className="space-y-4">
+        {Array.from({ length: 10 }).map((_, index) => (
+          <li key={index}>
+            <FeedPostSkeleton />
+          </li>
+        ))}
+      </ul>
+    );
   }
 
   return (
-    <div className="space-y-4">
+    <ul className="space-y-4">
       {posts.map((post) => (
-        <FeedPost key={post.id} post={post} onDelete={handleDelete} />
+        <li key={post.id}>
+          <FeedPost post={post} onDelete={handleDelete} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

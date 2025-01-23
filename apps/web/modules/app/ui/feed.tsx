@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Post } from "../lib/definitions";
 import { deletePost, getPosts } from "../services/posts-service";
 import { FeedPost } from "./feed-post";
+import { FeedPostSkeleton } from "./feed-post-skeleton";
 
 export function Feed() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -36,7 +37,15 @@ export function Feed() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <ul className="space-y-6">
+        {Array.from({ length: 10 }).map((_, index) => (
+          <li key={index}>
+            <FeedPostSkeleton />
+          </li>
+        ))}
+      </ul>
+    );
   }
 
   if (error) {
