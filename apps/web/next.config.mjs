@@ -27,6 +27,7 @@ const nextConfig = {
   experimental: {
     reactCompiler: false,
   },
+  transpilePackages: ["@repo/ui"],
 };
 
 export default withNextIntl(nextConfig);

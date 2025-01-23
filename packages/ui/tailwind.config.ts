@@ -1,8 +1,17 @@
+import tailwindTypography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 const config = {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
+  content: [
+    "../../packages/ui/src/components/**/*.{ts,tsx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./modules/**/*.{ts,tsx}",
+    "./sections/**",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -93,7 +102,7 @@ const config = {
       },
     },
   },
-  // plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [tailwindcssAnimate, tailwindTypography],
 } satisfies Config;
 
 export default config;

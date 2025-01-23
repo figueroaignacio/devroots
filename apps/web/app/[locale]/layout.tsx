@@ -1,5 +1,5 @@
 // Components
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@repo/ui/components/toaster";
 import NextTopLoader from "nextjs-toploader";
 
 // Providers

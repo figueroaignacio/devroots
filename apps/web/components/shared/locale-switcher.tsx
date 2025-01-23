@@ -12,7 +12,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@repo/ui/components/dropdown-menu";
 
 // Icons
 import { Languages } from "lucide-react";

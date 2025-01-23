@@ -3,17 +3,17 @@ import { getTranslations } from "next-intl/server";
 
 // Componetns
 import { Logo } from "@/components/shared/logo";
+import { Link } from "@/config/i18n/routing";
+import { LoginButton } from "@/modules/auth/ui/login-button";
+import { RegisterButton } from "@/modules/auth/ui/register-button";
+import { Button } from "@repo/ui/components/button";
 import {
   Sheet,
   SheetClose,
   SheetContent,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Link } from "@/config/i18n/routing";
-import { LoginButton } from "@/modules/auth/ui/login-button";
-import { RegisterButton } from "@/modules/auth/ui/register-button";
-import { Button } from "@repo/ui/components/button";
+} from "@repo/ui/components/sheet";
 
 // Icons
 import { ArrowRight, Menu } from "lucide-react";
