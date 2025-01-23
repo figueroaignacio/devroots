@@ -38,9 +38,9 @@ export const {
         session.user.id = token.sub;
       }
 
-      if (token.role && session.user) {
-        session.user.id = token.role as string;
-      }
+      // if (token.role && session.user) {
+      //   session.user.name = token.role as string;
+      // }
 
       return session;
     },
