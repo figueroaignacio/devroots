@@ -22,6 +22,7 @@ import {
   Rss,
   Settings,
   User,
+  UsersRound,
 } from "lucide-react";
 
 const iconMap = {
@@ -32,6 +33,7 @@ const iconMap = {
   Settings,
   BugPlay,
   Mail,
+  UsersRound,
 };
 
 interface Sidebar {

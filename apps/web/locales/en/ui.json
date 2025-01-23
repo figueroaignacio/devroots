@@ -22,6 +22,11 @@
       "groupLabel": "App",
       "items": [
         { "title": "Hub", "href": "/hub", "icon": "Home" },
+        {
+          "title": "Communities",
+          "href": "/communities",
+          "icon": "UsersRound"
+        },
         { "title": "Challenges", "href": "/challenges", "icon": "Lightbulb" },
         { "title": "Blog", "href": "/blog", "icon": "Rss" },
         { "title": "Profile", "href": "/profile/me", "icon": "User" },
