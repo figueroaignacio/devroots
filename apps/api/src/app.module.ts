@@ -2,10 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { PostsModule } from './posts/posts.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
-import { PostsModule } from './posts/posts.module';
-import { OasindModule } from './oasind/oasind.module';
 
 @Module({
   imports: [
@@ -16,7 +15,6 @@ import { OasindModule } from './oasind/oasind.module';
     PrismaModule,
     UsersModule,
     PostsModule,
-    OasindModule,
   ],
   controllers: [AppController],
   providers: [AppService],
