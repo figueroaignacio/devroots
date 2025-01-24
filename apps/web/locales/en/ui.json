@@ -29,7 +29,6 @@
         },
         { "title": "Challenges", "href": "/challenges", "icon": "Lightbulb" },
         { "title": "Blog", "href": "/blog", "icon": "Rss" },
-        { "title": "Profile", "href": "/profile/me", "icon": "User" },
         { "title": "Settings", "href": "/settings", "icon": "Settings" }
       ]
     },
