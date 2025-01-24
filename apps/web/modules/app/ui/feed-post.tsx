@@ -66,7 +66,7 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
 
           <div>
             <div className="flex items-center gap-x-2">
-              <Link href={`/profile/${post.author.id}`}>
+              <Link href={`/profile/${post.author.username}`}>
                 <span className="font-semibold">{post.author.username}</span>
               </Link>
               <span className="text-xs">·</span>
