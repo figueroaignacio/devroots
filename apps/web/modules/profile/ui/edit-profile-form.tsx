@@ -1,13 +1,18 @@
 "use client";
 
-import { updateUser } from "@/modules/app/services/users-service";
+// Hooks
+import { useToast } from "@repo/ui/hooks/use-toast";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+
+// Components
 import { Button } from "@repo/ui/components/button";
 import { Input } from "@repo/ui/components/input";
 import { Label } from "@repo/ui/components/label";
 import { Textarea } from "@repo/ui/components/textarea";
-import { useToast } from "@repo/ui/hooks/use-toast";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+
+// Services
+import { updateUser } from "@/modules/app/services/users-service";
 
 export function EditProfileForm() {
   const { data: session, update } = useSession();

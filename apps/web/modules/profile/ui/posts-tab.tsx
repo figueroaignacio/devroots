@@ -1,11 +1,16 @@
 "use client";
 
+// Hooks
+import { useEffect, useState } from "react";
+
+// Components
 import { Post } from "@/modules/app/lib/definitions";
-import { deletePost } from "@/modules/app/services/posts-service";
-import { getUserPosts } from "@/modules/app/services/users-service";
 import { FeedPost } from "@/modules/app/ui/feed-post";
 import { FeedPostSkeleton } from "@/modules/app/ui/feed-post-skeleton";
-import { useEffect, useState } from "react";
+
+// Services
+import { deletePost } from "@/modules/app/services/posts-service";
+import { getUserPosts } from "@/modules/app/services/users-service";
 
 interface PostsTabProps {
   userId: string;
