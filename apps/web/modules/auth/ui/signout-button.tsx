@@ -29,7 +29,6 @@ export function SignOutButton() {
       try {
         toast({
           title: "Closing session...",
-          description: "Please wait a moment...",
           action: <Loader />,
         });
         await signOut({
