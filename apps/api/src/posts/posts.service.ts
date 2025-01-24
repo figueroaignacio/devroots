@@ -17,7 +17,7 @@ export class PostsService {
     });
   }
 
-  async findAllPosts() {
+  async getAllPosts() {
     return this.prisma.post.findMany({
       include: {
         author: true,
@@ -25,7 +25,7 @@ export class PostsService {
     });
   }
 
-  async findOnePost(id: string) {
+  async getPostById(id: string) {
     return this.prisma.post.findUnique({
       where: { id },
       include: {

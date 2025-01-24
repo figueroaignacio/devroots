@@ -16,37 +16,37 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }
 
   @Get()
-  findAll() {
+  getAllUsers() {
     return this.usersService.getAllUsers();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  getUserById(@Param('id') id: string) {
     return this.usersService.getUserById(id);
   }
 
   @Get('username/:username')
-  findByUsername(@Param('username') username: string) {
+  getUserByUsername(@Param('username') username: string) {
     return this.usersService.getUserByUsername(username);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.updateUser(id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  removeUser(@Param('id') id: string) {
     return this.usersService.removeUser(id);
   }
 
   @Get(':id/posts')
-  async findUserPosts(@Param('id') userId: string) {
+  async getUserPosts(@Param('id') userId: string) {
     return this.usersService.getUserPosts(userId);
   }
 }
