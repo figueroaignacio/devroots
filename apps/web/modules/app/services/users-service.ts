@@ -25,8 +25,8 @@ export async function getUserByUsername(username: string): Promise<User> {
   return response.json();
 }
 
-export async function updatePost(id: string, user: UpdateUser): Promise<User> {
-  const response = await fetch(`${API_URL}/posts/${id}`, {
+export async function updateUser(id: string, user: UpdateUser): Promise<User> {
+  const response = await fetch(`${API_URL}/users/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

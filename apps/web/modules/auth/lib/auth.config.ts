@@ -17,6 +17,7 @@ export default {
           email: profile.email,
           image: profile.avatar_url,
           username: profile.login,
+          bio: profile.bio,
         };
       },
     }),

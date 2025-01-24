@@ -31,6 +31,10 @@ export const {
         session.user.username = token.username as string;
       }
 
+      if (token.bio && session.user) {
+        session.user.bio = token.bio as string;
+      }
+
       return session;
     },
     async jwt({ token }) {
@@ -41,6 +45,7 @@ export const {
 
       token.role = existingUser.role;
       token.username = existingUser.username;
+      token.bio = existingUser.bio;
 
       return token;
     },

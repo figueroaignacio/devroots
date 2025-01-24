@@ -69,11 +69,7 @@ export async function ProfileDetails({
             </Button>
           )}
         </div>
-        <p className="text-sm text-muted-foreground">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          obcaecati sequi reiciendis ad excepturi sunt repellat facilis omnis
-          soluta saepe.
-        </p>
+        <p className="text-sm text-muted-foreground">{user.bio}</p>
       </div>
       <Tabs defaultValue="posts" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
