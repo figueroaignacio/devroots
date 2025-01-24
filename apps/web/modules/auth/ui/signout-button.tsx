@@ -5,6 +5,7 @@ import { useToast } from "@repo/ui/hooks/use-toast";
 import { useState, useTransition } from "react";
 
 // Components
+import { Loader } from "@/components/shared/loader";
 import { Button } from "@repo/ui/components/button";
 import {
   Dialog,
@@ -27,8 +28,9 @@ export function SignOutButton() {
     startTransition(async () => {
       try {
         toast({
-          title: "Cerrando sesión...",
-          description: "Por favor, espera un momento.",
+          title: "Closing session...",
+          description: "Please wait a moment...",
+          action: <Loader />,
         });
         await signOut({
           redirect: true,
@@ -37,7 +39,7 @@ export function SignOutButton() {
       } catch (error) {
         toast({
           title: "Error",
-          description: "Hubo un problema al cerrar la sesión.",
+          description: "Something went wrong!",
           variant: "destructive",
         });
       } finally {
@@ -57,16 +59,15 @@ export function SignOutButton() {
           setIsDialogOpen(true);
         }}
       >
-        Cerrar sesión
+        Log out
         <LogOut className="ml-2 h-4 w-4" />
       </Button>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
-          <DialogTitle>¿Estás seguro?</DialogTitle>
+          <DialogTitle>Are you sure?</DialogTitle>
           <DialogDescription>
-            ¿Estás seguro de que deseas cerrar sesión? Esta acción te
-            desconectará.
+            Are you sure you want to log out? This action will log you out.
           </DialogDescription>
           <DialogFooter>
             <Button
@@ -74,14 +75,14 @@ export function SignOutButton() {
               onClick={() => setIsDialogOpen(false)}
               disabled={isPending}
             >
-              Cancelar
+              Cancel
             </Button>
             <Button
               onClick={handleSignOut}
               disabled={isPending}
               variant="destructive"
             >
-              Confirmar
+              Confirm
             </Button>
           </DialogFooter>
         </DialogContent>
