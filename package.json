@@ -21,7 +21,7 @@
     "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
-    "turbo": "^2.3.3",
-    "@types/bcryptjs": "^2.4.6"
+    "@types/bcryptjs": "^2.4.6",
+    "turbo": "^2.3.4"
   }
 }
