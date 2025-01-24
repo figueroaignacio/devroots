@@ -23,7 +23,6 @@ export function EditPostForm({
   const router = useRouter();
   const [title, setTitle] = useState<string>(post.title);
   const [content, setContent] = useState<string>(post.content);
-  const [published, setPublished] = useState<boolean>(post.published);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
