@@ -1,6 +1,5 @@
 "use client";
 
-// Components
 import {
   Card,
   CardContent,
@@ -40,7 +39,7 @@ export function FormWrapper({
               OR
             </span>
           </div>
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-center text-sm text-muted-foreground mb-4">
             Continue with email
           </p>
         </CardContent>

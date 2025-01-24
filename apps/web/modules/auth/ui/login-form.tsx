@@ -1,15 +1,8 @@
 "use client";
 
-// Hooks
-import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-
-// Schema
-import { LoginSchema } from "../lib/schemas";
-
-// Components
 import { FormError } from "@/modules/auth/ui/form-error";
 import { FormSuccess } from "@/modules/auth/ui/form-success";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@repo/ui/components/button";
 import {
   Form,
@@ -20,13 +13,13 @@ import {
   FormMessage,
 } from "@repo/ui/components/form";
 import { Input } from "@repo/ui/components/input";
-import { Loader } from "lucide-react";
-import { FormWrapper } from "./form-wrapper";
-
-// Utils
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Loader2, Lock, Mail } from "lucide-react";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import type { z } from "zod";
 import { login } from "../lib/actions";
+import { LoginSchema } from "../lib/schemas";
+import { FormWrapper } from "./form-wrapper";
 
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
@@ -70,12 +63,16 @@ export function LoginForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="email@example.com"
-                      type="email"
-                      autoComplete="email"
-                    />
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        {...field}
+                        placeholder="email@example.com"
+                        type="email"
+                        autoComplete="email"
+                        className="pl-10"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -88,28 +85,40 @@ export function LoginForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Your password"
-                      type="password"
-                      autoComplete="current-password"
-                    />
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        {...field}
+                        placeholder="Your password"
+                        type="password"
+                        autoComplete="current-password"
+                        className="pl-10"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <FormError message={error} />
+          <div className="flex items-center justify-between">
+            <FormError message={error} />
+            <a
+              href="/auth/forgot-password"
+              className="text-sm text-primary hover:underline"
+            >
+              Forgot password?
+            </a>
+          </div>
           <FormSuccess message={success} />
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? (
               <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Logging in...
-                <Loader className="ml-2 h-4 w-4 animate-spin" />
               </>
             ) : (
-              "Login"
+              "Log In"
             )}
           </Button>
         </form>
