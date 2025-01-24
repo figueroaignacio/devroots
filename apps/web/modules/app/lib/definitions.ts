@@ -29,6 +29,7 @@ export interface User {
   role: string;
   createdAt: string;
   updatedAt: string;
+  username: string;
 }
 
 export interface UpdateUser extends Pick<User, "name" | "image"> {}

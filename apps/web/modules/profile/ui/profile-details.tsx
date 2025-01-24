@@ -56,8 +56,7 @@ export async function ProfileDetails({ params }: { params: { id: string } }) {
             </Avatar>
             <div className="ml-4">
               <h1 className="text-2xl font-semibold">{user.name}</h1>
-              <h2 className="text-sm text-muted-foreground">{user.email}</h2>
-              <span className="text-sm">Fullstack Developer</span>
+              <h2 className="text-sm text-muted-foreground">{user.username}</h2>
             </div>
           </div>
           {currentUser === user.id && (

@@ -20,6 +20,16 @@ export async function getUserById(id: string | undefined) {
   }
 }
 
+export async function getUserByUsername(username: string | undefined) {
+  try {
+    const user = await db.user.findUnique({ where: { username } });
+
+    return user;
+  } catch {
+    return null;
+  }
+}
+
 export async function getVerificationTokenByToken(token: string) {
   try {
     const verificationToken = await db.verificationToken.findUnique({

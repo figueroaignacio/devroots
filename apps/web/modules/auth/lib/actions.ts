@@ -11,6 +11,7 @@ import { sendVerificationEmail } from "./mail";
 import {
   generateVerificationToken,
   getUserByEmail,
+  getUserByUsername,
   getVerificationTokenByToken,
 } from "./utils";
 
@@ -71,19 +72,21 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: "Invalid fields." };
   }
 
-  const { email, password, name } = validatedFields.data;
+  const { email, password, name, username } = validatedFields.data;
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const existingUser = await getUserByEmail(email);
+  const existingUserName = await getUserByUsername(username);
 
-  if (existingUser) {
-    return { error: "Email already in use" };
+  if (existingUser && existingUserName) {
+    return { error: "Something is already in use" };
   }
 
   await db.user.create({
     data: {
       name,
+      username,
       email,
       password: hashedPassword,
     },

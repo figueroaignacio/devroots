@@ -1,7 +1,7 @@
 "use client";
 
 // Hooks
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@repo/ui/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
