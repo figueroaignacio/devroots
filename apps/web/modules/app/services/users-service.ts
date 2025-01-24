@@ -17,6 +17,14 @@ export async function getUser(id: string): Promise<User> {
   return response.json();
 }
 
+export async function getUserByUsername(username: string): Promise<User> {
+  const response = await fetch(`${API_URL}/users/username/${username}`);
+  if (!response) {
+    throw new Error("Failed to fetch users");
+  }
+  return response.json();
+}
+
 export async function updatePost(id: string, user: UpdateUser): Promise<User> {
   const response = await fetch(`${API_URL}/posts/${id}`, {
     method: "PATCH",

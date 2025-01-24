@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description: "View user profile",
 };
 
-export default function ProfilePage({ params }: { params: { id: string } }) {
+export default function ProfilePage({
+  params,
+}: {
+  params: { username: string };
+}) {
   return <ProfileDetails params={params} />;
 }

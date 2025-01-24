@@ -22,35 +22,25 @@ export const {
     },
   },
   callbacks: {
-    async signIn({ user, account }) {
-      if (account?.provider !== "credentials") return true;
-
-      const existingUser = await getUserById(user.id);
-
-      if (!existingUser?.emailVerified) return false;
-
-      // TODO: ADD 2FA CHECK
-
-      return true;
-    },
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
 
-      // if (token.role && session.user) {
-      //   session.user.name = token.role as string;
-      // }
+      if (token.username && session.user) {
+        session.user.username = token.username as string;
+      }
 
       return session;
     },
     async jwt({ token }) {
-      if (!token.sub) return null;
+      if (!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);
       if (!existingUser) return token;
 
       token.role = existingUser.role;
+      token.username = existingUser.username;
 
       return token;
     },

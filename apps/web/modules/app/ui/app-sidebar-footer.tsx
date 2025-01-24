@@ -47,7 +47,7 @@ export async function AppSidebarFooter() {
               </AvatarFallback>
             </Avatar>
             <div className="text-left">
-              <p className="text-sm font-medium">{session?.user?.name}</p>
+              <p className="text-sm font-medium">{session?.user?.username}</p>
             </div>
           </div>
           <Button variant="ghost" size="icon" asChild>
@@ -57,7 +57,7 @@ export async function AppSidebarFooter() {
           </Button>
         </div>
         <DropdownMenuContent align="end" className="w-56">
-          <Link href={`/profile/${session?.user?.id}`}>
+          <Link href={`/profile/${session?.user?.username}`}>
             <DropdownMenuItem className="cursor-pointer">
               <User className="mr-2 h-4 w-4" />
               Profile

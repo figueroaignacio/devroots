@@ -19,14 +19,18 @@ import { ArrowLeft } from "lucide-react";
 
 // Utils
 import { getInitials } from "@/modules/app/lib/utils";
-import { getUser } from "@/modules/app/services/users-service";
 import { auth } from "@/modules/auth/lib/auth";
+import { getUserByUsername } from "@/modules/auth/lib/utils";
 import { notFound } from "next/navigation";
 
-export async function ProfileDetails({ params }: { params: { id: string } }) {
-  const user = await getUser(params.id);
+export async function ProfileDetails({
+  params,
+}: {
+  params: { username: string };
+}) {
+  const user = await getUserByUsername(params.username);
   const session = await auth();
-  const currentUser = session?.user?.id;
+  const currentUser = session?.user?.username;
 
   if (!user) {
     notFound();
@@ -59,7 +63,7 @@ export async function ProfileDetails({ params }: { params: { id: string } }) {
               <h2 className="text-sm text-muted-foreground">{user.username}</h2>
             </div>
           </div>
-          {currentUser === user.id && (
+          {currentUser === user.username && (
             <Button variant="outline">
               <Link href="/profile/edit">Edit profile</Link>
             </Button>
@@ -74,17 +78,17 @@ export async function ProfileDetails({ params }: { params: { id: string } }) {
       <Tabs defaultValue="posts" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="posts">Posts</TabsTrigger>
-          <TabsTrigger value="challenges">Challenges</TabsTrigger>
           <TabsTrigger value="comments">Comments</TabsTrigger>
+          <TabsTrigger value="challenges">Challenges</TabsTrigger>
         </TabsList>
         <TabsContent value="posts">
           <PostsTab userId={user.id} />
         </TabsContent>
-        <TabsContent value="challenges">
-          <ChallengesTab userId={user.id} />
-        </TabsContent>
         <TabsContent value="comments">
           <CommentsTab userId={user.id} />
+        </TabsContent>
+        <TabsContent value="challenges">
+          <ChallengesTab userId={user.id} />
         </TabsContent>
       </Tabs>
     </div>

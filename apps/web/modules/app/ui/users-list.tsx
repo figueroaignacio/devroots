@@ -22,10 +22,13 @@ export async function UsersList() {
             <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <Link href={`/profile/${user.id}`} className="hover:underline">
-              {user.name}
+            <Link
+              href={`/profile/${user.username}`}
+              className="hover:underline"
+            >
+              {user.username}
             </Link>
-            <span className="text-xs text-muted-foreground">{user.email}</span>
+            <span className="text-xs text-muted-foreground">{user.name}</span>
           </div>
         </li>
       ))}

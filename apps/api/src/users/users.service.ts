@@ -13,13 +13,19 @@ export class UsersService {
     });
   }
 
-  async findAllUsers() {
+  async getAllUsers() {
     return this.prisma.user.findMany();
   }
 
-  async findOneUser(id: string) {
+  async getUserById(id: string) {
     return this.prisma.user.findUnique({
       where: { id },
+    });
+  }
+
+  async getUserByUsername(username: string) {
+    return this.prisma.user.findUnique({
+      where: { username },
     });
   }
 
@@ -36,7 +42,7 @@ export class UsersService {
     });
   }
 
-  async findUserPosts(userId: string) {
+  async getUserPosts(userId: string) {
     return this.prisma.post.findMany({
       where: { authorId: userId },
       orderBy: { createdAt: 'desc' },

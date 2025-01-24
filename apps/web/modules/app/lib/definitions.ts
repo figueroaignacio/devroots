@@ -9,6 +9,7 @@ export interface Post {
   author: {
     id: string;
     name: string;
+    username: string;
     image: string | null;
   };
 }

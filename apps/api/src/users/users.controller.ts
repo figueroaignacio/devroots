@@ -22,12 +22,17 @@ export class UsersController {
 
   @Get()
   findAll() {
-    return this.usersService.findAllUsers();
+    return this.usersService.getAllUsers();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOneUser(id);
+    return this.usersService.getUserById(id);
+  }
+
+  @Get('username/:username')
+  findByUsername(@Param('username') username: string) {
+    return this.usersService.getUserByUsername(username);
   }
 
   @Patch(':id')
@@ -41,7 +46,7 @@ export class UsersController {
   }
 
   @Get(':id/posts')
-  async getUserPosts(@Param('id') userId: string) {
-    return this.usersService.findUserPosts(userId);
+  async findUserPosts(@Param('id') userId: string) {
+    return this.usersService.getUserPosts(userId);
   }
 }
