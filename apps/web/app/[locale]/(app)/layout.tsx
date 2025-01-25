@@ -1,16 +1,14 @@
-import { auth } from "@/modules/auth/lib/auth";
+// Components
+import { Providers } from "@/components/shared/providers";
+import { AppHeader } from "@/modules/app/ui/app-header";
+import { AppSidebar } from "@/modules/app/ui/app-sidebar";
 
 // Styles
 import "@/styles/globals.css";
 
-// Components
-import { AppSidebar } from "@/modules/app/ui/app-sidebar";
-import { SidebarProvider } from "@repo/ui/components/sidebar";
-import { SessionProvider } from "next-auth/react";
-
-// Config
+// Utils
 import { routing } from "@/config/i18n/routing";
-import { AppHeader } from "@/modules/app/ui/app-header";
+import { auth } from "@/modules/auth/lib/auth";
 import { setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 
@@ -34,14 +32,12 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   }
 
   return (
-    <SessionProvider>
-      <SidebarProvider>
-        <AppSidebar />
-        <div className="w-full">
-          <AppHeader />
-          <main className="page-container relative">{children}</main>
-        </div>
-      </SidebarProvider>
-    </SessionProvider>
+    <Providers session={session}>
+      <AppSidebar />
+      <div className="w-full">
+        <AppHeader />
+        <main className="page-container relative">{children}</main>
+      </div>
+    </Providers>
   );
 }

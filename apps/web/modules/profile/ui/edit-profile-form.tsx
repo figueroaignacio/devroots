@@ -2,172 +2,187 @@
 
 // Hooks
 import { useToast } from "@repo/ui/hooks/use-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 // Components
 import { Loader } from "@/components/shared/loader";
 import { Button } from "@repo/ui/components/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@repo/ui/components/form";
 import { Input } from "@repo/ui/components/input";
-import { Label } from "@repo/ui/components/label";
 import { Textarea } from "@repo/ui/components/textarea";
+
+// Utils
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 // Services
 import { updateUser } from "@/modules/app/services/users-service";
+
+// Schemas
+import { EditProfileSchema } from "../lib/schemas";
+
+type FormData = z.infer<typeof EditProfileSchema>;
 
 export function EditProfileForm() {
   const { data: session, update } = useSession();
   const { toast } = useToast();
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    username: "",
-    name: "",
-    bio: "",
-    image: "",
+  const queryClient = useQueryClient();
+
+  const form = useForm<FormData>({
+    resolver: zodResolver(EditProfileSchema),
+    defaultValues: {
+      username: "",
+      name: "",
+      bio: "",
+      image: "",
+    },
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (session?.user) {
-      setFormData({
+      form.reset({
         username: session.user.username || "",
         name: session.user.name || "",
         bio: session.user.bio || "",
-        image: session.user.image || "",
+        image: session.user.image || null,
       });
     }
-  }, [session]);
+  }, [session, form]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  const updateProfileMutation = useMutation({
+    mutationFn: (userData: FormData) => {
+      if (!session?.user?.id) {
+        throw new Error("User ID is required for update");
+      }
+      return updateUser(session.user.id, userData);
+    },
+    onSuccess: async () => {
+      await update();
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      toast({
+        title: "Success",
+        description: "Profile updated successfully!",
+      });
+      router.push(`/profile/${form.getValues("username")}`);
+    },
+    onError: (error: Error) => {
+      console.error("Error updating profile:", error);
+      toast({
+        title: "Update Error",
+        description:
+          error.message || "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
+  const onSubmit = (data: FormData) => {
     if (!session) {
       toast({
         title: "Authentication Error",
         description: "You need to be logged in to update your profile.",
         variant: "destructive",
       });
-      setIsSubmitting(false);
       return;
     }
 
-    const userData = {
-      username: formData.username,
-      name: formData.name,
-      bio: formData.bio,
-      image: formData.image,
-    };
-
-    if (!session.user?.id) {
-      toast({
-        title: "Update Error",
-        description: "User ID is required for update",
-        variant: "destructive",
-      });
-      setIsSubmitting(false);
-      return;
-    }
-
-    try {
-      const updatedUser = await updateUser(session.user.id, userData);
-      await update();
-      toast({
-        title: "Success",
-        description: "Profile updated successfully!",
-      });
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      toast({
-        title: "Update Error",
-        description:
-          error instanceof Error
-            ? error.message
-            : "An unexpected error occurred. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-      router.push(`/profile/${session.user.username}`);
-    }
+    updateProfileMutation.mutate(data);
   };
 
   return (
     <div className="max-w-xl mx-auto p-6">
       <h2 className="text-2xl font-semibold mb-6">Edit Profile</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <Label htmlFor="username" className="block text-sm font-medium">
-            Username
-          </Label>
-          <Input
-            type="text"
-            id="username"
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
             name="username"
-            value={formData.username}
-            onChange={handleChange}
-            className="mt-2"
-            disabled={isSubmitting}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    value={field.value || ""}
+                    disabled={updateProfileMutation.isPending}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div>
-          <Label htmlFor="name" className="block text-sm font-medium">
-            Name
-          </Label>
-          <Input
-            type="text"
-            id="name"
+          <FormField
+            control={form.control}
             name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="mt-2"
-            disabled={isSubmitting}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    disabled={updateProfileMutation.isPending}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div>
-          <Label htmlFor="bio" className="block text-sm font-medium">
-            Bio
-          </Label>
-          <Textarea
-            id="bio"
+          <FormField
+            control={form.control}
             name="bio"
-            value={formData.bio}
-            onChange={handleChange}
-            className="mt-2"
-            disabled={isSubmitting}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Bio</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    value={field.value || ""}
+                    disabled={updateProfileMutation.isPending}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div>
-          <Label htmlFor="image" className="block text-sm font-medium">
-            Profile Image URL (optional)
-          </Label>
-          <Input
-            type="text"
-            id="image"
+          <FormField
+            control={form.control}
             name="image"
-            value={formData.image}
-            onChange={handleChange}
-            className="mt-2"
-            disabled={isSubmitting}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Profile Image URL (optional)</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    value={field.value || ""}
+                    disabled={updateProfileMutation.isPending}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <Button
-          type="submit"
-          variant="default"
-          className="mt-4"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? <Loader /> : "Save Changes"}
-        </Button>
-      </form>
+          <Button
+            type="submit"
+            variant="default"
+            className="mt-4"
+            disabled={updateProfileMutation.isPending}
+          >
+            {updateProfileMutation.isPending ? <Loader /> : "Save Changes"}
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 }

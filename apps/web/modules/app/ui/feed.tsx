@@ -1,42 +1,46 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Post } from "../lib/definitions";
-import { deletePost, getPosts } from "../services/posts-service";
+// Hooks
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
+// Components
 import { FeedPost } from "./feed-post";
 import { FeedPostSkeleton } from "./feed-post-skeleton";
 
-export function Feed() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+// Types
+import type { Post } from "../lib/definitions";
 
-  const handleDelete = async (id: string) => {
+// Services
+import { deletePost, getPosts } from "../services/posts-service";
+
+export function Feed() {
+  const queryClient = useQueryClient();
+
+  const {
+    data: posts,
+    isLoading,
+    error,
+  } = useQuery<Post[], Error>({
+    queryKey: ["posts"],
+    queryFn: getPosts,
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: deletePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
+
+  const handleDelete = async (post: Post) => {
     try {
-      await deletePost(id);
-      const updatedPosts = await getPosts();
-      setPosts(updatedPosts);
+      await deleteMutation.mutateAsync(post.id);
     } catch (error) {
-      setError("Failed to delete post");
+      console.error("Failed to delete post", error);
     }
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const fetchedPosts = await getPosts();
-        setPosts(fetchedPosts);
-      } catch (error) {
-        setError("Failed to fetch posts");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <ul className="space-y-6">
         {Array.from({ length: 10 }).map((_, index) => (
@@ -49,18 +53,19 @@ export function Feed() {
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div>{error.message}</div>;
   }
 
   return (
     <div>
       <ul className="space-y-6">
-        {posts.length === 0 ? (
+        {posts && posts.length === 0 ? (
           <li>No posts available.</li>
         ) : (
+          posts &&
           posts.map((post) => (
             <li key={post.id}>
-              <FeedPost post={post} onDelete={() => handleDelete(post.id)} />
+              <FeedPost post={post} onDelete={() => handleDelete(post)} />
             </li>
           ))
         )}

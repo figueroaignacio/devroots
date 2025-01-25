@@ -1,19 +1,37 @@
 "use client";
 
-// Hooks
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 // Components
+import { Loader } from "@/components/shared/loader";
 import { Button } from "@repo/ui/components/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@repo/ui/components/form";
 import { Input } from "@repo/ui/components/input";
-import { Label } from "@repo/ui/components/label";
 import { Textarea } from "@repo/ui/components/textarea";
 
-// Definitions & Services
-import { Loader } from "@/components/shared/loader";
-import { UpdatePost } from "../lib/definitions";
+// Utils
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+// Types
+import type { UpdatePost } from "../lib/definitions";
+
+// Services
 import { updatePost } from "../services/posts-service";
+
+// Schemas
+import { EditPostSchema } from "../lib/schemas";
+
+type FormData = z.infer<typeof EditPostSchema>;
 
 export function EditPostForm({
   post,
@@ -21,68 +39,89 @@ export function EditPostForm({
   post: { id: string; title: string; content: string; published: boolean };
 }) {
   const router = useRouter();
-  const [title, setTitle] = useState<string>(post.title);
-  const [content, setContent] = useState<string>(post.content);
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const form = useForm<FormData>({
+    resolver: zodResolver(EditPostSchema),
+    defaultValues: {
+      title: post.title,
+      content: post.content,
+    },
+  });
 
+  const updatePostMutation = useMutation({
+    mutationFn: (updatedPostData: UpdatePost) =>
+      updatePost(post.id, updatedPostData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      router.push("/hub");
+    },
+    onError: (error) => {
+      console.error("Failed to update post", error);
+    },
+  });
+
+  const onSubmit = (data: FormData) => {
     const updatedPostData: UpdatePost = {
-      title,
-      content,
+      ...data,
       published: true,
     };
 
-    try {
-      await updatePost(post.id, updatedPostData);
-      router.push("/hub");
-    } catch (error) {
-      setError("Failed to update post");
-    } finally {
-      setIsSubmitting(false);
-    }
+    updatePostMutation.mutate(updatedPostData);
   };
 
   return (
     <div className="container mx-auto py-8 w-[700px]">
       <h1 className="text-2xl font-bold mb-6">Edit Post</h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="title">Title</Label>
-          <Input
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
+      {updatePostMutation.isError && (
+        <p className="text-red-500 mb-4">Failed to update post</p>
+      )}
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Title</FormLabel>
+                <FormControl>
+                  <Input {...field} disabled={updatePostMutation.isPending} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="content">Content</Label>
-          <Textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-            className="min-h-[200px]"
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Content</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    disabled={updatePostMutation.isPending}
+                    className="min-h-[200px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="flex gap-x-2">
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? <Loader /> : "Update"}
-          </Button>
-          <Button
-            type="button"
-            onClick={() => router.push("/hub")}
-            disabled={isSubmitting}
-          >
-            Cancel
-          </Button>
-        </div>
-      </form>
+          <div className="flex gap-x-2">
+            <Button type="submit" disabled={updatePostMutation.isPending}>
+              {updatePostMutation.isPending ? <Loader /> : "Update"}
+            </Button>
+            <Button
+              type="button"
+              onClick={() => router.push("/hub")}
+              disabled={updatePostMutation.isPending}
+            >
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </Form>
     </div>
   );
 }

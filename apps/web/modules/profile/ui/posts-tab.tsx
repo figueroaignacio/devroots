@@ -1,7 +1,7 @@
 "use client";
 
 // Hooks
-import { useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 // Components
 import { Post } from "@/modules/app/lib/definitions";
@@ -17,34 +17,33 @@ interface PostsTabProps {
 }
 
 export function PostsTab({ userId }: PostsTabProps) {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const userPosts = await getUserPosts(userId);
-        setPosts(userPosts);
-      } catch (error) {
-        console.error("Failed to fetch user posts", error);
-      } finally {
-        setLoading(false);
-      }
-    }
+  const {
+    data: posts,
+    isLoading,
+    error,
+  } = useQuery<Post[], Error>({
+    queryKey: ["posts"],
+    queryFn: () => getUserPosts(userId),
+  });
 
-    fetchPosts();
-  }, [userId]);
+  const deleteMutation = useMutation({
+    mutationFn: deletePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    },
+  });
 
   const handleDelete = async (post: Post) => {
     try {
-      await deletePost(post.id);
-      setPosts((prevPosts) => prevPosts.filter((p) => p.id !== post.id));
+      await deleteMutation.mutateAsync(post.id);
     } catch (error) {
       console.error("Failed to delete post", error);
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <ul className="space-y-4">
         {Array.from({ length: 10 }).map((_, index) => (
@@ -56,11 +55,15 @@ export function PostsTab({ userId }: PostsTabProps) {
     );
   }
 
+  if (error) {
+    return <div>Error loading posts</div>;
+  }
+
   return (
     <ul className="space-y-4">
-      {posts.map((post) => (
+      {posts?.map((post) => (
         <li key={post.id}>
-          <FeedPost post={post} onDelete={handleDelete} />
+          <FeedPost post={post} onDelete={() => handleDelete(post)} />
         </li>
       ))}
     </ul>
