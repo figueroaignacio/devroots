@@ -3,6 +3,7 @@
 // Hooks
 import { useToast } from "@repo/ui/hooks/use-toast";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 // Components
@@ -18,6 +19,7 @@ import { updateUser } from "@/modules/app/services/users-service";
 export function EditProfileForm() {
   const { data: session, update } = useSession();
   const { toast } = useToast();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: "",
     name: "",
@@ -94,6 +96,7 @@ export function EditProfileForm() {
       });
     } finally {
       setIsSubmitting(false);
+      router.push(`/profile/${session.user.username}`);
     }
   };
 
