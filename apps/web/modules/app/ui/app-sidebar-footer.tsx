@@ -30,7 +30,7 @@ export async function AppSidebarFooter() {
     <SidebarFooter className="p-4">
       <Button className="mb-5">
         <Link href="/post/create" className="flex items-center gap-x-3">
-          <span>Create</span>
+          <span>Post</span>
           <Pen className="size-4" />
         </Link>
       </Button>
