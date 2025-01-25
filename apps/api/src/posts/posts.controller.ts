@@ -30,6 +30,11 @@ export class PostsController {
     return this.postsService.getPostById(id);
   }
 
+  @Get('slug/:slug')
+  getPostBySlug(@Param('slug') slug: string) {
+    return this.postsService.getPostBySlug(slug);
+  }
+
   @Patch(':id')
   updatePost(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postsService.updatePost(id, updatePostDto);

@@ -8,18 +8,22 @@ import {
 
 // Utils
 import { getInitials } from "@/modules/app/lib/utils";
-import { getPost } from "@/modules/app/services/posts-service";
+import { getPostBySlug } from "@/modules/app/services/posts-service";
 import { auth } from "@/modules/auth/lib/auth";
 import { redirect } from "next/navigation";
 
-export default async function PostPage({ params }: { params: { id: string } }) {
+export default async function PostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const session = await auth();
 
   if (!session || !session.user) {
     redirect("/auth/login");
   }
 
-  const post = await getPost(params.id);
+  const post = await getPostBySlug(params.slug);
 
   if (!post) {
     return <div>No post found</div>;

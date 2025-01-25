@@ -95,7 +95,7 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href={`/post/details/${post.id}`}>
+              <Link href={`/post/${post.slug}`}>
                 <Button variant="ghost" size="icon">
                   <MessageCircle size={20} />
                 </Button>
