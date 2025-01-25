@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 // Components
+import { Loader } from "@/components/shared/loader";
 import { Button } from "@repo/ui/components/button";
 import { Input } from "@repo/ui/components/input";
 import { Label } from "@repo/ui/components/label";
@@ -161,7 +162,7 @@ export function EditProfileForm() {
           className="mt-4"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Saving..." : "Save Changes"}
+          {isSubmitting ? <Loader /> : "Save Changes"}
         </Button>
       </form>
     </div>
