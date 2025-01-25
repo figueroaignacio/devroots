@@ -37,6 +37,7 @@ export function RegisterForm() {
       name: "",
       email: "",
       password: "",
+      username: "",
     },
   });
 
@@ -74,6 +75,28 @@ export function RegisterForm() {
                       <Input
                         {...field}
                         placeholder="John Doe"
+                        type="text"
+                        autoComplete="name"
+                        className="pl-10"
+                      />
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        {...field}
+                        placeholder="johndoe_"
                         type="text"
                         autoComplete="name"
                         className="pl-10"

@@ -33,15 +33,12 @@ export function FormWrapper({
       {showSocial && (
         <CardContent>
           <Providers />
-          <div className="relative my-4">
+          <div className="relative mt-8">
             <Separator />
             <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-background px-2 text-xs text-muted-foreground">
-              OR
+              Or continue with email
             </span>
           </div>
-          <p className="text-center text-sm text-muted-foreground mb-4">
-            Continue with email
-          </p>
         </CardContent>
       )}
       <CardContent>{children}</CardContent>
