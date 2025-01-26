@@ -51,4 +51,14 @@ export class UsersService {
       },
     });
   }
+
+  async getUserComments(userId: string) {
+    return this.prisma.comment.findMany({
+      where: { authorId: userId },
+      orderBy: { createdAt: 'desc' },
+      include: {
+        author: true,
+      },
+    });
+  }
 }

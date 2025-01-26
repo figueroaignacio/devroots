@@ -49,4 +49,9 @@ export class UsersController {
   async getUserPosts(@Param('id') userId: string) {
     return this.usersService.getUserPosts(userId);
   }
+
+  @Get(':id/comments')
+  async getUserComments(@Param('id') userId: string) {
+    return this.usersService.getUserComments(userId);
+  }
 }

@@ -1,4 +1,4 @@
-import { formatDistanceToNow } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
 
 export const getInitials = (name: string) => {
   return name
@@ -11,3 +11,7 @@ export const getInitials = (name: string) => {
 export function formatDateDistance(date: string | Date): string {
   return formatDistanceToNow(new Date(date), { addSuffix: true });
 }
+
+export const formatDate = (dateString: string | Date): string => {
+  return format(new Date(dateString), "MMM dd, yyyy, hh:mm a");
+};

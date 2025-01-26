@@ -1,5 +1,5 @@
 import { API_URL } from "@/lib/constants";
-import { Post, UpdateUser, User } from "../lib/definitions";
+import { Comment, Post, UpdateUser, User } from "../lib/definitions";
 
 export async function getUsers(): Promise<User[]> {
   const response = await fetch(`${API_URL}/users`);
@@ -44,5 +44,15 @@ export async function getUserPosts(userId: string): Promise<Post[]> {
   if (!response.ok) {
     throw new Error("Failed to fetch user posts");
   }
+  return response.json();
+}
+
+export async function getUserComments(userId: string): Promise<Comment[]> {
+  const response = await fetch(`${API_URL}/users/${userId}/comments`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch user comments");
+  }
+
   return response.json();
 }

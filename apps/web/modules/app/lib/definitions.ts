@@ -35,3 +35,6 @@ export interface User {
 }
 
 export interface UpdateUser extends Pick<User, "name" | "image"> {}
+
+export interface Comment
+  extends Pick<Post, "id" | "content" | "createdAt" | "author"> {}
