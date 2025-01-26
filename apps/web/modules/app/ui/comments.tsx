@@ -1,14 +1,11 @@
 "use client";
 
+// Hooks
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 
+// Components
 import { Loader } from "@/components/shared/loader";
-import { formatDate, getInitials } from "@/modules/app/lib/utils";
-import {
-  deleteComment,
-  getComments,
-} from "@/modules/app/services/comments-service";
 import {
   Avatar,
   AvatarFallback,
@@ -24,6 +21,16 @@ import {
 import { MoreHorizontal, Trash } from "lucide-react";
 import { CommentForm } from "./comment-form";
 
+// Utils
+import { formatDate, getInitials } from "@/modules/app/lib/utils";
+
+// Services
+import {
+  deleteComment,
+  getComments,
+} from "@/modules/app/services/comments-service";
+
+// Types
 import type { Comment } from "../lib/definitions";
 
 export default function Comments({ postId }: { postId: string }) {

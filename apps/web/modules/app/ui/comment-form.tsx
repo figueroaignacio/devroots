@@ -1,12 +1,12 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+// Hooks
+import { useToast } from "@repo/ui/hooks/use-toast";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
-import { createComment } from "@/modules/app/services/comments-service";
+// Components
 import { Button } from "@repo/ui/components/button";
 import {
   Form,
@@ -16,8 +16,14 @@ import {
   FormMessage,
 } from "@repo/ui/components/form";
 import { Textarea } from "@repo/ui/components/textarea";
-import { useToast } from "@repo/ui/hooks/use-toast";
 import { CommentSchema } from "../lib/schemas";
+
+// Utils
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+// Services
+import { createComment } from "@/modules/app/services/comments-service";
 
 type CommentFormValues = z.infer<typeof CommentSchema>;
 
