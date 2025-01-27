@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 // Components
+import { Loader } from "@/components/shared/loader";
 import { Button } from "@repo/ui/components/button";
 import {
   Form,
@@ -98,7 +99,7 @@ export function CommentForm({ postId, onCommentAdded }: CommentFormProps) {
           )}
         />
         <Button type="submit" disabled={isSubmitting} className="lg:w-56">
-          {isSubmitting ? "Posting..." : "Comment"}
+          {isSubmitting ? <Loader /> : "Comment"}
         </Button>
       </form>
     </Form>

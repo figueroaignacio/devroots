@@ -1,7 +1,7 @@
 import { Link } from "@/config/i18n/routing";
 import { getInitials } from "@/modules/app/lib/utils";
 import { getPostBySlug } from "@/modules/app/services/posts-service";
-import Comments from "@/modules/app/ui/comments";
+import { Comments } from "@/modules/app/ui/comments";
 import { auth } from "@/modules/auth/lib/auth";
 import {
   Avatar,
@@ -50,7 +50,7 @@ export default async function PostPage({
         <div className="text-2xl font-bold">{post.title}</div>
       </div>
       <div>
-        <div className="prose max-w-none mb-8">{post.content}</div>
+        <div className="max-w-none mb-8">{post.content}</div>
         <Comments postId={post.id} />
       </div>
     </div>
