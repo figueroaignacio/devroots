@@ -63,7 +63,6 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
               {post.author.name ? post.author.name[0] : "?"}
             </AvatarFallback>
           </Avatar>
-
           <div>
             <div className="flex items-center gap-x-2">
               <Link href={`/profile/${post.author.username}`}>
@@ -77,9 +76,7 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
           </div>
         </div>
       </div>
-
       <h3 className="font-semibold text-lg mt-2">{post.title}</h3>
-
       <div className="flex gap-x-3 mt-4">
         <TooltipProvider>
           <Tooltip>
@@ -104,7 +101,6 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
               <p>Comments</p>
             </TooltipContent>
           </Tooltip>
-
           {currentUserId === post.authorId && (
             <>
               <Tooltip>
@@ -137,7 +133,6 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
           )}
         </TooltipProvider>
       </div>
-
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
