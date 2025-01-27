@@ -79,7 +79,6 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
       </div>
 
       <h3 className="font-semibold text-lg mt-2">{post.title}</h3>
-      <p className="text-sm mt-1">{post.content}</p>
 
       <div className="flex gap-x-3 mt-4">
         <TooltipProvider>
