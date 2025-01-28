@@ -6,6 +6,7 @@ import { PostsModule } from './posts/posts.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 import { CommentsModule } from './comments/comments.module';
+import { CommunitiesModule } from './communities/communities.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CommentsModule } from './comments/comments.module';
     UsersModule,
     PostsModule,
     CommentsModule,
+    CommunitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

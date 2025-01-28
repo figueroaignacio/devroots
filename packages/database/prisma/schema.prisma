@@ -30,6 +30,9 @@ model User {
   updatedAt DateTime @updatedAt
 
   Comment Comment[]
+  CommunityMember CommunityMember[]
+  Community Community[]
+  CommunityPost CommunityPost[]
 }
 
 model Account {
@@ -89,3 +92,44 @@ model Comment {
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
+
+model Community {
+  id          String         @id @default(cuid())
+  name        String         @unique
+  description String?
+  slug        String         @unique
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  ownerId     String
+  owner       User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  members     CommunityMember[]
+  communityPosts CommunityPost[]
+}
+
+model CommunityMember {
+  id          String      @id @default(cuid())
+  userId      String
+  communityId String
+  joinedAt    DateTime    @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  community   Community   @relation(fields: [communityId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, communityId])
+}
+
+model CommunityPost {
+  id          String      @id @default(cuid())
+  title       String
+  content     String?
+  slug        String?     @unique
+  published   Boolean     @default(false)
+  communityId String
+  authorId    String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  community   Community   @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  author      User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
