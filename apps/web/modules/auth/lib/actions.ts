@@ -77,10 +77,13 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const existingUser = await getUserByEmail(email);
-  const existingUserName = await getUserByUsername(username);
+  if (existingUser) {
+    return { error: "Email is already in use." };
+  }
 
-  if (existingUser && existingUserName) {
-    return { error: "Something is already in use" };
+  const existingUserName = await getUserByUsername(username);
+  if (existingUserName) {
+    return { error: "Username is already taken." };
   }
 
   await db.user.create({

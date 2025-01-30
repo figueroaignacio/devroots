@@ -102,7 +102,6 @@ export function LoginForm() {
             />
           </div>
           <div className="flex items-center justify-between">
-            <FormError message={error} />
             <a
               href="/auth/forgot-password"
               className="text-sm text-primary hover:underline"
@@ -110,6 +109,7 @@ export function LoginForm() {
               Forgot password?
             </a>
           </div>
+          <FormError message={error} />
           <FormSuccess message={success} />
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? (

@@ -150,11 +150,9 @@ export function RegisterForm() {
                   <FormMessage />
                 </FormItem>
               )}
-            />{" "}
+            />
           </div>
-          <div className="flex items-center justify-between">
-            <FormError message={error} />
-          </div>
+          <FormError message={error} />
           <FormSuccess message={success} />
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? (
