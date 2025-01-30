@@ -30,6 +30,11 @@ export class CommunitiesController {
     return this.communitiesService.getCommunityById(id);
   }
 
+  @Get('slug/:slug')
+  getCommunityBySlug(@Param('slug') slug: string) {
+    return this.communitiesService.getCommunityBySlug(slug);
+  }
+
   @Patch(':id')
   updateCommunity(
     @Param('id') id: string,

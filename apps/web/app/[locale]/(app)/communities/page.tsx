@@ -1,12 +1,11 @@
-import { API_URL } from "@/lib/constants";
+import { getAllCommunities } from "@/modules/communities/services/communities-services";
 
-const data = await fetch(`${API_URL}/communities`);
-const communities = await data.json();
+export default async function CommunitiesPage() {
+  const communities = await getAllCommunities();
 
-export default function CommunitiesPage() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {communities.map((community: any) => (
+      {communities.map((community) => (
         <div key={community.id} className="rounded-lg overflow-hidden border">
           <div className="p-6">
             <div className="flex justify-between items-start">

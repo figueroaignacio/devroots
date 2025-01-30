@@ -40,6 +40,14 @@ export class CommunitiesService {
     return community;
   }
 
+  async getCommunityBySlug(slug: string) {
+    const community = await this.prisma.community.findUnique({
+      where: { slug },
+    });
+
+    return community;
+  }
+
   async updateCommunity(id: string, updateCommunityDto: UpdateCommunityDto) {
     const community = await this.prisma.community.update({
       where: { id },
