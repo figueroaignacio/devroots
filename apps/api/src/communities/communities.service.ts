@@ -6,13 +6,13 @@ import { UpdateCommunityDto } from './dto/update-community.dto';
 
 @Injectable()
 export class CommunitiesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly db: PrismaService) {}
 
   async createCommunity(createCommunityDto: CreateCommunityDto) {
     const { name, description, ownerId } = createCommunityDto;
     const slug = generateSlug(name);
 
-    const community = await this.prisma.community.create({
+    const community = await this.db.community.create({
       data: {
         name,
         description,
@@ -25,11 +25,11 @@ export class CommunitiesService {
   }
 
   async getAllCommunities() {
-    return await this.prisma.community.findMany();
+    return await this.db.community.findMany();
   }
 
   async getCommunityById(id: string) {
-    const community = await this.prisma.community.findUnique({
+    const community = await this.db.community.findUnique({
       where: { id },
     });
 
@@ -41,7 +41,7 @@ export class CommunitiesService {
   }
 
   async getCommunityBySlug(slug: string) {
-    const community = await this.prisma.community.findUnique({
+    const community = await this.db.community.findUnique({
       where: { slug },
     });
 
@@ -49,7 +49,7 @@ export class CommunitiesService {
   }
 
   async updateCommunity(id: string, updateCommunityDto: UpdateCommunityDto) {
-    const community = await this.prisma.community.update({
+    const community = await this.db.community.update({
       where: { id },
       data: updateCommunityDto,
     });
@@ -58,7 +58,7 @@ export class CommunitiesService {
   }
 
   async removeCommunity(id: string) {
-    await this.prisma.community.delete({
+    await this.db.community.delete({
       where: { id },
     });
 

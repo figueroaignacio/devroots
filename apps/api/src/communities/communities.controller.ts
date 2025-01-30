@@ -26,7 +26,7 @@ export class CommunitiesController {
   }
 
   @Get(':id')
-  figetCommunityByIdndOne(@Param('id') id: string) {
+  getCommunityById(@Param('id') id: string) {
     return this.communitiesService.getCommunityById(id);
   }
 

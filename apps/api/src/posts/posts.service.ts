@@ -6,12 +6,12 @@ import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly db: PrismaService) {}
 
   async createPost(createPostDto: CreatePostDto) {
     const slug = generateSlug(createPostDto.title);
 
-    return this.prisma.post.create({
+    return this.db.post.create({
       data: {
         ...createPostDto,
         slug,
@@ -22,7 +22,7 @@ export class PostsService {
   }
 
   async getAllPosts() {
-    return this.prisma.post.findMany({
+    return this.db.post.findMany({
       include: {
         author: true,
       },
@@ -30,7 +30,7 @@ export class PostsService {
   }
 
   async getPostById(id: string) {
-    return this.prisma.post.findUnique({
+    return this.db.post.findUnique({
       where: { id },
       include: {
         author: true,
@@ -39,7 +39,7 @@ export class PostsService {
   }
 
   async getPostBySlug(slug: string) {
-    return this.prisma.post.findUnique({
+    return this.db.post.findUnique({
       where: { slug },
       include: { author: true },
     });
@@ -50,7 +50,7 @@ export class PostsService {
       ? generateSlug(updatePostDto.title)
       : undefined;
 
-    return this.prisma.post.update({
+    return this.db.post.update({
       where: { id },
       data: {
         ...updatePostDto,
@@ -61,7 +61,7 @@ export class PostsService {
   }
 
   async removePost(id: string) {
-    return this.prisma.post.delete({
+    return this.db.post.delete({
       where: { id },
     });
   }

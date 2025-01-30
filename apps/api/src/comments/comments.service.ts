@@ -3,13 +3,13 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class CommentsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly db: PrismaService) {}
 
   async createComment(
     postId: string,
     createCommentDto: { content: string; authorId: string },
   ) {
-    return this.prisma.comment.create({
+    return this.db.comment.create({
       data: {
         content: createCommentDto.content,
         authorId: createCommentDto.authorId,
@@ -19,17 +19,17 @@ export class CommentsService {
   }
 
   async getAllComments() {
-    return this.prisma.comment.findMany();
+    return this.db.comment.findMany();
   }
 
   async getCommentByPostId(postId: string) {
-    return this.prisma.comment.findMany({
+    return this.db.comment.findMany({
       where: { postId },
       include: { author: true },
     });
   }
 
   async deleteComment(commentId: string) {
-    return this.prisma.comment.delete({ where: { id: commentId } });
+    return this.db.comment.delete({ where: { id: commentId } });
   }
 }
