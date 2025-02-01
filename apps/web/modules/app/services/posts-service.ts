@@ -1,64 +1,40 @@
+import { apiFetcher } from "@/lib/utils";
 import { CreatePost, Post, UpdatePost } from "../lib/definitions";
 
-import { API_URL } from "@/lib/constants";
-
 export async function getPosts(): Promise<Post[]> {
-  const response = await fetch(`${API_URL}/posts`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch posts");
-  }
-  return response.json();
+  return apiFetcher<Post[]>("/posts");
 }
 
 export async function getPost(id: string): Promise<Post> {
-  const response = await fetch(`${API_URL}/posts/${id}`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch post");
-  }
-  return response.json();
+  return apiFetcher<Post>(`/posts/${id}`);
 }
 
 export async function getPostBySlug(slug: string): Promise<Post> {
-  const response = await fetch(`${API_URL}/posts/slug/${slug}`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch post");
-  }
-  return response.json();
+  return apiFetcher<Post>(`/posts/slug/${slug}`);
 }
 
 export async function createPost(post: CreatePost): Promise<Post> {
-  const response = await fetch(`${API_URL}/posts`, {
+  return apiFetcher<Post>("/posts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(post),
   });
-  if (!response.ok) {
-    throw new Error("Failed to create post");
-  }
-  return response.json();
 }
 
 export async function updatePost(id: string, post: UpdatePost): Promise<Post> {
-  const response = await fetch(`${API_URL}/posts/${id}`, {
+  return apiFetcher<Post>(`/posts/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(post),
   });
-  if (!response.ok) {
-    throw new Error("Failed to update post");
-  }
-  return response.json();
 }
 
 export async function deletePost(id: string): Promise<void> {
-  const response = await fetch(`${API_URL}/posts/${id}`, {
+  await apiFetcher<void>(`/posts/${id}`, {
     method: "DELETE",
   });
-  if (!response.ok) {
-    throw new Error("Failed to delete post");
-  }
 }

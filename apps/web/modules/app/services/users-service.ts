@@ -1,58 +1,32 @@
-import { API_URL } from "@/lib/constants";
+import { apiFetcher } from "@/lib/utils";
 import { Comment, Post, UpdateUser, User } from "../lib/definitions";
 
 export async function getUsers(): Promise<User[]> {
-  const response = await fetch(`${API_URL}/users`);
-  if (!response) {
-    throw new Error("Failed to fetch users");
-  }
-  return response.json();
+  return apiFetcher<User[]>("/users");
 }
 
 export async function getUser(id: string): Promise<User> {
-  const response = await fetch(`${API_URL}/users/${id}`);
-  if (!response) {
-    throw new Error("Failed to fetch users");
-  }
-  return response.json();
+  return apiFetcher<User>(`/users/${id}`);
 }
 
 export async function getUserByUsername(username: string): Promise<User> {
-  const response = await fetch(`${API_URL}/users/username/${username}`);
-  if (!response) {
-    throw new Error("Failed to fetch users");
-  }
-  return response.json();
+  return apiFetcher<User>(`/users/username/${username}`);
 }
 
 export async function updateUser(id: string, user: UpdateUser): Promise<User> {
-  const response = await fetch(`${API_URL}/users/${id}`, {
+  return apiFetcher<User>(`/users/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
   });
-  if (!response.ok) {
-    throw new Error("Failed to update post");
-  }
-  return response.json();
 }
 
 export async function getUserPosts(userId: string): Promise<Post[]> {
-  const response = await fetch(`${API_URL}/users/${userId}/posts`);
-  if (!response.ok) {
-    throw new Error("Failed to fetch user posts");
-  }
-  return response.json();
+  return apiFetcher<Post[]>(`/users/${userId}/posts`);
 }
 
 export async function getUserComments(userId: string): Promise<Comment[]> {
-  const response = await fetch(`${API_URL}/users/${userId}/comments`);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch user comments");
-  }
-
-  return response.json();
+  return apiFetcher<Comment[]>(`/users/${userId}/comments`);
 }
