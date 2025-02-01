@@ -1,6 +1,5 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -22,11 +21,8 @@ import { Textarea } from "@repo/ui/components/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-// Types
-import type { UpdatePost } from "../lib/definitions";
-
-// Services
-import { updatePost } from "../services/posts-service";
+// Hooks
+import { useUpdatePost } from "../queries/post-queries";
 
 // Schemas
 import { EditPostSchema } from "../lib/schemas";
@@ -39,7 +35,7 @@ export function EditPostForm({
   post: { id: string; title: string; content: string; published: boolean };
 }) {
   const router = useRouter();
-  const queryClient = useQueryClient();
+  const updatePostMutation = useUpdatePost();
 
   const form = useForm<FormData>({
     resolver: zodResolver(EditPostSchema),
@@ -49,25 +45,11 @@ export function EditPostForm({
     },
   });
 
-  const updatePostMutation = useMutation({
-    mutationFn: (updatedPostData: UpdatePost) =>
-      updatePost(post.id, updatedPostData),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-      router.push("/hub");
-    },
-    onError: (error) => {
-      console.error("Failed to update post", error);
-    },
-  });
-
   const onSubmit = (data: FormData) => {
-    const updatedPostData: UpdatePost = {
-      ...data,
-      published: true,
-    };
-
-    updatePostMutation.mutate(updatedPostData);
+    updatePostMutation.mutate({
+      id: post.id,
+      post: { ...data, published: true },
+    });
   };
 
   return (

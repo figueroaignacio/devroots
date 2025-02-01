@@ -1,7 +1,7 @@
 "use client";
 
 // Hooks
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useDeletePost, usePosts } from "../queries/post-queries";
 
 // Components
 import { FeedPost } from "./feed-post";
@@ -10,27 +10,9 @@ import { FeedPostSkeleton } from "./feed-post-skeleton";
 // Types
 import type { Post } from "../lib/definitions";
 
-// Services
-import { deletePost, getPosts } from "../services/posts-service";
-
 export function Feed() {
-  const queryClient = useQueryClient();
-
-  const {
-    data: posts,
-    isLoading,
-    error,
-  } = useQuery<Post[], Error>({
-    queryKey: ["posts"],
-    queryFn: getPosts,
-  });
-
-  const deleteMutation = useMutation({
-    mutationFn: deletePost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
-  });
+  const { data: posts, isLoading, error } = usePosts();
+  const deleteMutation = useDeletePost();
 
   const handleDelete = async (post: Post) => {
     try {
@@ -59,15 +41,14 @@ export function Feed() {
   return (
     <div>
       <ul className="space-y-6">
-        {posts && posts.length === 0 ? (
-          <li>No posts available.</li>
-        ) : (
-          posts &&
+        {posts && posts.length > 0 ? (
           posts.map((post) => (
             <li key={post.id}>
               <FeedPost post={post} onDelete={() => handleDelete(post)} />
             </li>
           ))
+        ) : (
+          <li>No posts available.</li>
         )}
       </ul>
     </div>
