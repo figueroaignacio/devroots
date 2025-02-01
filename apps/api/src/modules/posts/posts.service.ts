@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { generateSlug } from 'src/lib/utils';
-import { PrismaService } from '../prisma/prisma.service';
+import { DatabaseService } from '../../database/database.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostsService {
-  constructor(private readonly db: PrismaService) {}
+  constructor(private readonly db: DatabaseService) {}
 
   async createPost(createPostDto: CreatePostDto) {
     const slug = generateSlug(createPostDto.title);

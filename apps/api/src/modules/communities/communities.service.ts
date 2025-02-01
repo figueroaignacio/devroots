@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { DatabaseService } from 'src/database/database.service';
 import { generateSlug } from 'src/lib/utils';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCommunityDto } from './dto/create-community.dto';
 import { UpdateCommunityDto } from './dto/update-community.dto';
 
 @Injectable()
 export class CommunitiesService {
-  constructor(private readonly db: PrismaService) {}
+  constructor(private readonly db: DatabaseService) {}
 
   async createCommunity(createCommunityDto: CreateCommunityDto) {
     const { name, description, ownerId } = createCommunityDto;

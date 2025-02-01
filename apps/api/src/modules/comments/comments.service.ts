@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class CommentsService {
-  constructor(private readonly db: PrismaService) {}
+  constructor(private readonly db: DatabaseService) {}
 
   async createComment(
     postId: string,

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { CommentsModule } from './comments/comments.module';
-import { CommunitiesModule } from './communities/communities.module';
-import { PostsModule } from './posts/posts.module';
-import { PrismaModule } from './prisma/prisma.module';
-import { UsersModule } from './users/users.module';
+import { DatabaseModule } from './database/database.module';
+import { CommentsModule } from './modules/comments/comments.module';
+import { CommunitiesModule } from './modules/communities/communities.module';
+import { PostsModule } from './modules/posts/posts.module';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -12,7 +12,7 @@ import { UsersModule } from './users/users.module';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    PrismaModule,
+    DatabaseModule,
     UsersModule,
     PostsModule,
     CommentsModule,
