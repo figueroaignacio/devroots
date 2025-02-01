@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function apiFetcher<T>(
+export async function httpClient<T>(
   endpoint: string,
   options?: RequestInit
 ): Promise<T> {

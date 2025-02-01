@@ -1,7 +1,7 @@
-import { apiFetcher } from "@/lib/utils";
+import { httpClient } from "@/lib/utils";
 
 export const getComments = async (postId: string) => {
-  return apiFetcher(`/comments/${postId}`);
+  return httpClient(`/comments/${postId}`);
 };
 
 export const createComment = async (
@@ -9,7 +9,7 @@ export const createComment = async (
   content: string,
   authorId: string
 ) => {
-  return apiFetcher(`/comments/${postId}`, {
+  return httpClient(`/comments/${postId}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ content, authorId }),
@@ -17,7 +17,7 @@ export const createComment = async (
 };
 
 export const deleteComment = async (id: string): Promise<void> => {
-  await apiFetcher(`/comments/${id}`, {
+  await httpClient(`/comments/${id}`, {
     method: "DELETE",
   });
 };

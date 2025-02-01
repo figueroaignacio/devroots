@@ -1,10 +1,10 @@
-import { apiFetcher } from "@/lib/utils";
+import { httpClient } from "@/lib/utils";
 import { Community } from "../lib/definitions";
 
 export async function getAllCommunities() {
-  return apiFetcher<Community[]>("/communities");
+  return httpClient<Community[]>("/communities");
 }
 
 export async function getCommunityBySlug(slug: string) {
-  return apiFetcher<Community>(`/communities/slug/${slug}`);
+  return httpClient<Community>(`/communities/slug/${slug}`);
 }
