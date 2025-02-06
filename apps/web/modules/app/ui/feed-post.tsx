@@ -1,10 +1,5 @@
 "use client";
 
-// Hooks
-import { useSession } from "next-auth/react";
-import { useState } from "react";
-
-// Components
 import { Link } from "@/config/i18n/routing";
 import {
   Avatar,
@@ -26,8 +21,8 @@ import {
   TooltipTrigger,
 } from "@repo/ui/components/tooltip";
 import { Heart, MessageCircle, Pencil, Trash2 } from "lucide-react";
-
-// Utils & Definitions
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 import type { Post } from "../lib/definitions";
 import { formatDateDistance } from "../lib/utils";
 
@@ -40,7 +35,6 @@ interface FeedPostProps {
 export function FeedPost({ post, onDelete }: FeedPostProps) {
   const { data: session } = useSession();
   const currentUserId = session?.user?.id;
-
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const handleDelete = () => {
@@ -51,7 +45,7 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
   };
 
   return (
-    <div className="bg-card rounded-lg p-6 flex flex-col gap-4 border">
+    <div className="p-6 flex flex-col gap-4 border-b dark:hover:bg-gray-600 hover:dark:bg-opacity-30 hover:bg-[#dde3ea] transition-all duration-200">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-3">
           <Avatar>
@@ -76,7 +70,9 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
           </div>
         </div>
       </div>
-      <h3>{post.title}</h3>
+      <Link href={`/post/${post.slug}`}>
+        <h3>{post.title}</h3>
+      </Link>
       <div className="flex gap-x-3 mt-4">
         <TooltipProvider>
           <Tooltip>
@@ -91,11 +87,11 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link href={`/post/${post.slug}`}>
-                <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" asChild>
+                <Link href={`/post/${post.slug}`}>
                   <MessageCircle size={20} />
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </TooltipTrigger>
             <TooltipContent>
               <p>Comments</p>
@@ -105,11 +101,11 @@ export function FeedPost({ post, onDelete }: FeedPostProps) {
             <>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href={`/post/edit/${post.id}`}>
-                    <Button variant="ghost" size="icon">
+                  <Button variant="ghost" size="icon" asChild>
+                    <Link href={`/post/edit/${post.id}`}>
                       <Pencil size={20} />
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Edit</p>

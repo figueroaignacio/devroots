@@ -2,7 +2,7 @@ import { Skeleton } from "@repo/ui/components/skeleton";
 
 export function FeedPostSkeleton() {
   return (
-    <div className="bg-card rounded-lg p-6 flex flex-col gap-4 border">
+    <div className="p-4 flex flex-col gap-4 border-b">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-x-3">
           <Skeleton className="h-10 w-10 rounded-full" />

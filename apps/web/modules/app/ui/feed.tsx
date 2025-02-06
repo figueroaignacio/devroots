@@ -39,18 +39,16 @@ export function Feed() {
   }
 
   return (
-    <div>
-      <ul className="space-y-6">
-        {posts && posts.length > 0 ? (
-          posts.map((post) => (
-            <li key={post.id}>
-              <FeedPost post={post} onDelete={() => handleDelete(post)} />
-            </li>
-          ))
-        ) : (
-          <li>No posts available.</li>
-        )}
-      </ul>
-    </div>
+    <ul>
+      {posts && posts.length > 0 ? (
+        posts.map((post) => (
+          <li key={post.id}>
+            <FeedPost post={post} onDelete={() => handleDelete(post)} />
+          </li>
+        ))
+      ) : (
+        <li>No posts available.</li>
+      )}
+    </ul>
   );
 }
