@@ -1,5 +1,10 @@
 "use client";
 
+// Hooks
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+
+// Components
 import { Link } from "@/config/i18n/routing";
 import {
   Avatar,
@@ -21,9 +26,11 @@ import {
   TooltipTrigger,
 } from "@repo/ui/components/tooltip";
 import { Heart, MessageCircle, Pencil, Trash2 } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
+
+// Definitions
 import type { Post } from "../lib/definitions";
+
+// Utils
 import { formatDateDistance } from "../lib/utils";
 
 interface FeedPostProps {
