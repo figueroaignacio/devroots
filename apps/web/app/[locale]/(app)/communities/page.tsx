@@ -9,13 +9,9 @@ export default async function CommunitiesPage() {
         <div key={community.id} className="rounded-lg overflow-hidden border">
           <div className="p-6">
             <div className="flex justify-between items-start">
-              <h2 className="text-xl font-semibold text-gray-900">
-                {community.name}
-              </h2>
+              <h2 className="text-xl font-semibold">{community.name}</h2>
             </div>
-            <p className="text-gray-700 text-sm mt-2">
-              {community.description}
-            </p>
+            <p className="text-sm mt-2">{community.description}</p>
             <div className="mt-4">
               <a
                 href={`/communities/${community.slug}`}

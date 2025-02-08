@@ -47,4 +47,21 @@ export class CommunitiesController {
   removeCommunity(@Param('id') id: string) {
     return this.communitiesService.removeCommunity(id);
   }
+
+  @Post('join')
+  async joinCommunity(@Body() body: { userId: string; communityId: string }) {
+    return this.communitiesService.joinCommunity(body.userId, body.communityId);
+  }
+
+  @Post(':communityId/check-membership')
+  async checkMembership(
+    @Param('communityId') communityId: string,
+    @Body('userId') userId: string,
+  ) {
+    const isMember = await this.communitiesService.checkMembership(
+      userId,
+      communityId,
+    );
+    return { isMember };
+  }
 }

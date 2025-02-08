@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { DatabaseService } from 'src/database/database.service';
 import { generateSlug } from 'src/lib/utils';
 import { CreateCommunityDto } from './dto/create-community.dto';
@@ -63,5 +67,51 @@ export class CommunitiesService {
     });
 
     return { message: `Community with ID ${id} has been deleted` };
+  }
+
+  async joinCommunity(userId: string, communityId: string) {
+    const community = await this.db.community.findUnique({
+      where: { id: communityId },
+    });
+
+    if (!community) {
+      throw new NotFoundException(`Community with ID ${communityId} not found`);
+    }
+
+    const existingMember = await this.db.communityMember.findUnique({
+      where: { userId_communityId: { userId, communityId } },
+    });
+
+    if (existingMember) {
+      throw new ConflictException('User is already a member of this community');
+    }
+
+    return await this.db.communityMember.create({
+      data: {
+        userId,
+        communityId,
+      },
+    });
+  }
+
+  async checkMembership(userId: string, communityId: string): Promise<boolean> {
+    const community = await this.db.community.findUnique({
+      where: { id: communityId },
+    });
+
+    if (!community) {
+      throw new NotFoundException(`Community with ID ${communityId} not found`);
+    }
+
+    const member = await this.db.communityMember.findUnique({
+      where: {
+        userId_communityId: {
+          userId,
+          communityId,
+        },
+      },
+    });
+
+    return !!member;
   }
 }
