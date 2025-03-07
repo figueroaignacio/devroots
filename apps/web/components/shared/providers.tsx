@@ -1,6 +1,5 @@
 "use client";
 
-import { SidebarProvider } from "@repo/ui/components/sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
 import { useState } from "react";
@@ -16,9 +15,7 @@ export function Providers({
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SessionProvider session={session}>
-        <SidebarProvider>{children}</SidebarProvider>
-      </SessionProvider>
+      <SessionProvider session={session}>{children}</SessionProvider>
     </QueryClientProvider>
   );
 }

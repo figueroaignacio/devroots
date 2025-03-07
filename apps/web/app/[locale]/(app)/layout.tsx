@@ -2,6 +2,7 @@
 import { Providers } from "@/components/shared/providers";
 import { AppHeader } from "@/modules/app/ui/app-header";
 import { AppSidebar } from "@/modules/app/ui/app-sidebar";
+import { MobileNav } from "@/modules/app/ui/mobile-nav";
 
 // Styles
 import "@/styles/globals.css";
@@ -33,10 +34,14 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
 
   return (
     <Providers session={session}>
-      <AppSidebar />
-      <div className="w-full">
-        <AppHeader />
-        <main className="relative">{children}</main>
+      <AppHeader />
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 max-w-7xl mx-auto">
+        <div className="lg:col-span-3">
+          <AppSidebar />
+        </div>
+        <main className="relative lg:col-span-6">{children}</main>
+        <div className="lg:col-span-4"></div>
+        <MobileNav />
       </div>
     </Providers>
   );

@@ -1,21 +1,12 @@
 "use client";
 
 // Hooks
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 
 // Components
 import { Link } from "@/config/i18n/routing";
-import {
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuItem,
-} from "@repo/ui/components/sidebar";
-
-// Icons
 import {
   BugPlay,
   Home,
@@ -26,6 +17,9 @@ import {
   User,
   UsersRound,
 } from "lucide-react";
+
+// Utils
+import { cn } from "@/lib/utils";
 
 const iconMap = {
   Home,
@@ -43,10 +37,15 @@ interface Sidebar {
   items: { href: string; icon: keyof typeof iconMap; title: string }[];
 }
 
-export function AppSidebarLinks() {
+interface AppSidebarLinksProps {
+  closeMenu?: () => void;
+}
+
+export function AppSidebarLinks({ closeMenu }: AppSidebarLinksProps) {
   const t = useTranslations();
   const pathname = usePathname();
   const currentLocale = useLocale();
+  const isMobile = useIsMobile();
   const sidebarNavigation = t.raw("sidebarNavigation") as Sidebar[];
 
   const isActive = (href: string) => {
@@ -55,35 +54,45 @@ export function AppSidebarLinks() {
   };
 
   return (
-    <SidebarContent>
+    <nav className="flex-1 space-y-1 overflow-y-auto">
       {sidebarNavigation.map((group) => (
-        <SidebarGroup key={group.groupLabel}>
-          <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu className="space-y-1">
-              {group.items.map((item) => {
-                const Icon = iconMap[item.icon];
-                const active = isActive(item.href);
-                return (
-                  <SidebarMenuItem key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`flex items-center py-2 px-3 rounded-md transition-colors dark:hover:bg-gray-600 dark:hover:bg-opacity-30 hover:bg-[#dde3ea] ${
-                        active
-                          ? "dark:bg-gray-600 dark:bg-opacity-30 bg-[#dde3ea]"
-                          : ""
-                      }`}
-                    >
-                      <Icon className="mr-3 h-5 w-5" />
+        <div key={group.groupLabel} className="mb-6">
+          <h2 className="mb-2 px-4 text-sm font-medium text-muted-foreground">
+            {group.groupLabel}
+          </h2>
+          <ul className="space-y-1">
+            {group.items.map((item) => {
+              const Icon = iconMap[item.icon];
+              const active = isActive(item.href);
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "flex items-center rounded-full px-4 py-3 text-base font-medium transition-colors hover:bg-accent",
+                      active ? "font-bold" : ""
+                    )}
+                    onClick={() => isMobile && closeMenu?.()}
+                  >
+                    <Icon
+                      className={cn(
+                        "mr-4 h-6 w-6",
+                        active ? "text-primary" : ""
+                      )}
+                    />
+                    <span className={isMobile ? "inline" : "hidden md:inline"}>
                       {item.title}
-                    </Link>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+                    </span>
+                    {active && !isMobile && (
+                      <div className="absolute left-0 h-12 w-1 rounded-r-full bg-primary md:hidden" />
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       ))}
-    </SidebarContent>
+    </nav>
   );
 }

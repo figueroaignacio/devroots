@@ -1,3 +1,10 @@
+"use client";
+
+// Hooks
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+
 // Components
 import { Link } from "@/config/i18n/routing";
 import { SignOutButton } from "@/modules/auth/ui/signout-button";
@@ -6,75 +13,91 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@repo/ui/components/avatar";
-import { Button } from "@repo/ui/components/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@repo/ui/components/dropdown-menu";
-import { SidebarFooter } from "@repo/ui/components/sidebar";
-
-// Icons
-import { MoreVertical, Pen, Settings, User } from "lucide-react";
+import { MoreHorizontal, Settings, User } from "lucide-react";
 
 // Utils
-import { auth } from "@/modules/auth/lib/auth";
+import { cn } from "@/lib/utils";
 import { getInitials } from "../lib/utils";
 
-export async function AppSidebarFooter() {
-  const session = await auth();
+interface AppSidebarFooterProps {
+  closeMenu?: () => void;
+}
+
+export function AppSidebarFooter({ closeMenu }: AppSidebarFooterProps) {
+  const { data: session } = useSession();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
+
+  if (!session?.user) return null;
 
   return (
-    <SidebarFooter className="p-4">
-      <Button className="mb-5">
-        <Link href="/post/create" className="flex items-center gap-x-3">
-          <span>Post</span>
-          <Pen className="size-4" />
-        </Link>
-      </Button>
-      <DropdownMenu>
-        <div className="flex items-center justify-between w-full">
-          <div className="flex items-center space-x-3">
-            <Avatar className="h-9 w-9">
-              <AvatarImage
-                src={session?.user?.image ?? undefined}
-                alt={session?.user?.name ?? "User avatar"}
-              />
-              <AvatarFallback>
-                {getInitials(session?.user?.name ?? "User")}
-              </AvatarFallback>
-            </Avatar>
-            <div className="text-left">
-              <p className="text-sm font-medium">{session?.user?.username}</p>
-            </div>
+    <div className="relative">
+      <button
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="flex w-full items-center justify-between rounded-full p-3 transition-colors hover:bg-accent"
+      >
+        <div className="flex items-center">
+          <Avatar className="h-10 w-10 mr-3">
+            <AvatarImage
+              src={session.user.image ?? undefined}
+              alt={session.user.name ?? "User avatar"}
+            />
+            <AvatarFallback>
+              {getInitials(session.user.name ?? "User")}
+            </AvatarFallback>
+          </Avatar>
+          <div className={isMobile ? "block" : "hidden md:block"}>
+            <p className="text-sm font-medium">{session.user.username}</p>
+            <p className="text-xs text-muted-foreground">
+              @{session.user.username}
+            </p>
           </div>
-          <Button variant="ghost" size="icon" asChild>
-            <DropdownMenuTrigger className="focus:outline-none">
-              <MoreVertical className="h-5 w-5 text-muted-foreground hover:text-foreground transition-colors" />
-            </DropdownMenuTrigger>
-          </Button>
         </div>
-        <DropdownMenuContent align="end" className="w-56">
-          <Link href={`/profile/${session?.user?.username}`}>
-            <DropdownMenuItem className="cursor-pointer">
+        <MoreHorizontal
+          className={cn(
+            "h-5 w-5 text-muted-foreground",
+            isMobile ? "block" : "hidden md:block"
+          )}
+        />
+      </button>
+
+      {isMenuOpen && (
+        <div className="absolute bottom-full left-0 mb-2 w-full rounded-lg border border-border bg-background shadow-lg">
+          <div className="p-2">
+            <Link
+              href={`/profile/${session.user.username}`}
+              className="flex items-center rounded-md px-3 py-2 text-sm hover:bg-accent"
+              onClick={() => {
+                setIsMenuOpen(false);
+                isMobile && closeMenu?.();
+              }}
+            >
               <User className="mr-2 h-4 w-4" />
               Profile
-            </DropdownMenuItem>
-          </Link>
-          <Link href="/settings">
-            <DropdownMenuItem className="cursor-pointer">
+            </Link>
+            <Link
+              href="/settings"
+              className="flex items-center rounded-md px-3 py-2 text-sm hover:bg-accent"
+              onClick={() => {
+                setIsMenuOpen(false);
+                isMobile && closeMenu?.();
+              }}
+            >
               <Settings className="mr-2 h-4 w-4" />
               Settings
-            </DropdownMenuItem>
-          </Link>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <SignOutButton />
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </SidebarFooter>
+            </Link>
+            <div
+              className="flex items-center rounded-md px-3 py-2 text-sm hover:bg-accent"
+              onClick={() => {
+                setIsMenuOpen(false);
+                isMobile && closeMenu?.();
+              }}
+            >
+              <SignOutButton />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

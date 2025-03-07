@@ -1,21 +1,51 @@
 // Components
 import { Link } from "@/config/i18n/routing";
-import { Sidebar, SidebarHeader } from "@repo/ui/components/sidebar";
 import { AppSidebarFooter } from "./app-sidebar-footer";
 import { AppSidebarLinks } from "./app-sidebar-links";
 
+// Icons
+import {
+  BugPlay,
+  Home,
+  Lightbulb,
+  Mail,
+  Pen,
+  Rss,
+  Settings,
+  User,
+  UsersRound,
+} from "lucide-react";
+
+const iconMap = {
+  Home,
+  Lightbulb,
+  Rss,
+  User,
+  Settings,
+  BugPlay,
+  Mail,
+  UsersRound,
+};
+
 export function AppSidebar() {
   return (
-    <Sidebar collapsible="offcanvas" className="pl-20">
-      <SidebarHeader className="px-2 py-3">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="font-bold text-xl px-2">devs.</span>
-          </Link>
-        </div>
-      </SidebarHeader>
+    <div className="hidden lg:flex h-screen flex-col justify-between border-r border-border p-2 md:p-4">
+      <div className="mb-6">
+        <Link href="/" className="flex items-center px-2 py-3">
+          <span className="text-xl font-bold">devs.</span>
+        </Link>
+      </div>
       <AppSidebarLinks />
+      <div className="mb-6 px-2">
+        <Link
+          href="/post/create"
+          className="flex w-full items-center justify-center rounded-full bg-primary p-3 font-medium text-primary-foreground transition-colors hover:bg-primary/90 md:p-4"
+        >
+          <Pen className="h-5 w-5 md:mr-2" />
+          <span className="hidden md:inline">Post</span>
+        </Link>
+      </div>
       <AppSidebarFooter />
-    </Sidebar>
+    </div>
   );
 }
