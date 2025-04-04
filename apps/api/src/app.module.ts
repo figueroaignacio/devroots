@@ -1,10 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
-import { CommentsModule } from './modules/comments/comments.module';
-import { CommunitiesModule } from './modules/communities/communities.module';
-import { PostsModule } from './modules/posts/posts.module';
-import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -13,10 +9,6 @@ import { UsersModule } from './modules/users/users.module';
       isGlobal: true,
     }),
     DatabaseModule,
-    UsersModule,
-    PostsModule,
-    CommentsModule,
-    CommunitiesModule,
   ],
   controllers: [],
   providers: [],

@@ -1,7 +1,3 @@
-// Components
-import { Footer } from "@/modules/landing/ui/footer";
-import { Header } from "@/modules/landing/ui/header";
-
 // Styles
 import "@/styles/globals.css";
 
@@ -24,9 +20,7 @@ export default async function LandingLayout({ children, params }: LayoutProps) {
 
   return (
     <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto] overflow-x-hidden">
-      <Header />
       <main>{children}</main>
-      <Footer />
     </div>
   );
 }

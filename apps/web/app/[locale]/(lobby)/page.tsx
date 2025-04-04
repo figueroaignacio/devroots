@@ -1,6 +1,3 @@
-// Sections
-import { Hero } from "@/modules/landing/sections/hero";
-
 // Utils
 import { setRequestLocale } from "next-intl/server";
 
@@ -16,8 +13,12 @@ export default async function LandingPage({ params }: HomePageProps) {
 
   return (
     <main className="page-container py-12 space-y-16">
-      <Hero />
-      {/* <Spotlights /> */}
+      <section className="grid place-items-center min-h-[80dvh]">
+        <h1 className="text-4xl">Landing page</h1>
+      </section>
+      <section className="grid place-items-center min-h-[80dvh]">
+        <h1 className="text-4xl">Welcome to the landing page!</h1>
+      </section>
     </main>
   );
 }
