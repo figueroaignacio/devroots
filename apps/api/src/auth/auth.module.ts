@@ -10,9 +10,9 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
-    UserModule, // Importa el módulo que contiene UserService
+    UserModule,
     PassportModule,
-    ConfigModule, // Asegúrate de importar ConfigModule
+    ConfigModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -24,6 +24,6 @@ import { JwtStrategy } from './strategies/jwt.strategy';
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, JwtRefreshStrategy],
-  exports: [AuthService, JwtModule], // Exporta JwtModule si es necesario
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
