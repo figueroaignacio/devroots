@@ -23,7 +23,7 @@ import {
   FormMessage,
 } from "@workspace/ui/components/form";
 import { Input } from "@workspace/ui/components/input";
-import { Link } from "lucide-react";
+import Link from "next/link";
 import { OAuthProviders } from "./oauth-providers";
 
 // Utils
