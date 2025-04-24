@@ -168,7 +168,7 @@ export function RegisterForm({
                   href="/auth/login"
                   className="underline underline-offset-4"
                 >
-                  Sign up
+                  Login
                 </Link>
               </div>
             </form>
