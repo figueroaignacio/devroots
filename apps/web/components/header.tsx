@@ -17,7 +17,7 @@ const actions = [
 
 export function Header() {
   return (
-    <header className="border-b py-3">
+    <header className="border-b p-3">
       <div className="max-w-6xl mx-auto flex justify-between">
         <Link href="/" className="font-bold text-2xl">
           N3O
