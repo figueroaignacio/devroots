@@ -1,7 +1,8 @@
 "use client";
 
 // Hooks
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 
 // Components
@@ -40,7 +41,8 @@ export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
@@ -49,11 +51,35 @@ export function RegisterForm({
       lastName: "",
       email: "",
       password: "",
-      confirmPassword: "",
     },
   });
 
-  async function onSubmit(values: RegisterFormSchema) {}
+  async function onSubmit(values: RegisterFormSchema) {
+    startTransition(async () => {
+      try {
+        const res = await fetch("http://localhost:4000/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+          credentials: "include",
+        });
+
+        if (!res.ok) {
+          throw new Error(`Failed to register user: ${res.status}`);
+        }
+
+        router.push("/auth/login");
+      } catch (error) {
+        console.error("Error registering user:", error);
+        form.setError("root", {
+          type: "server",
+          message: "Something went wrong. Please try again.",
+        });
+      }
+    });
+  }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -131,20 +157,6 @@ export function RegisterForm({
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="confirmPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
               {form.formState.errors.root && (
                 <div className="text-sm text-red-500 font-medium">
                   {form.formState.errors.root.message}
@@ -152,12 +164,8 @@ export function RegisterForm({
               )}
 
               <div className="flex flex-col gap-3">
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Registering..." : "Register"}
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  {isPending ? "Registering..." : "Register"}
                 </Button>
                 <OAuthProviders />
               </div>

@@ -28,7 +28,7 @@ export class AuthController {
   async register(@Body() registerDto: RegisterDto, @Res() res: Response) {
     const tokens = await this.authService.register(registerDto);
     this.setCookies(res, tokens);
-    res.status(HttpStatus.CREATED).send();
+    res.status(HttpStatus.CREATED).json({ message: 'User registered' });
   }
 
   @Public()
@@ -36,7 +36,7 @@ export class AuthController {
   async login(@Body() loginDto: LoginDto, @Res() res: Response) {
     const tokens = await this.authService.login(loginDto);
     this.setCookies(res, tokens);
-    res.status(HttpStatus.OK).send();
+    res.status(HttpStatus.OK).json({ message: 'Login successful' });
   }
 
   @Post('logout')
@@ -44,7 +44,7 @@ export class AuthController {
   async logout(@CurrentUser() user: UserResponseDto, @Res() res: Response) {
     await this.authService.logout(user.id);
     this.clearCookies(res);
-    res.status(HttpStatus.OK).send();
+    res.status(HttpStatus.OK).json({ message: 'Logout successful' });
   }
 
   @Public()
@@ -55,7 +55,7 @@ export class AuthController {
     const refreshToken = req.user['refreshToken'];
     const tokens = await this.authService.refresh(userId, { refreshToken });
     this.setCookies(res, tokens);
-    res.status(HttpStatus.OK).send();
+    res.status(HttpStatus.OK).json({ message: 'Tokens refreshed' });
   }
 
   @Get('me')
@@ -65,17 +65,19 @@ export class AuthController {
   }
 
   private setCookies(res: Response, tokens: TokensDto) {
+    const isProduction = process.env.NODE_ENV === 'production';
+
     res.cookie('access_token', tokens.accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: isProduction,
+      sameSite: isProduction ? 'strict' : 'lax',
       maxAge: 15 * 60 * 1000,
     });
 
     res.cookie('refresh_token', tokens.refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
+      secure: isProduction,
+      sameSite: isProduction ? 'strict' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
   }

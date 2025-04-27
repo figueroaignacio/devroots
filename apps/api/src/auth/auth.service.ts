@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { validatePassword } from 'src/utils/hash.util';
@@ -29,12 +34,27 @@ export class AuthService {
   }
 
   async register(registerDto: RegisterDto): Promise<TokensDto> {
-    const user = await this.userService.create(registerDto);
-    const tokens = await this.generateTokens(user);
-    await this.userService.updateRefreshToken(user.id, {
-      refreshToken: tokens.refreshToken,
-    });
-    return tokens;
+    try {
+      const existingUser = await this.userService.findByEmail(
+        registerDto.email,
+      );
+      if (existingUser) {
+        throw new ConflictException('Email already exists');
+      }
+
+      const user = await this.userService.create(registerDto);
+      const tokens = await this.generateTokens(user);
+      await this.userService.updateRefreshToken(user.id, {
+        refreshToken: tokens.refreshToken,
+      });
+      return tokens;
+    } catch (error) {
+      console.error('Error in register service:', error);
+      if (error instanceof ConflictException) {
+        throw error;
+      }
+      throw new InternalServerErrorException('Error registering user');
+    }
   }
 
   async login(loginDto: LoginDto): Promise<TokensDto> {
