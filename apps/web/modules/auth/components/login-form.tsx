@@ -1,7 +1,8 @@
 "use client";
 
 // Hooks
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 
 // Components
@@ -36,8 +37,8 @@ import {
 } from "@/modules/auth/schemas/login-schema";
 
 export function LoginForm() {
-  const [serverError, setServerError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const form = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
@@ -47,7 +48,37 @@ export function LoginForm() {
     },
   });
 
-  async function onSubmit(values: LoginFormSchema) {}
+  async function onSubmit(values: LoginFormSchema) {
+    try {
+      const res = await fetch("http://localhost:4000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        startTransition(() => {
+          router.push("/dashboard");
+        });
+      } else {
+        const errorData = await res.json();
+        console.error("Login failed:", errorData.message || "Unknown error");
+        form.setError("root", {
+          type: "server",
+          message: errorData.message || "Login failed, please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      form.setError("root", {
+        type: "server",
+        message: "An error occurred during login. Please try again later.",
+      });
+    }
+  }
 
   return (
     <div className={cn("flex flex-col gap-6")}>
@@ -101,19 +132,9 @@ export function LoginForm() {
                 )}
               />
 
-              {serverError && (
-                <div className="text-sm font-medium text-destructive">
-                  {serverError}
-                </div>
-              )}
-
               <div className="flex flex-col gap-3">
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Logging in..." : "Login"}
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  {isPending ? "Logging in..." : "Login"}
                 </Button>
                 <OAuthProviders />
               </div>
