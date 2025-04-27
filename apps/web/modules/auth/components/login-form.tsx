@@ -6,6 +6,7 @@ import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 
 // Components
+import { Loader } from "@/components/loader";
 import { Button } from "@workspace/ui/components/button";
 import {
   Card,
@@ -49,35 +50,35 @@ export function LoginForm() {
   });
 
   async function onSubmit(values: LoginFormSchema) {
-    try {
-      const res = await fetch("http://localhost:4000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-        credentials: "include",
-      });
-
-      if (res.ok) {
-        startTransition(() => {
-          router.push("/dashboard");
+    startTransition(async () => {
+      try {
+        const res = await fetch("http://localhost:4000/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+          credentials: "include",
         });
-      } else {
-        const errorData = await res.json();
-        console.error("Login failed:", errorData.message || "Unknown error");
+
+        if (res.ok) {
+          router.push("/dashboard");
+        } else {
+          const errorData = await res.json();
+          console.error("Login failed:", errorData.message || "Unknown error");
+          form.setError("root", {
+            type: "server",
+            message: errorData.message || "Login failed, please try again.",
+          });
+        }
+      } catch (error) {
+        console.error("Login failed:", error);
         form.setError("root", {
           type: "server",
-          message: errorData.message || "Login failed, please try again.",
+          message: "An error occurred during login. Please try again later.",
         });
       }
-    } catch (error) {
-      console.error("Login failed:", error);
-      form.setError("root", {
-        type: "server",
-        message: "An error occurred during login. Please try again later.",
-      });
-    }
+    });
   }
 
   return (
@@ -134,7 +135,7 @@ export function LoginForm() {
 
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full" disabled={isPending}>
-                  {isPending ? "Logging in..." : "Login"}
+                  {isPending ? <Loader /> : "Log in"}
                 </Button>
                 <OAuthProviders />
               </div>

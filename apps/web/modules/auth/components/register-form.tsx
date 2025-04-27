@@ -6,6 +6,7 @@ import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 
 // Components
+import { Loader } from "@/components/loader";
 import { Button } from "@workspace/ui/components/button";
 import {
   Card,
@@ -165,7 +166,7 @@ export function RegisterForm({
 
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full" disabled={isPending}>
-                  {isPending ? "Registering..." : "Register"}
+                  {isPending ? <Loader /> : "Register"}
                 </Button>
                 <OAuthProviders />
               </div>
