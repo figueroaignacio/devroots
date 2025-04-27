@@ -118,12 +118,12 @@ export function LoginForm() {
                   <FormItem>
                     <div className="flex items-center">
                       <FormLabel>Password</FormLabel>
-                      <a
+                      {/* <a
                         href="#"
                         className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                       >
                         Forgot your password?
-                      </a>
+                      </a> */}
                     </div>
                     <FormControl>
                       <Input type="password" {...field} />
@@ -142,12 +142,14 @@ export function LoginForm() {
 
               <div className="mt-4 text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <Link
-                  href="/auth/register"
-                  className="underline underline-offset-4"
-                >
-                  Sign up
-                </Link>
+                <Button asChild variant="link" className="p-0">
+                  <Link
+                    href="/auth/register"
+                    className="underline underline-offset-4"
+                  >
+                    Sign up
+                  </Link>
+                </Button>
               </div>
             </form>
           </Form>
