@@ -1,5 +1,5 @@
 // Components
-import { EnterIcon } from "@radix-ui/react-icons";
+import { EnterIcon, PlusCircledIcon } from "@radix-ui/react-icons";
 import { Button } from "@workspace/ui/components/button";
 import Link from "next/link";
 
@@ -8,6 +8,7 @@ const actions = [
     label: "Register",
     href: "/auth/register",
     variant: "outline" as const,
+    icon: PlusCircledIcon,
   },
   {
     label: "Log In",
