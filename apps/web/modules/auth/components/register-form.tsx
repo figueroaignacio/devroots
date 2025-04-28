@@ -4,6 +4,7 @@
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { useAuthStore } from "../store/auth-store";
 
 // Components
 import { Loader } from "@/components/loader";
@@ -44,6 +45,8 @@ export function RegisterForm({
 }: React.ComponentProps<"div">) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  4;
+  const { register } = useAuthStore();
 
   const form = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
@@ -58,19 +61,7 @@ export function RegisterForm({
   async function onSubmit(values: RegisterFormSchema) {
     startTransition(async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-          credentials: "include",
-        });
-
-        if (!res.ok) {
-          throw new Error(`Failed to register user: ${res.status}`);
-        }
-
+        await register(values);
         router.push("/auth/login");
       } catch (error) {
         console.error("Error registering user:", error);

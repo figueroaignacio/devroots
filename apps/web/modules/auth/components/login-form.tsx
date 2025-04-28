@@ -4,6 +4,7 @@
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { useAuthStore } from "../store/auth-store";
 
 // Components
 import { Loader } from "@/components/loader";
@@ -40,6 +41,7 @@ import {
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const { login } = useAuthStore();
 
   const form = useForm<LoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
@@ -52,31 +54,10 @@ export function LoginForm() {
   async function onSubmit(values: LoginFormSchema) {
     startTransition(async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-          credentials: "include",
-        });
-
-        if (res.ok) {
-          router.push("/dashboard");
-        } else {
-          const errorData = await res.json();
-          console.error("Login failed:", errorData.message || "Unknown error");
-          form.setError("root", {
-            type: "server",
-            message: errorData.message || "Login failed, please try again.",
-          });
-        }
-      } catch (error) {
-        console.error("Login failed:", error);
-        form.setError("root", {
-          type: "server",
-          message: "An error occurred during login. Please try again later.",
-        });
+        await login(values.email, values.password);
+        router.push("/dashboard");
+      } catch (error: any) {
+        form.setError("root", { type: "server", message: error.message });
       }
     });
   }
