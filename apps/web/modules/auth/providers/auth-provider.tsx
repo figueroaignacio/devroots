@@ -1,9 +1,12 @@
 "use client";
 
-import { Loader } from "@/components/loader";
+// Hooks
 import { useAuthStore } from "@/modules/auth/store/auth-store";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+
+// Components
+import { Loader } from "@/components/loader";
 
 type AuthProviderProps = {
   children: React.ReactNode;
