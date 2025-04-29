@@ -1,4 +1,5 @@
 // Components
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { LoginForm } from "@/modules/auth/components/login-form";
 import { CodeIcon, PersonIcon, RocketIcon } from "@radix-ui/react-icons";
@@ -81,6 +82,7 @@ export default function LandingPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 }
