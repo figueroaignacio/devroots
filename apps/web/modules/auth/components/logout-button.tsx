@@ -36,10 +36,10 @@ export default function LogoutButton() {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogTitle>Log out of your account?</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            You’ll be signed out from your current session. You can log in again
+            anytime.
           </DialogDescription>
         </DialogHeader>
         <div className="flex justify-end gap-3">
