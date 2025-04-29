@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@workspace/ui/components/form";
 import { Input } from "@workspace/ui/components/input";
+import { FormError } from "./form-error";
 import { FormWrapper } from "./form-wrapper";
 
 // Utils
@@ -90,6 +91,10 @@ export function LoginForm({ className }: { className?: string }) {
               </FormItem>
             )}
           />
+
+          {form.formState.errors.root && (
+            <FormError message={form.formState.errors.root?.message} />
+          )}
 
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? <Loader /> : "Log in"}

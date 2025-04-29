@@ -19,6 +19,7 @@ import {
   FormMessage,
 } from "@workspace/ui/components/form";
 import { Input } from "@workspace/ui/components/input";
+import { FormError } from "./form-error";
 import { FormWrapper } from "./form-wrapper";
 
 // Utils
@@ -131,9 +132,7 @@ export function RegisterForm({ className }: { className?: string }) {
           />
 
           {form.formState.errors.root && (
-            <div className="text-sm text-red-500 font-medium">
-              {form.formState.errors.root.message}
-            </div>
+            <FormError message={form.formState.errors.root?.message} />
           )}
 
           <Button type="submit" className="w-full" disabled={isPending}>
