@@ -8,11 +8,11 @@ import { useEffect } from "react";
 // Components
 import { Loader } from "@/components/loader";
 
-type AuthProviderProps = {
+type CheckAuthProps = {
   children: React.ReactNode;
 };
 
-export function AuthProvider({ children }: AuthProviderProps) {
+export function CheckAuth({ children }: CheckAuthProps) {
   const { user, getMe } = useAuthStore();
   const router = useRouter();
 
