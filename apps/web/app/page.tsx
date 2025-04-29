@@ -1,3 +1,4 @@
+// Components
 import { Header } from "@/components/header";
 import { LoginForm } from "@/modules/auth/components/login-form";
 import { CodeIcon, PersonIcon, RocketIcon } from "@radix-ui/react-icons";
