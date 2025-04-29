@@ -6,6 +6,15 @@ import { useAuthStore } from "../store/auth-store";
 
 // Components
 import { Button } from "@workspace/ui/components/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@workspace/ui/components/dialog";
 
 export default function LogoutButton() {
   const { logout } = useAuthStore();
@@ -21,8 +30,27 @@ export default function LogoutButton() {
   };
 
   return (
-    <Button onClick={handleLogout} variant="destructive">
-      Logout
-    </Button>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="destructive">Log out</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Are you absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex justify-end gap-3">
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
+          <Button variant="destructive" onClick={handleLogout}>
+            Log out
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
