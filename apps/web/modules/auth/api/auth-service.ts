@@ -8,7 +8,7 @@ export const register = (set: Set) => async (userData: RegisterFormSchema) => {
   set({ isLoading: true, error: null });
 
   try {
-    const response = await fetch(`${authEndpoints.register}/asfasd`, {
+    const response = await fetch(`${authEndpoints.register}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
