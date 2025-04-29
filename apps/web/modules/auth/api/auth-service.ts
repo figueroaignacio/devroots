@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
 import { RegisterFormSchema } from "../schemas/register-schema";
-import { authEndpoints } from "./endpoints";
+import { AUTH_ENDPOINTS } from "./endpoints";
 
 type Set = Parameters<StateCreator<any>>[0];
 
@@ -8,7 +8,7 @@ export const register = (set: Set) => async (userData: RegisterFormSchema) => {
   set({ isLoading: true, error: null });
 
   try {
-    const response = await fetch(`${authEndpoints.register}`, {
+    const response = await fetch(`${AUTH_ENDPOINTS.REGISTER}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export const login = (set: Set) => async (email: string, password: string) => {
   set({ isLoading: true, error: null });
 
   try {
-    const response = await fetch(`${authEndpoints.login}`, {
+    const response = await fetch(`${AUTH_ENDPOINTS.LOGIN}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export const getMe = (set: Set) => async () => {
   set({ isLoading: true, error: null });
 
   try {
-    const response = await fetch(`${authEndpoints.me}`, {
+    const response = await fetch(`${AUTH_ENDPOINTS.ME}`, {
       credentials: "include",
     });
 
@@ -81,7 +81,7 @@ export const getMe = (set: Set) => async () => {
 
 export const logout = (set: Set) => async () => {
   try {
-    await fetch(`${authEndpoints.logout}`, {
+    await fetch(`${AUTH_ENDPOINTS.LOGOUT}`, {
       method: "POST",
       credentials: "include",
     });
