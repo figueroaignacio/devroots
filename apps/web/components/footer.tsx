@@ -22,7 +22,7 @@ export function Footer() {
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-secondary hover:bg-secondary/80 text-foreground p-2 rounded-md transition-colors"
+                className="bg-secondary hover:bg-secondary/80 text-foreground p-2 rounded-xl transition-colors"
               >
                 <GitHubLogoIcon className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
@@ -31,7 +31,7 @@ export function Footer() {
                 href="https://discord.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-secondary hover:bg-secondary/80 text-foreground p-2 rounded-md transition-colors"
+                className="bg-secondary hover:bg-secondary/80 text-foreground p-2 rounded-xl transition-colors"
               >
                 <DiscordLogoIcon className="h-5 w-5" />
                 <span className="sr-only">Discord</span>
