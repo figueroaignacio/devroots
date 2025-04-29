@@ -47,7 +47,7 @@ export function LoginForm({ className }: { className?: string }) {
     startTransition(async () => {
       try {
         await login(values.email, values.password);
-        router.push("/dashboard");
+        router.push("/home");
       } catch (error: any) {
         form.setError("root", { type: "server", message: error.message });
       }
