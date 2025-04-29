@@ -10,7 +10,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold">N3O</h3>
+              <h3 className="text-lg font-semibold">I7A</h3>
               <ThemeToggle />
             </div>
             <p className="text-sm text-muted-foreground">

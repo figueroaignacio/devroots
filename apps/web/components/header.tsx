@@ -23,7 +23,7 @@ export function Header() {
     <header className="border-b p-3">
       <div className="container mx-auto flex justify-between">
         <Link href="/" className="font-bold text-2xl">
-          N3O
+          I7A
         </Link>
         <div className="space-x-5">
           {actions.map((action, index) => (
