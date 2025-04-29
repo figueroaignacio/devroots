@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import { LoginForm } from "@/modules/auth/components/login-form";
 import { CodeIcon, PersonIcon, RocketIcon } from "@radix-ui/react-icons";
+import { Button } from "@workspace/ui/components/button";
 
 export default function LandingPage() {
   return (
@@ -23,12 +24,12 @@ export default function LandingPage() {
                   and level up your skills together.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium px-6 py-3 rounded-lg transition-colors">
+                  <Button variant="default" size="lg">
                     Get Started
-                  </button>
-                  <button className="bg-secondary hover:bg-secondary/80 text-secondary-foreground font-medium px-6 py-3 rounded-lg transition-colors">
+                  </Button>
+                  <Button variant="outline" size="lg">
                     Explore Challenges
-                  </button>
+                  </Button>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
                   <div className="flex items-center gap-3">
