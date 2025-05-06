@@ -10,6 +10,11 @@ export default function LandingPage() {
       <Header />
       <main>
         <div className="min-h-screen bg-background text-foreground">
+          <div className="absolute inset-0 -z-10 overflow-hidden">
+            <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
+          </div>
+          <div className="absolute top-1/4 right-0 w-1/3 h-1/3 bg-primary/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 rounded-full blur-3xl"></div>
           <div className="container mx-auto px-4 py-12 md:py-24">
             <div className="grid grid-cols-1 gap-12 md:grid-cols-2 items-center">
               <div className="space-y-6">
