@@ -1,7 +1,6 @@
 // Components
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { LoginForm } from "@/modules/auth/components/login-form";
 import { CodeIcon, PersonIcon, RocketIcon } from "@radix-ui/react-icons";
 import { Button } from "@workspace/ui/components/button";
 
@@ -69,16 +68,7 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary rounded-lg blur-lg opacity-30"></div>
-                <div className="relative bg-card border border-border rounded-xl shadow-xl p-6">
-                  <LoginForm className="p-0" />
-                </div>
-              </div>
             </div>
-          </div>
-          <div className="absolute inset-0 -z-10 overflow-hidden">
-            <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
           </div>
         </div>
       </main>
