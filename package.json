@@ -7,7 +7,14 @@
     "dev": "turbo dev",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky"
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "pnpm run format",
+      "pnpm run lint",
+      "pnpm test --bail"
+    ]
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",
