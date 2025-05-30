@@ -5,9 +5,9 @@ import { BackpackIcon, CodeIcon, StarIcon } from '@radix-ui/react-icons';
 export default function HeroForm() {
   return (
     <div className="relative hidden overflow-hidden lg:flex lg:w-1/2">
-      <div className="bg-primary-foreground/10 absolute top-20 right-20 h-32 w-32 rounded-full blur-xl"></div>
-      <div className="bg-primary-foreground/10 absolute bottom-32 left-16 h-24 w-24 rounded-full blur-xl"></div>
+      <div className="bg-secondary/30 absolute bottom-0 left-0 h-96 w-96 rounded-full blur-3xl"></div>
       <div className="relative z-10 flex flex-col justify-center p-12 text-white">
+        <div className="bg-primary/5 absolute top-0 right-0 h-72 w-72 rounded-full blur-3xl"></div>
         <div className="max-w-lg">
           <h1 className="mb-6 text-5xl leading-tight font-bold tracking-tight">
             Domina el <span className="relative">desarrollo</span>
