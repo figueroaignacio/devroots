@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  i7a-db:
+    image: postgres:16
+    container_name: i7a-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: i7a_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+volumes:
+  pgdata:
