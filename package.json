@@ -24,13 +24,13 @@
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "commitlint": "^19.8.1",
-    "eslint": "^9.27.0",
+    "eslint": "^9.28.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.0",
-    "prettier": "^3.5.1",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "turbo": "^2.4.2",
-    "typescript": "5.7.3"
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.12",
+    "turbo": "^2.5.4",
+    "typescript": "5.8.3"
   },
   "packageManager": "pnpm@10.4.1",
   "engines": {
