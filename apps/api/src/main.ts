@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
 
@@ -9,6 +10,8 @@ async function bootstrap() {
 
   app.setGlobalPrefix('/api');
   app.use(helmet());
+  app.use(cookieParser());
+
   app.enableCors({
     origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
