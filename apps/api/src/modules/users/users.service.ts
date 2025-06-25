@@ -12,6 +12,10 @@ export class UsersService {
     private readonly userRepo: Repository<User>
   ) {}
 
+  async findByGithubId(githubId: string): Promise<User | null> {
+    return this.userRepo.findOne({ where: { githubId } });
+  }
+
   async findById(id: string): Promise<User | null> {
     return this.userRepo.findOne({ where: { id } });
   }
