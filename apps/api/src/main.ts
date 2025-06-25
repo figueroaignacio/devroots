@@ -18,10 +18,9 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('Devroots API')
+    .setDescription('The Devroots API description')
     .setVersion('1.0')
-    .addTag('cats')
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
