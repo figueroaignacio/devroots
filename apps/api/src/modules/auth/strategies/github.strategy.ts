@@ -6,7 +6,7 @@ import { User } from 'src/modules/users/entities/user.entity';
 import { AuthService } from '../auth.service';
 
 @Injectable()
-export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
+export class GitHubStrategy extends PassportStrategy(Strategy, 'github') {
   constructor(
     private readonly configService: ConfigService,
     private readonly authService: AuthService
