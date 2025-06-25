@@ -29,7 +29,7 @@ export class AuthController {
   @Get('login')
   @UseGuards(GitHubAuthGuard)
   async login() {
-    // El guard redirige automáticamente a GitHub
+    // Guard redirects automatically to GitHub
   }
 
   @Get('github/callback')
