@@ -38,7 +38,7 @@ export class AuthController {
     @Req() req: Request & { user: User },
     @Res() res: Response
   ) {
-    const { access_token, user } = await this.authService.login(req.user);
+    const { access_token } = await this.authService.login(req.user);
 
     res.cookie(
       'access_token',
@@ -47,7 +47,7 @@ export class AuthController {
     );
 
     const frontendUrl = this.configService.get('FRONTEND_URL');
-    res.redirect(`${frontendUrl}/home`);
+    return res.redirect(`${frontendUrl}/home`);
   }
 
   @Get('me')

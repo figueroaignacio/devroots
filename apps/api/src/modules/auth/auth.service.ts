@@ -46,11 +46,18 @@ export class AuthService {
 
   getCookiesOptions() {
     return {
+      // httpOnly: true,
+      // secure: this.configService.get('NODE_ENV') === 'production',
+      // secure: false,
+      // sameSite: 'lax' as const,
+      // maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // path: '/',
       httpOnly: true,
-      secure: this.configService.get('NODE_ENV') === 'production',
+      secure: false, // debe estar en false en local
       sameSite: 'lax' as const,
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       path: '/',
+      domain: 'localhost', // 👈 ESTA LÍNEA ES CLAVE
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     };
   }
 }
