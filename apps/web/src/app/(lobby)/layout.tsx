@@ -1,4 +1,5 @@
 // Components
+import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
 // Metadata
@@ -15,10 +16,10 @@ export default function LobbyLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
+    <div className="flex min-h-[100svh] flex-col">
       <Header />
-      <main>{children}</main>
-      {/* <Footer /> */}
+      <main className="container mx-auto flex-1 px-4">{children}</main>
+      <Footer />
     </div>
   );
 }
