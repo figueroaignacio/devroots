@@ -1,8 +1,8 @@
 // Fonts
-import { geistMono, geistSans } from '@/lib/fonts';
+import { geistSans } from '@/lib/fonts';
 
 // Styles
-import './globals.css';
+import '@/styles/globals.css';
 
 import type { Metadata } from 'next';
 
@@ -18,11 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${geistSans.className}`}>{children}</body>
     </html>
   );
 }

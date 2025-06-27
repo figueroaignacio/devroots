@@ -1,16 +1,17 @@
 'use client';
 
+// Hooks
 import { useAuthStore } from '../store/auth-store';
+
+// Components
+import { Button } from '@/components/ui/button';
 
 export function LogoutButton() {
   const { logout } = useAuthStore();
 
   return (
-    <button
-      onClick={logout}
-      className="rounded-md bg-red-600 px-6 py-3 text-sm text-white"
-    >
+    <Button onClick={logout} variant="destructive">
       Cerrar sesión
-    </button>
+    </Button>
   );
 }
