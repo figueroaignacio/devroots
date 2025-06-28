@@ -1,5 +1,5 @@
 // Components
-import { LoginWithGitHubButton } from '@/modules/auth/components/login-with-github-button';
+import { GetStartedButton } from '@/modules/auth/components/get-started-button';
 import { HeaderLinks } from './header-links';
 import { Logo } from './logo';
 
@@ -14,7 +14,7 @@ export function Header() {
           <HeaderLinks />
         </nav>
         <div>
-          <LoginWithGitHubButton />
+          <GetStartedButton />
         </div>
       </div>
     </header>

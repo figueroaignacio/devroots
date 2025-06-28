@@ -13,7 +13,12 @@ export function LoginWithGitHubButton() {
   const isLoading = useAuthStore((state) => state.isLoading);
 
   return (
-    <Button onClick={loginWithGithub} disabled={isLoading} variant="outline">
+    <Button
+      onClick={loginWithGithub}
+      disabled={isLoading}
+      variant="outline"
+      className="w-full"
+    >
       <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
         <path
           fillRule="evenodd"
