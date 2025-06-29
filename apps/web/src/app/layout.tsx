@@ -17,7 +17,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <BackgroundDecoration />
       <body className={`${geistSans.className}`}>
         <ThemeProvider
           attribute="class"
@@ -25,6 +24,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <BackgroundDecoration />
           {children}
         </ThemeProvider>
       </body>
