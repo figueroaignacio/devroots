@@ -35,7 +35,7 @@ export function OAuthLoginForm() {
           <FunnyCodeSnippet />
         </div>
         <div className="flex justify-center lg:justify-end">
-          <Card className="w-full max-w-md shadow-xl">
+          <Card className="border-t-primary w-full max-w-md border-t-8 shadow-xl">
             <CardHeader className="text-center">
               <CardTitle className="text-2xl">Welcome</CardTitle>
               <CardDescription>
