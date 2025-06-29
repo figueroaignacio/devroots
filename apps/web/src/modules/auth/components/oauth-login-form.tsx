@@ -12,7 +12,7 @@ import { OAuthProviders } from './oauth-login-providers';
 
 export function OAuthLoginForm() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+    <div className="flex min-h-screen items-center justify-center p-4">
       <div className="grid w-full max-w-6xl items-center gap-8 lg:grid-cols-2">
         <div className="space-y-6 text-center lg:text-left">
           <div className="space-y-4">

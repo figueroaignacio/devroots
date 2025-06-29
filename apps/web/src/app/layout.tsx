@@ -1,9 +1,6 @@
 // Providers
 import { ThemeProvider } from '@/providers/theme-provider';
 
-// Components
-import { BackgroundDecoration } from '@/modules/lobby/components/background-decoration';
-
 // Fonts
 import { geistSans } from '@/lib/fonts';
 
@@ -24,7 +21,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <BackgroundDecoration />
           {children}
         </ThemeProvider>
       </body>
