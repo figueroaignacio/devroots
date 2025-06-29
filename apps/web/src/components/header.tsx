@@ -5,7 +5,7 @@ import { Logo } from './logo';
 
 export function Header() {
   return (
-    <header className="border-border border-b">
+    <header className="border-border border-b backdrop-blur-3xl">
       <div className="container mx-auto flex items-center justify-between px-4 py-2">
         <div>
           <Logo />

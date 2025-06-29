@@ -1,3 +1,9 @@
+// Providers
+import { ThemeProvider } from '@/providers/theme-provider';
+
+// Components
+import { BackgroundDecoration } from '@/modules/lobby/components/background-decoration';
+
 // Fonts
 import { geistSans } from '@/lib/fonts';
 
@@ -11,7 +17,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.className}`}>{children}</body>
+      <BackgroundDecoration />
+      <body className={`${geistSans.className}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
