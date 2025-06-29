@@ -3,10 +3,9 @@ import { JSX } from 'react';
 
 type Variant = 'h1' | 'h2' | 'h3' | 'p' | 'blockquote' | 'muted';
 
-interface TypographyProps {
+interface TypographyProps extends React.PropsWithChildren {
   variant?: Variant;
   className?: string;
-  children: React.ReactNode;
 }
 
 const variantTagMap: Record<Variant, keyof JSX.IntrinsicElements> = {
